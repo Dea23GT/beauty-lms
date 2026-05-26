@@ -42,7 +42,7 @@ router.post('/cursos/:cursoId/lecciones', async (req, res) => {
   } catch (error) {
     console.error('Error al crear lección:', error.message);
     if (error.code === 'ER_DUP_ENTRY') {
-      return res.status(409).json({ error: 'Ya existe una lección con ese número de orden en este curso' });
+      return res.status(409).json({ error: 'Ya existe una lección con ese número de orden en este módulo' });
     }
     res.status(500).json({ error: 'Error al crear la lección' });
   }
@@ -75,7 +75,7 @@ router.put('/lecciones/:id', async (req, res) => {
   } catch (error) {
     console.error('Error al actualizar lección:', error.message);
     if (error.code === 'ER_DUP_ENTRY') {
-      return res.status(409).json({ error: 'Ya existe otra lección con ese número de orden en este curso' });
+      return res.status(409).json({ error: 'Ya existe otra lección con ese número de orden en este módulo' });
     }
     res.status(500).json({ error: 'Error al actualizar la lección' });
   }

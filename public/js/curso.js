@@ -163,9 +163,9 @@ async function loadCursoDetalles() {
     }
 
     let html = '';
-    let lessonGlobalIndex = 1;
 
     pasos.forEach(paso => {
+      let lessonLocalIndex = 1;
       if (paso.lecciones && paso.lecciones.length > 0) {
         html += `
           <div class="paso-section">
@@ -189,7 +189,7 @@ async function loadCursoDetalles() {
                 </div>
               </div>
               ` : ''}
-              <span class="leccion-num">${lessonGlobalIndex++}</span>
+              <span class="leccion-num">${lessonLocalIndex++}</span>
               <span class="leccion-titulo" title="${escapeHtml(leccion.titulo)}">${escapeHtml(leccion.titulo)}</span>
             </li>
           `;

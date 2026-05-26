@@ -305,22 +305,22 @@ function renderTemarioHtml() {
     // Tarjeta del módulo
     html += `
       <div class="module-card" draggable="true" data-id="${paso.id}" ondragstart="handleDragStart(event)" ondragend="handleDragEnd(event)" style="border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); background: white; margin-bottom: 0.5rem; overflow: hidden; box-shadow: var(--shadow); transition: transform 0.2s ease, box-shadow 0.2s ease;">
-        <div class="module-card-header" style="display: flex; align-items: center; padding: 1rem; background: #fafafa; border-bottom: 1px solid var(--color-gray-light); gap: 1rem;">
+        <div class="module-card-header">
           <div class="drag-handle" style="cursor: move; color: var(--color-gray); font-size: 1.2rem;"><i class="bi bi-grip-vertical"></i></div>
           
-          <div class="module-img-frame" style="width: 70px; height: 40px; border-radius: 4px; overflow: hidden; border: 1px solid var(--color-gray-light); background: #eee; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
-            <img src="${paso.miniatura_url || 'data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'70\' height=\'40\' viewBox=\'0 0 70 40\'><rect width=\'100%\' height=\'100%\' fill=\'%231a1a1a\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23d6af37\' font-family=\'sans-serif\' font-size=\'10\' font-weight=\'bold\'>MOD</text></svg>'}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'70\' height=\'40\' viewBox=\'0 0 70 40\'><rect width=\'100%\' height=\'100%\' fill=\'%231a1a1a\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23d6af37\' font-family=\'sans-serif\' font-size=\'10\' font-weight=\'bold\'>MOD</text></svg>';">
+          <div class="module-img-frame">
+            <img src="${paso.miniatura_url || 'data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'70\' height=\'40\' viewBox=\'0 0 70 40\'><rect width=\'100%\' height=\'100%\' fill=\'%231a1a1a\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23d6af37\' font-family=\'sans-serif\' font-size=\'10\' font-weight=\'bold\'>MOD</text></svg>'}" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'70\' height=\'40\' viewBox=\'0 0 70 40\'><rect width=\'100%\' height=\'100%\' fill=\'%231a1a1a\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23d6af37\' font-family=\'sans-serif\' font-size=\'10\' font-weight=\'bold\'>MOD</text></svg>';">
           </div>
           
-          <div class="module-info-admin" style="flex: 1; min-width: 0;">
-            <h4 style="font-family: var(--font-title); font-size: 1.15rem; margin: 0; font-weight: 500; color: var(--color-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(paso.titulo)}</h4>
-            <p style="margin: 0; font-size: 0.8rem; color: var(--color-gray); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${escapeHtml(paso.descripcion || 'Sin descripción')}</p>
+          <div class="module-info-admin">
+            <h4>${escapeHtml(paso.titulo)}</h4>
+            <p>${escapeHtml(paso.descripcion || 'Sin descripción')}</p>
           </div>
           
-          <div class="module-actions-admin" style="display: flex; gap: 0.4rem; align-items: center;">
-            <button class="btn-action lessons" onclick="openLeccionFormModal(${paso.id})" style="padding: 0.4rem 0.7rem; font-size: 0.75rem; margin-top:0;"><i class="bi bi-plus-circle"></i> + Clase</button>
-            <button class="btn-action edit" onclick="openModuloModal(${paso.id})" style="padding: 0.4rem 0.7rem; font-size: 0.75rem; margin-top:0;"><i class="bi bi-pencil"></i></button>
-            <button class="btn-action delete" onclick="deleteModulo(${paso.id})" style="padding: 0.4rem 0.7rem; font-size: 0.75rem; margin-top:0;"><i class="bi bi-trash"></i></button>
+          <div class="module-actions-admin">
+            <button class="btn-action lessons" onclick="openLeccionFormModal(${paso.id})"><i class="bi bi-plus-circle"></i> + Clase</button>
+            <button class="btn-action edit" onclick="openModuloModal(${paso.id})"><i class="bi bi-pencil"></i></button>
+            <button class="btn-action delete" onclick="deleteModulo(${paso.id})"><i class="bi bi-trash"></i></button>
           </div>
         </div>
         
@@ -340,16 +340,16 @@ function renderTemarioHtml() {
                   <div class="lesson-drop-zone" data-paso-id="${paso.id}" data-index="${lIndex}" ondragover="allowLessonDrop(event)" ondragenter="lessonDragEnter(event)" ondragleave="lessonDragLeave(event)" ondrop="handleLessonDrop(event)">
                     <i class="bi bi-plus-circle-dotted"></i> Soltar clase aquí
                   </div>
-                  <div class="lesson-row-admin" draggable="true" data-id="${leccion.id}" ondragstart="handleLessonDragStart(event)" ondragend="handleLessonDragEnd(event)" style="display: flex; align-items: center; justify-content: space-between; background: #fafafa; padding: 0.5rem 0.75rem; border-radius: 4px; border: 1px solid #eee; font-size: 0.85rem;">
-                    <div style="display: flex; align-items: center; gap: 0.75rem; min-width: 0;">
+                  <div class="lesson-row-admin" draggable="true" data-id="${leccion.id}" ondragstart="handleLessonDragStart(event)" ondragend="handleLessonDragEnd(event)">
+                    <div class="lesson-info-admin">
                       <div class="drag-handle-lesson" style="cursor: move; color: var(--color-gray); font-size: 1.1rem; display: flex; align-items: center;"><i class="bi bi-grip-vertical"></i></div>
                       <span style="font-weight: 600; color: var(--color-primary-dark); background: #fdfaf2; padding: 0.1rem 0.4rem; border-radius: 3px; font-size: 0.75rem;">Clase ${leccion.orden}</span>
-                      <span style="font-weight: 500; color: var(--color-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${escapeHtml(leccion.titulo)}">${escapeHtml(leccion.titulo)}</span>
-                      <span style="font-size: 0.75rem; color: var(--color-gray); font-family: monospace;">(${escapeHtml(leccion.youtube_id)})</span>
+                      <span class="lesson-title-admin" title="${escapeHtml(leccion.titulo)}">${escapeHtml(leccion.titulo)}</span>
+                      <span class="lesson-youtube-id">(${escapeHtml(leccion.youtube_id)})</span>
                     </div>
-                    <div style="display: flex; gap: 0.25rem;">
-                      <button class="btn-action edit" onclick="openLeccionFormModal(${paso.id}, ${leccion.id})" style="padding: 0.2rem 0.4rem; font-size: 0.7rem; margin-top: 0;"><i class="bi bi-pencil-square"></i></button>
-                      <button class="btn-action delete" onclick="deleteLeccion(${leccion.id})" style="padding: 0.2rem 0.4rem; font-size: 0.7rem; margin-top: 0;"><i class="bi bi-trash"></i></button>
+                    <div class="lesson-actions-admin">
+                      <button class="btn-action edit" onclick="openLeccionFormModal(${paso.id}, ${leccion.id})"><i class="bi bi-pencil-square"></i></button>
+                      <button class="btn-action delete" onclick="deleteLeccion(${leccion.id})"><i class="bi bi-trash"></i></button>
                     </div>
                   </div>
                 `;
@@ -528,10 +528,10 @@ async function handleLessonDrop(event) {
   }
   groups[pasoId].splice(targetIndex, 0, draggedLesson);
   
-  // Re-secuenciar y aplanar la lista de lecciones asignando orden global correlativo
+  // Re-secuenciar y aplanar la lista de lecciones asignando orden correlativo por módulo
   const newLecciones = [];
-  let currentOrder = 1;
   loadedPasos.forEach(p => {
+    let currentOrder = 1;
     const group = groups[p.id] || [];
     group.forEach(l => {
       l.orden = currentOrder++;
@@ -1289,6 +1289,8 @@ async function fetchVentasReportes() {
 
 // --- TAB: CUPONES Y BANNER ---
 async function renderCuponesView(container) {
+  let localBannersList = [];
+
   container.innerHTML = `
     <div class="content-header">
       <h2 class="content-title"><i class="bi bi-ticket-perforated"></i> Cupones y Banner Promocional</h2>
@@ -1297,16 +1299,26 @@ async function renderCuponesView(container) {
 
     <!-- Sección de Banner -->
     <div style="background-color: var(--color-white); border: 1px solid var(--color-gray-light); padding: 1.5rem; border-radius: var(--border-radius); margin-bottom: 2rem; box-shadow: var(--shadow);">
-      <h3 style="font-size: 1.1rem; margin-bottom: 1rem; font-family: var(--font-title); letter-spacing: 0.5px;"><i class="bi bi-megaphone"></i> Banner Promocional Superior</h3>
-      <form id="banner-form" style="display: flex; gap: 1rem; align-items: end;">
+      <h3 style="font-size: 1.1rem; margin-bottom: 1rem; font-family: var(--font-title); letter-spacing: 0.5px;"><i class="bi bi-megaphone"></i> Banners Promocionales</h3>
+      
+      <!-- Agregar Nuevo Banner -->
+      <div style="display: flex; gap: 1rem; align-items: end; margin-bottom: 1.5rem;">
         <div style="flex: 1;">
-          <label for="banner-text" class="form-label" style="font-size: 0.8rem;">Texto del Banner (Vacío para desactivar)</label>
-          <input type="text" id="banner-text" class="form-control" placeholder="Ej. ¡50% de descuento en el curso de Automaquillaje con el código BELLEZA50!" style="padding: 0.6rem;">
+          <label for="new-banner-text" class="form-label" style="font-size: 0.8rem;">Agregar Nuevo Anuncio</label>
+          <input type="text" id="new-banner-text" class="form-control" placeholder="Ej. ¡50% de descuento con el código BELLEZA50!" style="padding: 0.6rem;">
         </div>
         <div>
-          <button type="submit" class="btn-auth" style="margin-top:0; padding:0.7rem 1.2rem;">Guardar Banner</button>
+          <button type="button" id="btn-add-banner" class="btn-action edit" style="margin-top:0; padding:0.7rem 1.2rem;"><i class="bi bi-plus-circle"></i> Agregar</button>
         </div>
-      </form>
+      </div>
+      
+      <!-- Lista de Banners -->
+      <label class="form-label" style="font-size: 0.8rem; display: block; margin-bottom: 0.5rem;">Anuncios Registrados</label>
+      <div id="banners-list-container" style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <!-- Se carga dinámicamente -->
+      </div>
+      
+      <button type="button" id="btn-save-banners" class="btn-auth" style="margin-top: 1.5rem; width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem;"><i class="bi bi-save"></i> Guardar Banners</button>
     </div>
 
     <!-- Formulario Rápido de Creación de Cupón -->
@@ -1359,6 +1371,46 @@ async function renderCuponesView(container) {
     </div>
   `;
 
+  // Renderizar la lista de banners en la vista actual
+  const renderLocalBanners = () => {
+    const listContainer = document.getElementById('banners-list-container');
+    if (localBannersList.length === 0) {
+      listContainer.innerHTML = `
+        <div style="text-align: center; padding: 1.5rem; color: var(--color-gray); border: 1px dashed var(--color-gray-light); border-radius: 4px; font-size: 0.85rem;">
+          No hay banners configurados. Agrega uno arriba para comenzar.
+        </div>
+      `;
+      return;
+    }
+
+    listContainer.innerHTML = localBannersList.map((banner, index) => `
+      <div style="display: flex; align-items: center; justify-content: space-between; background: #fafafa; border: 1px solid var(--color-gray-light); border-radius: 4px; padding: 0.6rem 0.8rem; gap: 1rem;">
+        <div style="display: flex; align-items: center; gap: 0.75rem; min-width: 0; flex: 1;">
+          <span style="font-size: 0.95rem; color: var(--color-primary-dark); font-weight: bold;">#${index + 1}</span>
+          <span style="font-size: 0.85rem; color: var(--color-dark); word-break: break-all; flex: 1;">${escapeHtml(banner.texto)}</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem; flex-shrink: 0;">
+          <label style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.85rem; cursor: pointer; user-select: none;">
+            <input type="checkbox" ${banner.activo ? 'checked' : ''} onchange="window.toggleLocalBanner(${index})" style="cursor: pointer; width: 16px; height: 16px;">
+            Activo
+          </label>
+          <button type="button" class="btn-action delete" onclick="window.deleteLocalBanner(${index})" style="padding: 0.3rem 0.5rem; font-size: 0.75rem; margin-top:0;"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+    `).join('');
+  };
+
+  // Definir funciones en el objeto window para que los eventos inline puedan invocarlas
+  window.toggleLocalBanner = (index) => {
+    localBannersList[index].activo = !localBannersList[index].activo;
+    renderLocalBanners();
+  };
+
+  window.deleteLocalBanner = (index) => {
+    localBannersList.splice(index, 1);
+    renderLocalBanners();
+  };
+
   // Cargar catálogo de cursos en el dropdown select
   try {
     const resCursos = await fetch('/api/cursos');
@@ -1374,42 +1426,62 @@ async function renderCuponesView(container) {
     console.error('Error al cargar dropdown cursos para cupones:', err);
   }
 
-  // Cargar texto del banner actual
+  // Cargar banners desde el backend
   try {
-    const resBanner = await fetch('/api/cursos/config/banner');
-    if (resBanner.ok) {
-      const data = await resBanner.json();
-      document.getElementById('banner-text').value = data.valor || '';
+    const resBanners = await fetch('/api/admin/config/banners', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (resBanners.ok) {
+      const data = await resBanners.json();
+      localBannersList = data.banners || [];
+      renderLocalBanners();
     }
   } catch (err) {
-    console.error('Error al cargar banner actual:', err);
+    console.error('Error al cargar banners actuales:', err);
   }
 
-  // Guardar Banner Handler
-  document.getElementById('banner-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const btnSubmit = e.target.querySelector('button[type="submit"]');
-    const originalText = btnSubmit.textContent;
-    const textVal = document.getElementById('banner-text').value.trim();
+  // Manejador para agregar banners locales
+  const addBannerInput = document.getElementById('new-banner-text');
+  const addBannerBtn = document.getElementById('btn-add-banner');
+  
+  const handleAddBanner = () => {
+    const text = addBannerInput.value.trim();
+    if (!text) return;
+    localBannersList.push({ texto: text, activo: true });
+    addBannerInput.value = '';
+    renderLocalBanners();
+  };
+  
+  addBannerBtn.addEventListener('click', handleAddBanner);
+  addBannerInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleAddBanner();
+    }
+  });
+
+  // Manejador para guardar banners en la base de datos
+  const saveBannersBtn = document.getElementById('btn-save-banners');
+  saveBannersBtn.addEventListener('click', async () => {
     try {
-      btnSubmit.disabled = true;
-      btnSubmit.innerHTML = '<i class="bi bi-arrow-repeat bi-spin" style="margin-right: 6px;"></i> Guardando...';
-      const response = await fetch('/api/admin/config/banner', {
+      saveBannersBtn.disabled = true;
+      saveBannersBtn.innerHTML = '<i class="bi bi-arrow-repeat bi-spin" style="margin-right: 6px;"></i> Guardando...';
+      const response = await fetch('/api/admin/config/banners', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ valor: textVal })
+        body: JSON.stringify({ banners: localBannersList })
       });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error || 'Error al guardar banner');
-      showTabAlert('cupones-alert', 'success', 'Banner promocional actualizado con éxito');
+      if (!response.ok) throw new Error(data.error || 'Error al guardar banners');
+      showTabAlert('cupones-alert', 'success', 'Banners promocionales actualizados con éxito');
     } catch (error) {
       showTabAlert('cupones-alert', 'danger', error.message);
     } finally {
-      btnSubmit.disabled = false;
-      btnSubmit.textContent = originalText;
+      saveBannersBtn.disabled = false;
+      saveBannersBtn.innerHTML = '<i class="bi bi-save" style="margin-right: 6px;"></i> Guardar Banners';
     }
   });
 

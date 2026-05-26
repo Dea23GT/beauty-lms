@@ -454,6 +454,198 @@
       border: 1px dashed var(--color-primary) !important;
       background: #fffcf5 !important;
     }
+    
+    .lesson-row-admin {
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .drag-handle, .drag-handle-lesson {
+      touch-action: none;
+    }
+
+    /* Estilos del Temario (Módulos y Lecciones) */
+    .module-card-header {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      background: #fafafa;
+      border-bottom: 1px solid var(--color-gray-light);
+      gap: 1rem;
+    }
+    
+    .module-img-frame {
+      width: 70px;
+      height: 40px;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--color-gray-light);
+      background: #eee;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .module-img-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .module-info-admin {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .module-info-admin h4 {
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      margin: 0;
+      font-weight: 500;
+      color: var(--color-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .module-info-admin p {
+      margin: 0;
+      font-size: 0.8rem;
+      color: var(--color-gray);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .module-actions-admin {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    
+    .module-actions-admin .btn-action {
+      padding: 0.4rem 0.7rem;
+      font-size: 0.75rem;
+      margin-top: 0;
+    }
+    
+    .lesson-row-admin {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fafafa;
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      border: 1px solid #eee;
+      font-size: 0.85rem;
+      gap: 0.5rem;
+    }
+    
+    .lesson-info-admin {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+      flex: 1;
+    }
+    
+    .lesson-title-admin {
+      font-weight: 500;
+      color: var(--color-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .lesson-youtube-id {
+      font-size: 0.75rem;
+      color: var(--color-gray);
+      font-family: monospace;
+      white-space: nowrap;
+    }
+    
+    .lesson-actions-admin {
+      display: flex;
+      gap: 0.25rem;
+      flex-shrink: 0;
+    }
+    
+    .lesson-actions-admin .btn-action {
+      padding: 0.2rem 0.4rem;
+      font-size: 0.7rem;
+      margin-top: 0;
+    }
+
+    /* Responsividad en pantallas pequeñas (Móviles y Tablets) */
+    @media (max-width: 768px) {
+      .module-card-header {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        padding: 0.75rem;
+      }
+      
+      .module-info-admin h4 {
+        white-space: normal;
+        line-height: 1.3;
+        font-size: 1.05rem;
+      }
+      
+      .module-info-admin p {
+        white-space: normal;
+        margin-top: 0.2rem;
+      }
+      
+      .module-actions-admin {
+        width: 100%;
+        justify-content: flex-end;
+        border-top: 1px dashed var(--color-gray-light);
+        padding-top: 0.6rem;
+        margin-top: 0.2rem;
+      }
+      
+      .module-actions-admin .btn-action {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.75rem;
+      }
+      
+      .lesson-row-admin {
+        flex-wrap: wrap;
+        padding: 0.6rem;
+        gap: 0.6rem;
+      }
+      
+      .lesson-info-admin {
+        width: 100%;
+        flex: none;
+        gap: 0.5rem;
+      }
+      
+      .lesson-title-admin {
+        white-space: normal;
+        word-break: break-word;
+        flex: 1;
+        line-height: 1.3;
+      }
+      
+      .lesson-youtube-id {
+        display: none; /* Ocultar en móvil para ahorrar espacio */
+      }
+      
+      .lesson-actions-admin {
+        width: 100%;
+        justify-content: flex-end;
+        border-top: 1px dotted #eee;
+        padding-top: 0.5rem;
+        margin-top: 0.1rem;
+      }
+      
+      .lesson-actions-admin .btn-action {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.75rem;
+      }
+    }
   </style>
 </head>
 <body>

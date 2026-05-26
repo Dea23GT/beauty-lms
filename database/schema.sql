@@ -56,7 +56,6 @@ CREATE TABLE IF NOT EXISTS `lecciones` (
   `youtube_id` VARCHAR(50) NOT NULL,
   `fecha_creacion` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_curso_leccion_orden` (`curso_id`, `orden`),
   CONSTRAINT `fk_lecciones_cursos` 
     FOREIGN KEY (`curso_id`) 
     REFERENCES `cursos` (`id`) 
