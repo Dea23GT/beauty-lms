@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academia de Estética | Blush Pro Academy LMS</title>
+  <meta name="description" content="Aprende el arte de la belleza con cursos profesionales en línea. Blush Pro Academy ofrece clases especializadas en maquillaje, colorimetría, cejas, pestañas y estética en Guatemala.">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Academia de Estética | Blush Pro Academy LMS">
+  <meta property="og:description" content="Aprende el arte de la belleza con cursos profesionales de maquillaje, estética y colorimetría.">
+  <meta property="og:image" content="/logo.svg">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Academia de Estética | Blush Pro Academy LMS">
+  <meta name="twitter:description" content="Aprende el arte de la belleza con cursos profesionales de estética en Guatemala.">
+  <meta name="twitter:image" content="/logo.svg">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+  <!-- Fondo Dinámico Animado -->
+  <div class="animated-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- Barra de Anuncios Promocional -->
+  <div class="promo-banner" id="promo-banner"></div>
+
+  <!-- Navbar Responsivo -->
+  <nav class="navbar">
+    <a href="index.html" class="navbar-brand"><img src="logo.svg" class="logo-img" alt="Blush Pro Academy"></a>
+    
+    <!-- Menú de Opciones para Alumnos (Escritorio) -->
+    <div class="navbar-menu">
+      <a href="index.html" class="nav-menu-link active">Inicio</a>
+      <a href="#" class="nav-menu-link" id="nav-shop">Tienda</a>
+      <a href="#nosotros" class="nav-menu-link">Nosotros</a>
+      <a href="#blog" class="nav-menu-link">Blog</a>
+      <a href="#contacto" class="nav-menu-link">Contacto</a>
+    </div>
+
+    <!-- Enlaces dinámicos según el estado de la usuaria -->
+    <div class="nav-links" id="nav-actions">
+      <!-- Se inyecta dinámicamente con JavaScript -->
+      <a href="login.html" class="btn-outline">Iniciar Sesión</a>
+      <a href="login.html" class="btn-primary">Registrarse</a>
+    </div>
+  </nav>
+
+  <!-- Banner Principal Hero -->
+  <header class="hero animate-fade-in">
+    <div class="container" style="padding: 0;">
+      <h1 class="hero-title">Aprende el Arte de la Belleza</h1>
+      <p class="hero-subtitle">Cursos exclusivos creados por profesionales de la estética para llevar tus habilidades al siguiente nivel.</p>
+    </div>
+  </header>
+
+  <!-- Sección Catálogo -->
+  <main class="container animate-fade-in">
+    <h2 class="section-title">Nuestros Cursos Disponibles</h2>
+    
+    <!-- Grid de Cursos -->
+    <div class="cursos-grid" id="cursos-container">
+      <!-- Placeholder de Carga -->
+      <div style="grid-column: 1 / -1; text-align: center; color: var(--color-gray); padding: 3rem 0;">
+        Cargando la experiencia académica...
+      </div>
+    </div>
+  </main>
+
+  <!-- Sección Nosotros -->
+  <section id="nosotros" class="container about-section animate-fade-in">
+    <div class="about-grid">
+      <div class="about-image-container">
+        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=800" alt="Blush Pro Academy Studio" class="about-img">
+        <div class="about-overlay-border"></div>
+      </div>
+      <div class="about-content">
+        <span class="about-badge">Conócenos</span>
+        <h2 class="about-title">Eleva Tu Arte a Nivel Profesional</h2>
+        <p class="about-text">
+          Blush Pro Academy es el espacio líder en Guatemala especializado en la formación técnica y artística de profesionales del maquillaje, cuidado capilar, estilismo y la estética avanzada.
+        </p>
+        <p class="about-text">
+          Nacimos con la visión de estructurar programas de alto rendimiento teórico-práctico. Nuestros instructores son reconocidos expertos activos en el diseño de imagen para editoriales de moda, pasarelas nupciales y clínicas estéticas de renombre. Te dotamos de las herramientas y conocimientos prácticos necesarios para emprender con éxito en el dinámico negocio de la belleza.
+        </p>
+        <div class="about-features">
+          <div class="about-feature-item">
+            <i class="bi bi-patch-check-fill about-feature-icon"></i>
+            <div class="about-feature-text">
+              <h4>Acreditación Certificada</h4>
+              <p>Recibe un certificado digital verificado al completar satisfactoriamente tu programa de estudios.</p>
+            </div>
+          </div>
+          <div class="about-feature-item">
+            <i class="bi bi-camera-reels-fill about-feature-icon"></i>
+            <div class="about-feature-text">
+              <h4>Clases en Alta Definición</h4>
+              <p>Aprende paso a paso con tomas detalladas en alta resolución y explicaciones profesionales claras.</p>
+            </div>
+          </div>
+          <div class="about-feature-item">
+            <i class="bi bi-clock-history about-feature-icon"></i>
+            <div class="about-feature-text">
+              <h4>Acceso Ilimitado 24/7</h4>
+              <p>Organiza tus horarios de práctica. Accede a tu plataforma y repasa las clases todas las veces que quieras.</p>
+            </div>
+          </div>
+          <div class="about-feature-item">
+            <i class="bi bi-chat-left-heart-fill about-feature-icon"></i>
+            <div class="about-feature-text">
+              <h4>Soporte de Instructores</h4>
+              <p>Resuelve dudas directamente a través de nuestros canales de comunicación integrados de WhatsApp.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Blog -->
+  <section id="blog" class="container blog-section animate-fade-in">
+    <span class="about-badge">Publicaciones de Estética</span>
+    <h2 class="section-title">Consejos y Tendencias de Belleza</h2>
+    <div class="blog-grid">
+      <!-- Tarjeta de Blog 1 -->
+      <article class="blog-card">
+        <div class="blog-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=600" alt="Skincare Rutina" class="blog-img" loading="lazy">
+        </div>
+        <div class="blog-info">
+          <div class="blog-meta">
+            <span class="blog-tag">Skincare</span>
+            <span class="blog-date">24 Mayo, 2026</span>
+          </div>
+          <h3 class="blog-post-title">Diseño de Rutina Facial Pro: Identificación de Activos</h3>
+          <p class="blog-excerpt">
+            Aprende a combinar principios activos como el ácido hialurónico, retinol y vitamina C sin causar irritaciones, personalizando la rutina según el tipo de piel de tu cliente.
+          </p>
+          <a href="#" class="blog-read-more" onclick="alert('Muy pronto podrás leer el artículo completo en nuestra revista digital Blush Magazine.'); event.preventDefault();">Leer Artículo <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </article>
+
+      <!-- Tarjeta de Blog 2 -->
+      <article class="blog-card">
+        <div class="blog-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=600" alt="Colorimetría capilar" class="blog-img" loading="lazy">
+        </div>
+        <div class="blog-info">
+          <div class="blog-meta">
+            <span class="blog-tag">Colorimetría</span>
+            <span class="blog-date">18 Mayo, 2026</span>
+          </div>
+          <h3 class="blog-post-title">La Regla de Oro en Colorimetría: Neutralización de Subtonos</h3>
+          <p class="blog-excerpt">
+            Domina el círculo cromático capilar para formular tonos perfectos. Descubre cómo corregir reflejos no deseados amarillos, naranjas o verdosos en decoloraciones.
+          </p>
+          <a href="#" class="blog-read-more" onclick="alert('Muy pronto podrás leer el artículo completo en nuestra revista digital Blush Magazine.'); event.preventDefault();">Leer Artículo <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </article>
+
+      <!-- Tarjeta de Blog 3 -->
+      <article class="blog-card">
+        <div class="blog-img-wrapper">
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=600" alt="Maquillaje de Novias" class="blog-img" loading="lazy">
+        </div>
+        <div class="blog-info">
+          <div class="blog-meta">
+            <span class="blog-tag">Maquillaje</span>
+            <span class="blog-date">10 Mayo, 2026</span>
+          </div>
+          <h3 class="blog-post-title">Looks Nupciales 2026: Maquillaje de Novia de Alta Duración</h3>
+          <p class="blog-excerpt">
+            Secretos profesionales de fijación, preparación de la piel en climas cálidos y técnicas de ojos difuminados elegantes que lucen espectaculares tanto en persona como ante la cámara.
+          </p>
+          <a href="#" class="blog-read-more" onclick="alert('Muy pronto podrás leer el artículo completo en nuestra revista digital Blush Magazine.'); event.preventDefault();">Leer Artículo <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Sección Contacto -->
+  <section id="contacto" class="container contact-section animate-fade-in">
+    <div class="contact-grid">
+      <!-- Formulario de Contacto -->
+      <div class="contact-form-container hero">
+        <h3>Escríbenos una Consulta</h3>
+        <form id="academy-contact-form">
+          <div class="form-row-contact">
+            <div class="form-group-contact">
+              <label for="contact-name">Tu Nombre</label>
+              <input type="text" id="contact-name" placeholder="Ej. Ana Gómez" required>
+            </div>
+            <div class="form-group-contact">
+              <label for="contact-email">Correo Electrónico</label>
+              <input type="email" id="contact-email" placeholder="Ej. ana@gmail.com" required>
+            </div>
+          </div>
+          <div class="form-group-contact">
+            <label for="contact-subject">Asunto</label>
+            <input type="text" id="contact-subject" placeholder="Ej. Información sobre Certificaciones" required>
+          </div>
+          <div class="form-group-contact">
+            <label for="contact-message">Tu Mensaje</label>
+            <textarea id="contact-message" rows="5" placeholder="Escribe aquí tus preguntas detalladas..." required></textarea>
+          </div>
+          <button type="submit" class="btn-contact" id="btn-submit-contact">
+            <span><i class="bi bi-send-fill"></i> Enviar Mensaje</span>
+          </button>
+        </form>
+        <div id="contact-success-alert" class="alert alert-success" style="display: none; margin-top: 1rem;">
+          <i class="bi bi-check-circle-fill"></i> ¡Mensaje recibido! Un asesor académico de Blush Pro se comunicará contigo vía correo en menos de 24 horas.
+        </div>
+      </div>
+
+      <!-- Tarjeta de Información -->
+      <div class="contact-info-card hero">
+        <div>
+          <h3>Blush Pro Academy</h3>
+          <p style="color: var(--color-gray); font-size: 0.95rem; font-weight: 300; margin-bottom: 0.5rem;">Visítanos o comunícate directamente con nuestro equipo de atención.</p>
+        </div>
+        <div class="contact-info-list">
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="bi bi-geo-alt-fill"></i></div>
+            <div class="contact-info-text">
+              <h4>Nuestra Sede</h4>
+              <p>Avenida Las Américas 15-20, Zona 13, Ciudad de Guatemala, Guatemala</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="bi bi-telephone-fill"></i></div>
+            <div class="contact-info-text">
+              <h4>Llámanos</h4>
+              <p>+502 2345-6789</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-info-icon"><i class="bi bi-envelope-fill"></i></div>
+            <div class="contact-info-text">
+              <h4>Escríbenos</h4>
+              <p>info@blushproacademy.com</p>
+            </div>
+          </div>
+        </div>
+        <a href="https://wa.me/50254321098?text=Hola%20Blush%20Pro%20Academy%2C%20me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20cursos." target="_blank" rel="noopener noreferrer" class="contact-whatsapp-btn">
+          <i class="bi bi-whatsapp"></i> Soporte Rápido WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-social-links">
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+      <a href="https://wa.me/50254321098" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+    </div>
+    <p>&copy; 2026 BLUSH PRO ACADEMY. Todos los derechos reservados. | Diseñado con elegancia.</p>
+  </footer>
+
+  <script>
+    // Helper de escape preventivo
+    const escapeHtml = text => {
+      if (text === null || text === undefined) return '';
+      return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    };
+
+    // Variables de sesión
+    const userJson = localStorage.getItem('user');
+    const user = userJson ? JSON.parse(userJson) : null;
+
+    // Elementos DOM
+    const navActions = document.getElementById('nav-actions');
+    const cursosContainer = document.getElementById('cursos-container');
+
+    // 1. Configurar barra de navegación según el estado de login
+    function renderNavbar() {
+      let actionsHtml = `
+        <button class="nav-icon-btn" id="btn-toggle-search" aria-label="Buscar" title="Buscar Cursos"><i class="bi bi-search"></i></button>
+        <button class="nav-icon-btn" id="btn-open-profile" aria-label="Perfil" title="Mi Cuenta"><i class="bi bi-person-fill"></i></button>
+      `;
+
+      if (user) {
+        if (user.rol === 'admin') {
+          actionsHtml += `
+            <a href="admin.html" class="btn-outline" style="font-size: 0.85rem; padding: 0.4rem 0.8rem; margin-left: 0.5rem;"><i class="bi bi-shield-lock"></i> Panel Admin</a>
+          `;
+        }
+      } else {
+        actionsHtml += `
+          <a href="login.html" class="btn-primary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem; margin-left: 0.5rem;">Ingresar</a>
+        `;
+      }
+
+      navActions.innerHTML = actionsHtml;
+    }
+
+    // 2. Obtener y renderizar los cursos desde la API
+    async function loadCursos() {
+      try {
+        const response = await fetch('/api/cursos');
+        
+        if (!response.ok) {
+          throw new Error('Error al conectar con el servidor');
+        }
+
+        const cursos = await response.json();
+
+        if (cursos.length === 0) {
+          cursosContainer.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; color: var(--color-gray); padding: 3rem 0;">
+              Próximamente tendremos cursos disponibles para ti.
+            </div>
+          `;
+          return;
+        }
+
+        // Renderizar dinámicamente las tarjetas de cursos con escapeHtml preventivo
+        cursosContainer.innerHTML = cursos.map(curso => `
+          <article class="curso-card" onclick="window.location.href='curso.html?id=${curso.id}'">
+            <div class="curso-img-wrapper">
+              <img src="${escapeHtml(curso.miniatura_url)}" alt="${escapeHtml(curso.titulo)}" class="curso-img" loading="lazy"
+                   onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'600\\' height=\\'400\\' viewBox=\\'0 0 600 400\\'><rect width=\\'100%\\' height=\\'100%\\' fill=\\'%231a1a1a\\'/><text x=\\'50%\\' y=\\'50%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' fill=\\'%23d6af37\\' font-family=\\'sans-serif\\' font-size=\\'36\\' font-weight=\\'bold\\' letter-spacing=\\'4\\'>BLUSH</text></svg>';">
+            </div>
+            <div class="curso-info">
+              <h3 class="curso-titulo">${escapeHtml(curso.titulo)}</h3>
+              <p class="curso-descripcion">${escapeHtml(curso.descripcion)}</p>
+              <div class="curso-footer">
+                <span class="curso-precio">Q${parseFloat(curso.precio).toFixed(2)}</span>
+                <a href="curso.html?id=${curso.id}" class="btn-card" onclick="event.stopPropagation();">Ver Curso</a>
+              </div>
+            </div>
+          </article>
+        `).join('');
+
+        // Procesar búsqueda por URL si existe
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('search');
+        if (searchQuery) {
+          const searchInput = document.getElementById('search-input');
+          const searchContainer = document.getElementById('search-bar-container');
+          if (searchInput && searchContainer) {
+            searchInput.value = searchQuery;
+            searchContainer.style.display = 'block';
+            if (typeof triggerCatalogFilter === 'function') {
+              triggerCatalogFilter(searchQuery);
+            }
+          }
+        }
+
+      } catch (error) {
+        console.error('❌ Error al cargar cursos:', error);
+        cursosContainer.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; color: var(--color-danger); padding: 3rem 0;">
+            No pudimos cargar los cursos. Por favor, intenta de nuevo más tarde.
+          </div>
+        `;
+      }
+    }
+
+    async function loadBanner() {
+      try {
+        const response = await fetch('/api/cursos/config/banner');
+        if (response.ok) {
+          const data = await response.json();
+          const bannerEl = document.getElementById('promo-banner');
+          if (data && data.valor && data.valor.trim() !== '') {
+            bannerEl.innerHTML = `<div class="promo-banner-content"><i class="bi bi-megaphone-fill"></i> ${escapeHtml(data.valor)}</div>`;
+            bannerEl.style.display = 'block';
+          } else {
+            bannerEl.style.display = 'none';
+          }
+        }
+      } catch (error) {
+        console.error('Error al cargar banner:', error);
+      }
+    }
+
+    // 3. Manejador del Formulario de Contacto
+    const contactForm = document.getElementById('academy-contact-form');
+    const contactSuccessAlert = document.getElementById('contact-success-alert');
+    const btnSubmitContact = document.getElementById('btn-submit-contact');
+
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        btnSubmitContact.disabled = true;
+        const btnSpan = btnSubmitContact.querySelector('span');
+        const originalText = btnSpan.innerHTML;
+        btnSpan.innerHTML = '<i class="bi bi-arrow-repeat bi-spin"></i> Enviando...';
+
+        setTimeout(() => {
+          btnSubmitContact.disabled = false;
+          btnSpan.innerHTML = originalText;
+          contactSuccessAlert.style.display = 'block';
+          contactForm.reset();
+
+          setTimeout(() => {
+            contactSuccessAlert.style.display = 'none';
+          }, 5000);
+        }, 1500);
+      });
+    }
+
+    // 4. Alerta interactiva para la opción Tienda
+    const navShop = document.getElementById('nav-shop');
+    if (navShop) {
+      navShop.addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('🛍️ Redirección externa:\n\nPróximamente serás redirigida a la Tienda de Cosméticos Oficial de Blush Pro Academy para adquirir tus herramientas y productos sugeridos.');
+      });
+    }
+
+    // 5. Destacar la opción activa del menú según el scroll
+    const sections = document.querySelectorAll('section[id], header.hero, main.container');
+    const navLinks = document.querySelectorAll('.nav-menu-link');
+
+    window.addEventListener('scroll', () => {
+      let currentSectionId = 'index.html';
+      const scrollPos = window.scrollY + 150;
+
+      if (window.scrollY < 200) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === 'index.html') {
+            link.classList.add('active');
+          }
+        });
+        return;
+      }
+
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        if (scrollPos >= top && scrollPos < top + height) {
+          currentSectionId = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        const href = link.getAttribute('href');
+        if (href.includes(currentSectionId) && currentSectionId) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Inicializar
+    renderNavbar();
+    loadCursos();
+    loadBanner();
+  </script>
+
+  <!-- Widgets Globales: WhatsApp y Hamburguesa -->
+  <script src="js/global-widgets.js" defer></script>
+</body>
+</html>

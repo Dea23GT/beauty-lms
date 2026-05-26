@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso Académico | Blush Pro Academy LMS</title>
+  <meta name="description" content="Inicia sesión o regístrate en Blush Pro Academy LMS para acceder a tus cursos profesionales de maquillaje, estética y colorimetría en Guatemala.">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Acceso Académico | Blush Pro Academy LMS">
+  <meta property="og:description" content="Inicia sesión o regístrate en Blush Pro Academy LMS para acceder a tus cursos profesionales de maquillaje, estética y colorimetría.">
+  <meta property="og:image" content="/logo.svg">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Acceso Académico | Blush Pro Academy LMS">
+  <meta name="twitter:description" content="Inicia sesión o regístrate en Blush Pro Academy LMS para acceder a tus cursos profesionales.">
+  <meta name="twitter:image" content="/logo.svg">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+  <!-- Fondo Dinámico Animado -->
+  <div class="animated-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- Barra de Anuncios Promocional -->
+  <div class="promo-banner" id="promo-banner"></div>
+
+  <!-- Barra de navegación minimalista -->
+  <nav class="navbar">
+    <a href="index.html" class="navbar-brand"><img src="logo.svg" class="logo-img" alt="Blush Pro Academy"></a>
+    <div class="nav-links">
+      <a href="index.html">Catálogo</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="auth-wrapper animate-fade-in">
+      
+      <!-- Encabezado de Autenticación -->
+      <div class="auth-header">
+        <h1 class="auth-logo" id="auth-title"><img src="logo.svg" alt="Blush Pro Academy"></h1>
+        <p class="auth-subtitle" id="auth-subtitle-text">Ingresa a tus clases personalizadas de belleza</p>
+      </div>
+
+      <!-- Alertas de Error/Éxito -->
+      <div id="alert-box" class="alert"></div>
+
+      <!-- Formulario de Iniciar Sesión / Registro -->
+      <form id="auth-form">
+        <!-- Campo Nombre (solo se muestra en Registro) -->
+        <div class="form-group" id="group-nombre" style="display: none;">
+          <label for="nombre" class="form-label">Nombre Completo</label>
+          <input type="text" id="nombre" class="form-control" placeholder="Ej. Ana Gómez">
+        </div>
+
+        <!-- Campo Correo -->
+        <div class="form-group">
+          <label for="correo" class="form-label">Correo Electrónico</label>
+          <input type="email" id="correo" class="form-control" placeholder="ejemplo@correo.com" required>
+        </div>
+
+        <!-- Campo Contraseña -->
+        <div class="form-group">
+          <label for="password" class="form-label">Contraseña</label>
+          <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+        </div>
+
+        <!-- Enlace ¿Olvidaste tu contraseña? (Oculto de momento, listo para implementación futura) -->
+        <div id="forgot-password-link-wrapper" style="display: none; text-align: right; margin-top: -10px; margin-bottom: 15px;">
+          <a href="#" id="link-forgot" style="font-size: 0.85rem; color: var(--color-primary); text-decoration: none;">¿Olvidaste tu contraseña?</a>
+        </div>
+        <!-- Enlace ¿Olvidaste tu contraseña? vía WhatsApp -->
+        <div id="whatsapp-forgot-password-link-wrapper" style="text-align: right; margin-top: -10px; margin-bottom: 15px;">
+          <a href="https://wa.me/50254321098?text=Hola%2C%20olvid%C3%A9%20mi%20contrase%C3%B1a%20de%20Blush%20Pro%20Academy%20y%20necesito%20ayuda%20para%20restablecerla.%20Mi%20correo%20registrado%20es%3A%20" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; color: var(--color-primary); text-decoration: none;"><i class="bi bi-whatsapp" style="margin-right: 4px;"></i>¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <!-- Botón de acción -->
+        <button type="submit" class="btn-auth" id="btn-submit">Iniciar Sesión</button>
+      </form>
+
+      <!-- Formulario de Recuperación (inicialmente oculto) -->
+      <form id="forgot-form" style="display: none; margin-top: 15px;">
+        <div class="form-group" id="forgot-email-group">
+          <label for="forgot-correo" class="form-label">Correo Electrónico</label>
+          <input type="email" id="forgot-correo" class="form-control" placeholder="ejemplo@correo.com" required>
+        </div>
+        <div class="form-group" id="forgot-fields" style="display: none;">
+          <label for="forgot-token" class="form-label">Código de 6 dígitos</label>
+          <input type="text" id="forgot-token" class="form-control" placeholder="123456" maxlength="6" style="margin-bottom: 15px;">
+          <label for="forgot-new-password" class="form-label">Nueva Contraseña</label>
+          <input type="password" id="forgot-new-password" class="form-control" placeholder="Mínimo 6 caracteres">
+        </div>
+        <button type="submit" class="btn-auth" id="btn-forgot-submit">Enviar Código de Recuperación</button>
+      </form>
+
+      <!-- Contenedor para el Asistente de Verificación -->
+      <div id="verification-assistant-container"></div>
+
+      <!-- Alternador de Modos -->
+      <div class="auth-footer">
+        <span id="footer-text">¿No tienes una cuenta? </span>
+        <a href="#" id="link-toggle">Regístrate aquí</a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-social-links">
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+      <a href="https://wa.me/50254321098" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+    </div>
+    <p>&copy; 2026 BLUSH PRO ACADEMY. Todos los derechos reservados. | Diseñado con elegancia.</p>
+  </footer>
+
+
+  <script>
+    // Variables de Estado
+    let isLoginMode = true; // true = login, false = register, 'forgot' = password recovery
+    let forgotStep = 1; // 1 = input email, 2 = input code & new password
+
+    // Selectores DOM
+    const authTitle = document.getElementById('auth-title');
+    const authSubtitleText = document.getElementById('auth-subtitle-text');
+    const groupNombre = document.getElementById('group-nombre');
+    const nombreInput = document.getElementById('nombre');
+    const correoInput = document.getElementById('correo');
+    const passwordInput = document.getElementById('password');
+    const btnSubmit = document.getElementById('btn-submit');
+    const footerText = document.getElementById('footer-text');
+    const linkToggle = document.getElementById('link-toggle');
+    const authForm = document.getElementById('auth-form');
+    const alertBox = document.getElementById('alert-box');
+    const linkForgot = document.getElementById('link-forgot');
+    const forgotForm = document.getElementById('forgot-form');
+    const forgotCorreoInput = document.getElementById('forgot-correo');
+    const forgotFields = document.getElementById('forgot-fields');
+    const forgotTokenInput = document.getElementById('forgot-token');
+    const forgotNewPasswordInput = document.getElementById('forgot-new-password');
+    const btnForgotSubmit = document.getElementById('btn-forgot-submit');
+    const assistantContainer = document.getElementById('verification-assistant-container');
+
+    // Redirección si ya está autenticada
+    if (localStorage.getItem('user')) {
+      window.location.href = 'index.html';
+    }
+
+    // Check query params for verification confirmation
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('verified') === 'true') {
+      showAlert('success', '¡Cuenta verificada exitosamente! Ya puedes iniciar sesión.');
+      if (urlParams.get('email')) {
+        correoInput.value = urlParams.get('email');
+      }
+    }
+
+    // Activar modo recuperación de contraseña
+    linkForgot.addEventListener('click', (e) => {
+      e.preventDefault();
+      isLoginMode = 'forgot';
+      forgotStep = 1;
+      hideAlert();
+      assistantContainer.innerHTML = '';
+
+      authTitle.innerHTML = 'RESTABLECER<span>CONTRASEÑA</span>';
+      authSubtitleText.textContent = 'Ingresa tu correo para recibir un código de recuperación.';
+      authForm.style.display = 'none';
+      forgotForm.style.display = 'block';
+      forgotFields.style.display = 'none';
+      btnForgotSubmit.textContent = 'Enviar Código de Recuperación';
+
+      footerText.textContent = '¿Recordaste tu contraseña? ';
+      linkToggle.textContent = 'Inicia sesión aquí';
+    });
+
+    // Cambiar entre Iniciar Sesión y Registro
+    linkToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      assistantContainer.innerHTML = '';
+      hideAlert();
+
+      if (isLoginMode === 'forgot' || !isLoginMode) {
+        // Cambiar a Login
+        isLoginMode = true;
+        authTitle.innerHTML = 'BLUSH PRO<span>ACADEMY</span>';
+        authSubtitleText.textContent = 'Ingresa a tus clases personalizadas de belleza';
+        groupNombre.style.display = 'none';
+        nombreInput.removeAttribute('required');
+        btnSubmit.textContent = 'Iniciar Sesión';
+        authForm.style.display = 'block';
+        forgotForm.style.display = 'none';
+        footerText.textContent = '¿No tienes una cuenta? ';
+        linkToggle.textContent = 'Regístrate aquí';
+      } else {
+        // Cambiar a Registro
+        isLoginMode = false;
+        authTitle.innerHTML = 'BLUSH PRO<span>ACADEMY</span>';
+        authSubtitleText.textContent = 'Regístrate para comenzar tu formación en estética';
+        groupNombre.style.display = 'block';
+        nombreInput.setAttribute('required', 'true');
+        btnSubmit.textContent = 'Crear Cuenta';
+        authForm.style.display = 'block';
+        forgotForm.style.display = 'none';
+        footerText.textContent = '¿Ya tienes cuenta? ';
+        linkToggle.textContent = 'Inicia sesión aquí';
+      }
+    });
+
+    // Envío del Formulario de Autenticación (Login / Registro)
+    authForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert();
+      assistantContainer.innerHTML = '';
+
+      const payload = {
+        correo: correoInput.value.trim(),
+        password: passwordInput.value
+      };
+
+      if (!isLoginMode) {
+        payload.nombre = nombreInput.value.trim();
+      }
+
+      const endpoint = isLoginMode ? '/api/auth/login' : '/api/auth/register';
+
+      try {
+        btnSubmit.disabled = true;
+        btnSubmit.innerHTML = isLoginMode 
+          ? '<i class="bi bi-arrow-repeat bi-spin" style="margin-right: 6px;"></i> Verificando...' 
+          : '<i class="bi bi-arrow-repeat bi-spin" style="margin-right: 6px;"></i> Creando cuenta...';
+
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Ocurrió un error inesperado');
+        }
+
+        if (isLoginMode) {
+          // Guardar credenciales en el cliente
+          localStorage.setItem('user', JSON.stringify(data.user));
+
+          showAlert('success', 'Sesión iniciada con éxito. Redireccionando...');
+          setTimeout(() => {
+            window.location.href = 'index.html';
+          }, 1000);
+        } else {
+          if (data.token) {
+            // Test user auto-login and redirect
+            localStorage.setItem('user', JSON.stringify(data.user));
+            showAlert('success', 'Sesión iniciada con éxito (Test). Redireccionando...');
+            setTimeout(() => {
+              window.location.href = 'index.html';
+            }, 1000);
+            return;
+          }
+          showAlert('success', 'Cuenta creada con éxito. Te hemos enviado un link de verificación.');
+          
+          // Mostrar caja asistente de verificación para fines de testeo
+          if (data.mockVerificationLink) {
+            assistantContainer.innerHTML = `
+              <div class="verification-assistant animate-fade-in" style="margin-top: 20px; padding: 15px; border-radius: var(--border-radius-md); background: rgba(212, 175, 55, 0.1); border: 1px solid var(--color-primary); color: var(--color-dark); text-align: left;">
+                <h4 style="margin-top:0; color: var(--color-primary); display:flex; align-items:center; gap: 8px;">
+                  <i class="bi bi-envelope-check"></i> Asistente de Verificación (Simulador)
+                </h4>
+                <p style="font-size: 0.9rem; margin-bottom: 12px;">Para completar las pruebas de tu cuenta, haz clic en el siguiente botón para verificar tu cuenta al instante:</p>
+                <a href="${data.mockVerificationLink}" class="btn-primary" style="display:inline-block; font-size: 0.85rem; padding: 6px 12px; text-decoration: none; text-align:center; border-radius:4px;">Verificar Cuenta Ahora</a>
+                <div style="margin-top: 10px; font-size: 0.8rem; opacity: 0.8;">Código temporal de verificación: <strong>${data.mockVerificationToken}</strong></div>
+              </div>
+            `;
+          }
+
+          // Esperamos a ver si el usuario prefiere hacer click en el asistente
+          btnSubmit.disabled = false;
+          btnSubmit.textContent = 'Crear Cuenta';
+        }
+
+      } catch (error) {
+        showAlert('danger', error.message);
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = isLoginMode ? 'Iniciar Sesión' : 'Crear Cuenta';
+      }
+    });
+
+    // Envío del Formulario de Recuperación de Contraseña
+    forgotForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert();
+
+      if (forgotStep === 1) {
+        const correo = forgotCorreoInput.value.trim();
+        if (!correo) return;
+
+        try {
+          btnForgotSubmit.disabled = true;
+          btnForgotSubmit.innerHTML = '<i class="bi bi-arrow-repeat bi-spin" style="margin-right: 6px;"></i> Enviando...';
+
+          const response = await fetch('/api/auth/forgot-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ correo })
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.error || 'Ocurrió un error al procesar tu solicitud.');
+          }
+
+          const successMsg = data.mockToken 
+            ? `Código enviado con éxito. Código simulado: ${data.mockToken}`
+            : 'Código enviado con éxito. Por favor, revisa tu correo electrónico.';
+          showAlert('success', successMsg);
+          forgotFields.style.display = 'block';
+          forgotTokenInput.setAttribute('required', 'true');
+          forgotNewPasswordInput.setAttribute('required', 'true');
+          btnForgotSubmit.textContent = 'Restablecer Contraseña';
+          forgotStep = 2;
+        } catch (error) {
+          showAlert('danger', error.message);
+          btnForgotSubmit.textContent = 'Enviar Código de Recuperación';
+        } finally {
+          btnForgotSubmit.disabled = false;
+        }
+      } else if (forgotStep === 2) {
+        const correo = forgotCorreoInput.value.trim();
+        const token = forgotTokenInput.value.trim();
+        const newPassword = forgotNewPasswordInput.value;
+
+        if (!correo || !token || !newPassword) return;
+
+        try {
+          btnForgotSubmit.disabled = true;
+          btnForgotSubmit.innerHTML = '<i class="bi bi-arrow-repeat bi-spin" style="margin-right: 6px;"></i> Restableciendo...';
+
+          const response = await fetch('/api/auth/reset-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ correo, token, newPassword })
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.error || 'Ocurrió un error al restablecer tu contraseña.');
+          }
+
+          showAlert('success', '¡Contraseña restablecida correctamente! Redirigiéndote al inicio de sesión...');
+          setTimeout(() => {
+            linkToggle.click(); // Cambia de vuelta a login
+          }, 2000);
+        } catch (error) {
+          showAlert('danger', error.message);
+          btnForgotSubmit.textContent = 'Restablecer Contraseña';
+        } finally {
+          btnForgotSubmit.disabled = false;
+        }
+      }
+
+    });
+
+    // Helpers de Alerta
+    function showAlert(type, message) {
+      alertBox.textContent = message;
+      alertBox.className = `alert alert-${type}`;
+      alertBox.style.display = 'block';
+    }
+
+    function hideAlert() {
+      alertBox.style.display = 'none';
+      alertBox.textContent = '';
+    }
+
+    async function loadBanner() {
+      try {
+        const response = await fetch('/api/cursos/config/banner');
+        if (response.ok) {
+          const data = await response.json();
+          const bannerEl = document.getElementById('promo-banner');
+          if (data && data.valor && data.valor.trim() !== '') {
+            bannerEl.innerHTML = `<div class="promo-banner-content"><i class="bi bi-megaphone-fill"></i> ${escapeHtml(data.valor)}</div>`;
+            bannerEl.style.display = 'block';
+          } else {
+            bannerEl.style.display = 'none';
+          }
+        }
+      } catch (error) {
+        console.error('Error al cargar banner:', error);
+      }
+    }
+
+    loadBanner();
+  </script>
+  <!-- Widgets Globales: WhatsApp y Hamburguesa -->
+  <script src="js/global-widgets.js" defer></script>
+</body>
+</html>

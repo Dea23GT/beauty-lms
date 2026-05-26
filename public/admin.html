@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Administrativo | Blush Pro Academy</title>
+  <meta name="description" content="Panel de administración exclusivo de Blush Pro Academy. Administra cursos, inscripciones, reportes de ventas, cupones de descuento y configuraciones del sitio.">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Panel Administrativo | Blush Pro Academy">
+  <meta property="og:description" content="Panel de administración exclusivo de Blush Pro Academy. Administra cursos, inscripciones, reportes de ventas, cupones y configuraciones.">
+  <meta property="og:image" content="/logo.svg">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Panel Administrativo | Blush Pro Academy">
+  <meta name="twitter:description" content="Panel de administración exclusivo de Blush Pro Academy.">
+  <meta name="twitter:image" content="/logo.svg">
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    /* Estilos específicos del Dashboard de Administración */
+    .admin-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: calc(100vh - 140px);
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    
+    .admin-sidebar {
+      background-color: var(--color-white);
+      border: 1px solid var(--color-gray-light);
+      border-radius: var(--border-radius);
+      padding: 1.5rem 1rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      height: fit-content;
+    }
+
+    .sidebar-btn {
+      background: none;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--color-dark);
+      text-align: left;
+      padding: 0.8rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .sidebar-btn:hover, .sidebar-btn.active {
+      background-color: var(--color-gray-light);
+      color: var(--color-primary);
+    }
+
+    .sidebar-btn.active {
+      font-weight: 600;
+      border-left: 3px solid var(--color-primary);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .admin-content {
+      background-color: var(--color-white);
+      border: 1px solid var(--color-gray-light);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      min-width: 0;
+    }
+
+    .content-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--color-gray-light);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .content-title {
+      font-family: var(--font-title);
+      font-size: 1.8rem;
+      color: var(--color-dark);
+    }
+
+    /* Tablas modernas y responsivas */
+    .table-container {
+      overflow-x: auto;
+      margin-top: 1rem;
+    }
+    .table-container::-webkit-scrollbar {
+      height: 6px;
+    }
+    .table-container::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.02);
+      border-radius: 3px;
+    }
+    .table-container::-webkit-scrollbar-thumb {
+      background: rgba(214, 175, 55, 0.3);
+      border-radius: 3px;
+    }
+    .table-container::-webkit-scrollbar-thumb:hover {
+      background: var(--color-primary);
+    }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    .admin-table th {
+      background-color: var(--color-gray-light);
+      color: var(--color-dark);
+      font-weight: 600;
+      padding: 0.8rem 1rem;
+      border-bottom: 2px solid var(--color-gray-light);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+    }
+
+    .admin-table td {
+      padding: 0.9rem 1rem;
+      border-bottom: 1px solid var(--color-gray-light);
+      vertical-align: middle;
+    }
+
+    .admin-table tr:hover {
+      background-color: #FAFAFA;
+    }
+
+    /* Clases de Columnas Administrativas con Anchos Fijos y Mínimos */
+    .col-id { width: 60px; min-width: 60px; text-align: center; }
+    .col-mini { width: 90px; min-width: 90px; }
+    .col-title { min-width: 250px; }
+    .col-price { width: 90px; min-width: 90px; }
+    .col-actions-cursos { width: 320px; min-width: 320px; text-align: center; }
+    
+    .col-alumna { min-width: 150px; }
+    .col-correo { min-width: 180px; }
+    .col-curso { min-width: 200px; }
+    .col-status { width: 100px; min-width: 100px; text-align: center; }
+    .col-actions-subs { width: 250px; min-width: 250px; text-align: center; }
+    
+    .col-rol { width: 120px; min-width: 120px; text-align: center; }
+    .col-date { width: 130px; min-width: 130px; }
+    .col-actions-users { width: 150px; min-width: 150px; text-align: center; }
+    
+    .col-monto { width: 100px; min-width: 100px; }
+    .col-metodo { width: 120px; min-width: 120px; }
+    .col-ref { width: 140px; min-width: 140px; }
+    .col-fecha { width: 160px; min-width: 160px; }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    .badge-success {
+      background-color: #D4EDDA;
+      color: #155724;
+    }
+
+    .badge-danger {
+      background-color: #F8D7DA;
+      color: #721C24;
+    }
+
+    .badge-primary {
+      background-color: #CCE5FF;
+      color: #004085;
+    }
+
+    /* Modales e Interfaces de Edición */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-content {
+      background-color: var(--color-white);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .close-modal {
+      position: absolute;
+      right: 1.5rem;
+      top: 1.5rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--color-gray);
+      transition: var(--transition);
+    }
+
+    .close-modal:hover {
+      color: var(--color-dark);
+    }
+
+    .modal-title {
+      font-family: var(--font-title);
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--color-gray-light);
+      padding-bottom: 0.5rem;
+    }
+
+    .actions-cell {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+
+    .btn-action {
+      background-color: var(--color-white);
+      border: 1px solid var(--color-gray-light);
+      cursor: pointer;
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .btn-action:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-action:active {
+      transform: translateY(0);
+    }
+
+    .btn-action.edit {
+      border-color: rgba(214, 175, 55, 0.4);
+      color: var(--color-primary-dark);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(214, 175, 55, 0.05));
+    }
+
+    .btn-action.edit:hover {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+      color: var(--color-white);
+      border-color: var(--color-primary);
+      box-shadow: 0 4px 10px rgba(212, 175, 55, 0.25);
+    }
+
+    .btn-action.delete {
+      border-color: rgba(231, 76, 60, 0.3);
+      color: var(--color-danger);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(231, 76, 60, 0.05));
+    }
+
+    .btn-action.delete:hover {
+      background: linear-gradient(135deg, #E74C3C, #C0392B);
+      color: var(--color-white);
+      border-color: var(--color-danger);
+      box-shadow: 0 4px 10px rgba(231, 76, 60, 0.25);
+    }
+
+    .btn-action.lessons {
+      border-color: rgba(26, 26, 26, 0.2);
+      color: var(--color-dark);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(26, 26, 26, 0.03));
+    }
+
+    .btn-action.lessons:hover {
+      background: linear-gradient(135deg, var(--color-dark), var(--color-dark-light));
+      color: var(--color-white);
+      border-color: var(--color-dark);
+      box-shadow: 0 4px 10px rgba(26, 26, 26, 0.25);
+    }
+
+    /* Responsividad del Layout de Administración (Tablets y Móviles) */
+    @media (max-width: 992px) {
+      .admin-layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .admin-sidebar {
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 0.8rem;
+        gap: 0.5rem;
+        justify-content: center;
+      }
+
+      .sidebar-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        justify-content: center;
+      }
+
+      .sidebar-btn.active {
+        border-left: none;
+        border-bottom: 3px solid var(--color-primary);
+        border-radius: 6px 6px 0 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .admin-sidebar {
+        justify-content: flex-start;
+        overflow-x: auto;
+        white-space: nowrap;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        border-bottom: 1px solid var(--color-gray-light);
+        padding-bottom: 0.5rem;
+      }
+
+      .sidebar-btn {
+        flex: 0 0 auto;
+      }
+
+      .content-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .content-header .btn-primary,
+      .content-header .btn-auth,
+      .content-header button {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+
+      .admin-content {
+        padding: 1rem;
+      }
+    }
+
+    /* Estilos del Acceso Denegado */
+    .access-denied-container {
+      text-align: center;
+      padding: 5rem 2rem;
+      max-width: 500px;
+      margin: 4rem auto;
+      background-color: var(--color-white);
+      border: 1px solid var(--color-gray-light);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Estilos para Drag and Drop y Módulos (Temario) */
+    .drop-zone {
+      display: none;
+      text-align: center;
+      padding: 0.5rem;
+      border: 2px dashed rgba(214, 175, 55, 0.3);
+      background-color: rgba(214, 175, 55, 0.01);
+      color: var(--color-primary-dark);
+      font-size: 0.8rem;
+      border-radius: 6px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    
+    #temario-modulos-container.drag-active .drop-zone {
+      display: block;
+      margin: 0.25rem 0;
+      animation: fadeIn 0.2s ease;
+    }
+    
+    .drop-zone-hover {
+      border-color: var(--color-primary) !important;
+      background-color: rgba(214, 175, 55, 0.1) !important;
+      transform: scale(1.005);
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.1);
+    }
+    
+    .module-card.dragging {
+      opacity: 0.4;
+      border: 2px dashed var(--color-primary) !important;
+      box-shadow: none !important;
+    }
+
+    /* Estilos para arrastre de clases */
+    .lesson-drop-zone {
+      display: none;
+      text-align: center;
+      padding: 0.35rem;
+      border: 1px dashed rgba(214, 175, 55, 0.4);
+      background-color: rgba(214, 175, 55, 0.02);
+      color: var(--color-primary-dark);
+      font-size: 0.75rem;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    
+    .lessons-list-admin.drag-active-lesson .lesson-drop-zone {
+      display: block;
+      margin: 0.2rem 0;
+      animation: fadeIn 0.2s ease;
+    }
+    
+    .lesson-drop-zone-hover {
+      border-color: var(--color-primary) !important;
+      background-color: rgba(214, 175, 55, 0.1) !important;
+      transform: scale(1.002);
+    }
+    
+    .lesson-row-admin.dragging {
+      opacity: 0.4;
+      border: 1px dashed var(--color-primary) !important;
+      background: #fffcf5 !important;
+    }
+  </style>
+</head>
+<body>
+  <!-- Fondo Dinámico Animado -->
+  <div class="animated-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="index.html" class="navbar-brand"><img src="logo.svg" class="logo-img" alt="Blush Pro Academy"></a>
+    <div class="nav-links">
+      <a href="index.html">Catálogo</a>
+      <a href="#" id="btn-logout" class="btn-outline">Cerrar Sesión</a>
+    </div>
+  </nav>
+
+  <!-- Vista Principal -->
+  <div class="container" id="main-view" style="display: none;">
+    <div class="admin-layout animate-fade-in">
+      
+      <!-- Menú Lateral -->
+      <aside class="admin-sidebar">
+        <button class="sidebar-btn active" onclick="switchTab('cursos')"><i class="bi bi-journal-album"></i> Cursos</button>
+        <button class="sidebar-btn" onclick="switchTab('suscripciones')"><i class="bi bi-key"></i> Suscripciones</button>
+        <button class="sidebar-btn" onclick="switchTab('usuarios')"><i class="bi bi-people"></i> Usuarias</button>
+        <button class="sidebar-btn" onclick="switchTab('cupones')"><i class="bi bi-ticket-perforated"></i> Cupones y Banner</button>
+        <button class="sidebar-btn" onclick="switchTab('ventas')"><i class="bi bi-graph-up-arrow"></i> Ventas y Reportes</button>
+      </aside>
+
+      <!-- Contenido Principal Dinámico -->
+      <main class="admin-content" id="tab-content">
+        <!-- Se inyecta dinámicamente según la pestaña activa -->
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Pantalla Acceso Denegado -->
+  <div class="container" id="access-denied-view" style="display: none;">
+    <div class="access-denied-container">
+      <span style="font-size: 3rem;">🔒</span>
+      <h1 style="font-family: var(--font-title); font-size: 2.2rem; margin-top: 1rem; margin-bottom: 1rem;">Acceso Restringido</h1>
+      <p style="color: var(--color-gray); margin-bottom: 2rem;">No tienes los permisos de administración necesarios para acceder a esta consola.</p>
+      <div class="alert alert-danger" style="display: inline-block;">Redireccionando al catálogo...</div>
+    </div>
+  </div>
+
+  <!-- MODAL DE CURSO (Nuevo/Editar) -->
+  <div class="modal" id="curso-modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('curso')">&times;</span>
+      <h2 class="modal-title" id="curso-modal-title">Nuevo Curso</h2>
+      <form id="curso-form">
+        <input type="hidden" id="curso-id-input">
+        <div class="form-group">
+          <label for="curso-titulo" class="form-label">Título del Curso</label>
+          <input type="text" id="curso-titulo" class="form-control" placeholder="Ej. Automaquillaje de Noche" required>
+        </div>
+        <div class="form-group">
+          <label for="curso-desc" class="form-label">Descripción</label>
+          <textarea id="curso-desc" class="form-control" rows="4" placeholder="Describe los temas del curso..." required style="resize: vertical; font-family: inherit; padding: 0.75rem; border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); width: 100%;"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="curso-precio" class="form-label">Precio (Q GTQ)</label>
+          <input type="number" id="curso-precio" class="form-control" min="0" step="0.01" placeholder="Ej. 49.99" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Miniatura del Curso</label>
+          <div style="display: flex; gap: 1rem; align-items: center;">
+            <input type="file" id="curso-image-file" class="form-control" accept="image/png, image/jpeg, image/jpg, image/webp" style="padding: 0.5rem; flex: 1;">
+            <div id="curso-image-preview-container" style="width: 80px; height: 50px; border: 1px solid var(--color-gray-light); border-radius: 4px; overflow: hidden; background-color: var(--color-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <span id="curso-image-preview-placeholder" style="font-size: 0.7rem; color: var(--color-gray);">Sin img</span>
+              <img id="curso-image-preview" src="" alt="Vista previa" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          </div>
+          <input type="hidden" id="curso-miniatura" required>
+          <small id="curso-file-info" style="display: block; font-size: 0.75rem; color: var(--color-gray); margin-top: 0.35rem;"></small>
+        </div>
+        <button type="submit" class="btn-auth" style="margin-top: 1rem; width: 100%;">Guardar Curso</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL DE TEMARIO (Gestión de Módulos e Índice de Clases) -->
+  <div class="modal" id="lecciones-modal">
+    <div class="modal-content" style="max-width: 850px; width: 95%;">
+      <span class="close-modal" onclick="closeModal('lecciones')">&times;</span>
+      <h2 class="modal-title" id="lecciones-modal-title">Gestionar Temario</h2>
+      <div id="lecciones-alert" class="alert" style="display: none; margin-bottom: 1rem;"></div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <p style="color: var(--color-gray); font-size: 0.9rem; margin: 0;">
+          Arrastra los módulos por su controlador para cambiar su orden de visualización.
+        </p>
+        <button class="btn-action edit" onclick="openModuloModal()" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; margin-top: 0;">
+          <i class="bi bi-folder-plus"></i> + Nuevo Módulo
+        </button>
+      </div>
+
+      <!-- Contenedor de Módulos (Drag-and-Drop) -->
+      <div id="temario-modulos-container" style="display: flex; flex-direction: column; gap: 1rem;">
+        <!-- Se inyecta dinámicamente -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE MÓDULO (Nuevo/Editar) -->
+  <div class="modal" id="modulo-modal">
+    <div class="modal-content" style="max-width: 480px; z-index: 1100;">
+      <span class="close-modal" onclick="closeModal('modulo')">&times;</span>
+      <h2 class="modal-title" id="modulo-modal-title">Nuevo Módulo</h2>
+      <div id="modulo-alert" class="alert" style="display: none; margin-bottom: 1rem;"></div>
+      <form id="modulo-form">
+        <input type="hidden" id="modulo-id-input">
+        <div class="form-group">
+          <label for="modulo-titulo" class="form-label">Título del Módulo</label>
+          <input type="text" id="modulo-titulo" class="form-control" placeholder="Ej. Módulo 1: Preparación" required>
+        </div>
+        <div class="form-group">
+          <label for="modulo-desc" class="form-label">Explicación / Descripción</label>
+          <textarea id="modulo-desc" class="form-control" rows="3" placeholder="Describe qué aprenderán en este módulo..." style="resize: vertical; font-family: inherit; padding: 0.75rem; border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); width: 100%;"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Imagen del Módulo</label>
+          <div style="display: flex; gap: 1rem; align-items: center;">
+            <input type="file" id="modulo-image-file" class="form-control" accept="image/png, image/jpeg, image/jpg, image/webp" style="padding: 0.5rem; flex: 1;">
+            <div id="modulo-image-preview-container" style="width: 80px; height: 50px; border: 1px solid var(--color-gray-light); border-radius: 4px; overflow: hidden; background-color: var(--color-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <span id="modulo-image-preview-placeholder" style="font-size: 0.7rem; color: var(--color-gray);">Sin img</span>
+              <img id="modulo-image-preview" src="" alt="Vista previa" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          </div>
+          <input type="hidden" id="modulo-miniatura-url">
+          <small id="modulo-file-info" style="display: block; font-size: 0.75rem; color: var(--color-gray); margin-top: 0.35rem;"></small>
+        </div>
+        <button type="submit" class="btn-auth" style="margin-top: 1rem; width: 100%;">Guardar Módulo</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL DE CLASE (Nueva/Editar) -->
+  <div class="modal" id="leccion-form-modal">
+    <div class="modal-content" style="max-width: 480px; z-index: 1100;">
+      <span class="close-modal" onclick="closeModal('leccion-form')">&times;</span>
+      <h2 class="modal-title" id="leccion-modal-title-action">Agregar Clase</h2>
+      <div id="leccion-alert-modal" class="alert" style="display: none; margin-bottom: 1rem;"></div>
+      <form id="leccion-form-modal-element">
+        <input type="hidden" id="leccion-id-input">
+        <input type="hidden" id="leccion-paso-id-input">
+        <div class="form-group">
+          <label for="leccion-titulo" class="form-label">Título de la Clase</label>
+          <input type="text" id="leccion-titulo" class="form-control" placeholder="Ej. Clase 1: Bases del Maquillaje" required>
+        </div>
+        <div class="form-group">
+          <label for="leccion-orden" class="form-label">Número de Orden</label>
+          <input type="number" id="leccion-orden" class="form-control" min="1" placeholder="Ej. 1" required>
+        </div>
+        <div class="form-group">
+          <label for="leccion-yt" class="form-label">ID de Video de YouTube</label>
+          <input type="text" id="leccion-yt" class="form-control" placeholder="Ej. dQw4w9WgXcQ" required>
+        </div>
+        <button type="submit" class="btn-auth" style="margin-top: 1rem; width: 100%;">Guardar Clase</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL DE CURSOS POR USUARIO -->
+  <div class="modal" id="user-courses-modal">
+    <div class="modal-content" style="max-width: 600px;">
+      <span class="close-modal" onclick="closeModal('user-courses')">&times;</span>
+      <h2 class="modal-title" id="user-courses-modal-title">Cursos de la Usuaria</h2>
+      <div id="user-courses-alert" class="alert" style="display: none; margin-bottom: 1rem;"></div>
+      <div class="table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th class="col-curso">Curso</th>
+              <th class="col-status">Estado</th>
+              <th class="col-actions-users">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="user-courses-table-body">
+            <!-- Cargado dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE DETALLE DE ASIGNACIÓN (VENTA MANUAL) -->
+  <div class="modal" id="assign-course-modal">
+    <div class="modal-content" style="max-width: 450px;">
+      <span class="close-modal" onclick="closeModal('assign-course')">&times;</span>
+      <h2 class="modal-title" style="font-family: var(--font-title); font-size: 1.6rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-gray-light); padding-bottom: 0.5rem;">Registrar Venta y Asignación</h2>
+      <div id="assign-course-alert" class="alert" style="display: none; margin-bottom: 1rem;"></div>
+      <form id="assign-course-form">
+        <input type="hidden" id="assign-usuario-id">
+        <input type="hidden" id="assign-curso-id">
+        
+        <div class="form-group">
+          <label class="form-label">Curso Seleccionado</label>
+          <input type="text" id="assign-curso-titulo" class="form-control" disabled style="background-color: var(--color-gray-light); font-weight: 600;">
+        </div>
+
+        <div class="form-group">
+          <label for="assign-monto" class="form-label">Monto Recibido (Q GTQ)</label>
+          <input type="number" id="assign-monto" class="form-control" min="0" step="0.01" required>
+        </div>
+
+        <div class="form-group">
+          <label for="assign-metodo" class="form-label">Método de Pago</label>
+          <select id="assign-metodo" class="form-control" required style="background: white; border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); padding: 0.8rem 1rem;">
+            <option value="VisaLink">VisaLink</option>
+            <option value="Transferencia Banrural">Transferencia Banrural</option>
+            <option value="Tarjeta">Tarjeta de Crédito/Débito</option>
+            <option value="Gratis">Gratis / Promoción</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="assign-referencia" class="form-label">Referencia / Observaciones</label>
+          <input type="text" id="assign-referencia" class="form-control" placeholder="Ej. Depósito #123456 o Notas">
+        </div>
+
+        <button type="submit" class="btn-auth" style="margin-top: 1rem; width: 100%;">Confirmar y Activar Curso</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-social-links">
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+      <a href="https://wa.me/50254321098" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+    </div>
+    <p>&copy; 2026 BLUSH PRO ACADEMY. Todos los derechos reservados. | Panel Administrativo Privado.</p>
+  </footer>
+
+
+  <!-- Widgets Globales: WhatsApp y Hamburguesa -->
+  <script src="js/global-widgets.js" defer></script>
+  <!-- Polyfill para soporte de Drag and Drop en dispositivos táctiles/móviles -->
+  <script src="https://cdn.jsdelivr.net/npm/drag-drop-touch@1.3.0/DragDropTouch.js"></script>
+  <script src="js/admin.js" defer></script>
+</body>
+</html>
