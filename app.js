@@ -163,6 +163,17 @@ async function startServer() {
         console.warn('⚠️ Advertencia en migración de base de datos (pasos - miniatura_url):', err.message);
       }
     }
+
+    try {
+      console.log('🔄 Verificando esquema de la base de datos (usuarios - requiere_cambio_password)...');
+      await pool.query("ALTER TABLE `usuarios` ADD COLUMN `requiere_cambio_password` BOOLEAN NOT NULL DEFAULT FALSE AFTER `metodo_verificacion`");
+      console.log('✅ Base de datos actualizada: columna requiere_cambio_password añadida a usuarios.');
+    } catch (err) {
+      if (err.code !== 'ER_DUP_FIELDNAME' && !err.message.includes('duplicate') && !err.message.includes('already exists')) {
+        console.warn('⚠️ Advertencia en migración de base de datos (usuarios - requiere_cambio_password):', err.message);
+      }
+    }
+
     
     app.listen(PORT, () => {
       console.log(`🚀 Servidor Express iniciado y corriendo en http://localhost:${PORT}`);

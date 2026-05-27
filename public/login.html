@@ -74,13 +74,13 @@
           <input type="password" id="password" class="form-control" placeholder="••••••••" required>
         </div>
 
-        <!-- Enlace ¿Olvidaste tu contraseña? (Oculto de momento, listo para implementación futura) -->
-        <div id="forgot-password-link-wrapper" style="display: none; text-align: right; margin-top: -10px; margin-bottom: 15px;">
+        <!-- Enlace ¿Olvidaste tu contraseña? normal -->
+        <div id="forgot-password-link-wrapper" style="text-align: right; margin-top: -10px; margin-bottom: 10px;">
           <a href="#" id="link-forgot" style="font-size: 0.85rem; color: var(--color-primary); text-decoration: none;">¿Olvidaste tu contraseña?</a>
         </div>
         <!-- Enlace ¿Olvidaste tu contraseña? vía WhatsApp -->
-        <div id="whatsapp-forgot-password-link-wrapper" style="text-align: right; margin-top: -10px; margin-bottom: 15px;">
-          <a href="https://wa.me/50254321098?text=Hola%2C%20olvid%C3%A9%20mi%20contrase%C3%B1a%20de%20Blush%20Pro%20Academy%20y%20necesito%20ayuda%20para%20restablecerla.%20Mi%20correo%20registrado%20es%3A%20" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; color: var(--color-primary); text-decoration: none;"><i class="bi bi-whatsapp" style="margin-right: 4px;"></i>¿Olvidaste tu contraseña?</a>
+        <div id="whatsapp-forgot-password-link-wrapper" style="text-align: right; margin-top: -5px; margin-bottom: 15px;">
+          <a href="https://wa.me/50254321098?text=Hola%2C%20olvid%C3%A9%20mi%20contrase%C3%B1a%20de%20Blush%20Pro%20Academy%20y%20necesito%20ayuda%20para%20restablecerla.%20Mi%20correo%20registrado%20es%3A%20" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; color: var(--color-primary); text-decoration: none;"><i class="bi bi-whatsapp" style="margin-right: 4px;"></i>O solicita ayuda por WhatsApp</a>
         </div>
 
         <!-- Botón de acción -->
@@ -180,9 +180,24 @@
       forgotFields.style.display = 'none';
       btnForgotSubmit.textContent = 'Enviar Código de Recuperación';
 
+      // Pre-llenar el correo si ya lo escribieron en el formulario de login
+      if (correoInput && correoInput.value.trim()) {
+        forgotCorreoInput.value = correoInput.value.trim();
+      }
+
       footerText.textContent = '¿Recordaste tu contraseña? ';
       linkToggle.textContent = 'Inicia sesión aquí';
     });
+
+    // Actualizar dinámicamente el enlace de WhatsApp para incluir el correo
+    const linkForgotWhatsapp = document.querySelector('#whatsapp-forgot-password-link-wrapper a');
+    if (linkForgotWhatsapp) {
+      linkForgotWhatsapp.addEventListener('click', () => {
+        const email = correoInput.value.trim();
+        const baseText = "Hola, olvidé mi contraseña de Blush Pro Academy y necesito ayuda para restablecerla. Mi correo registrado es: ";
+        linkForgotWhatsapp.href = `https://wa.me/50254321098?text=${encodeURIComponent(baseText + email)}`;
+      });
+    }
 
     // Cambiar entre Iniciar Sesión y Registro
     linkToggle.addEventListener('click', (e) => {
@@ -230,6 +245,18 @@
 
       if (!isLoginMode) {
         payload.nombre = nombreInput.value.trim();
+
+        // Enforce OWASP password strength on client-side registration
+        const password = payload.password;
+        const tieneMinuscula = /[a-z]/.test(password);
+        const tieneMayuscula = /[A-Z]/.test(password);
+        const tieneNumero = /\d/.test(password);
+        const tieneEspecial = /[@$!%*?&._\-\/\+#]/.test(password);
+
+        if (password.length < 8 || !tieneMinuscula || !tieneMayuscula || !tieneNumero || !tieneEspecial) {
+          showAlert('danger', 'La contraseña debe tener al menos 8 caracteres e incluir mayúsculas, minúsculas, números y un carácter especial (@$!%*?&._-/#+).');
+          return;
+        }
       }
 
       const endpoint = isLoginMode ? '/api/auth/login' : '/api/auth/register';
@@ -346,6 +373,16 @@
         const newPassword = forgotNewPasswordInput.value;
 
         if (!correo || !token || !newPassword) return;
+
+        const tieneMinuscula = /[a-z]/.test(newPassword);
+        const tieneMayuscula = /[A-Z]/.test(newPassword);
+        const tieneNumero = /\d/.test(newPassword);
+        const tieneEspecial = /[@$!%*?&._\-\/\+#]/.test(newPassword);
+
+        if (newPassword.length < 8 || !tieneMinuscula || !tieneMayuscula || !tieneNumero || !tieneEspecial) {
+          showAlert('danger', 'La nueva contraseña debe tener al menos 8 caracteres e incluir mayúsculas, minúsculas, números y un carácter especial (@$!%*?&._-/#+).');
+          return;
+        }
 
         try {
           btnForgotSubmit.disabled = true;

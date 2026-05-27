@@ -159,7 +159,7 @@
     
     .col-rol { width: 120px; min-width: 120px; text-align: center; }
     .col-date { width: 130px; min-width: 130px; }
-    .col-actions-users { width: 150px; min-width: 150px; text-align: center; }
+    .col-actions-users { width: 260px; min-width: 260px; text-align: center; }
     
     .col-monto { width: 100px; min-width: 100px; }
     .col-metodo { width: 120px; min-width: 120px; }
@@ -873,6 +873,40 @@
         </div>
 
         <button type="submit" class="btn-auth" style="margin-top: 1rem; width: 100%;">Confirmar y Activar Curso</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL DE REINICIAR CONTRASEÑA POR ADMIN -->
+  <div class="modal" id="reset-password-modal">
+    <div class="modal-content" style="max-width: 450px;">
+      <span class="close-modal" onclick="closeModal('reset-password')">&times;</span>
+      <h2 class="modal-title" style="font-family: var(--font-title); font-size: 1.6rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-gray-light); padding-bottom: 0.5rem;">Reiniciar Contraseña</h2>
+      <div id="reset-password-alert" class="alert" style="display: none; margin-bottom: 1rem;"></div>
+      
+      <form id="reset-password-form">
+        <input type="hidden" id="reset-password-usuario-id">
+        
+        <div class="form-group">
+          <label class="form-label">Usuaria Seleccionada</label>
+          <input type="text" id="reset-password-usuario-nombre" class="form-control" disabled style="background-color: var(--color-gray-light); font-weight: 600;">
+        </div>
+
+        <div style="font-size: 0.85rem; color: var(--color-gray); margin-bottom: 1.5rem; line-height: 1.4;">
+          <i class="bi bi-info-circle" style="color: var(--color-primary);"></i> Se generará automáticamente una contraseña temporal robusta que cumple con las directrices de seguridad OWASP. A la alumna se le exigirá actualizarla de inmediato la próxima vez que acceda a la plataforma.
+        </div>
+
+        <!-- Resultados del reinicio (inicialmente oculto) -->
+        <div id="reset-password-result-container" style="display: none; background: #fdfaf2; border: 1px dashed var(--color-primary); padding: 1rem; border-radius: var(--border-radius); margin-bottom: 1.5rem;">
+          <label class="form-label" style="font-weight: 600; color: var(--color-primary-dark); font-size: 0.8rem; margin-bottom: 0.5rem; display: block;">Contraseña Temporal Generada</label>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <input type="text" id="reset-password-temporal-val" class="form-control" readonly style="font-family: monospace; font-size: 1.1rem; letter-spacing: 1px; font-weight: bold; background: white; text-align: center; color: var(--color-dark); padding: 0.5rem;" onclick="this.select()">
+            <button type="button" class="btn-action edit" id="btn-copy-temp-pass" style="margin: 0; padding: 0.6rem 0.8rem;" onclick="window.copyTempPassword()"><i class="bi bi-copy"></i> Copiar</button>
+          </div>
+          <small style="display: block; font-size: 0.75rem; color: var(--color-gray); margin-top: 0.5rem;">Copia esta contraseña y compártela de forma segura con la usuaria.</small>
+        </div>
+
+        <button type="submit" class="btn-auth" id="btn-submit-reset-pass" style="margin-top: 1rem; width: 100%;">Generar Contraseña Temporal</button>
       </form>
     </div>
   </div>

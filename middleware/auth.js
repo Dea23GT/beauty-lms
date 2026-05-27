@@ -23,6 +23,17 @@ function verificarToken(req, res, next) {
     
     // Adjuntar los datos de la usuaria decodificados a la solicitud
     req.usuario = verificado;
+
+    // Bloquear accesos si requiere cambiar contraseña
+    const fullPath = (req.baseUrl || '') + (req.path || '');
+    if (verificado.requiresPasswordChange && fullPath !== '/api/auth/password' && fullPath !== '/api/auth/logout') {
+      return res.status(412).json({
+        error: 'Cambio de contraseña requerido',
+        requiresPasswordChange: true,
+        message: 'Debes cambiar tu contraseña temporal antes de continuar utilizando la plataforma.'
+      });
+    }
+
     next();
   } catch (error) {
     return res.status(403).json({

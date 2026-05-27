@@ -21,6 +21,19 @@ document.addEventListener('DOMContentLoaded', () => {
   initWhatsAppWidget();
   initSearchWidget();
   initProfileModal();
+
+  // Guard de contraseña temporal obligatorio
+  const userJson = localStorage.getItem('user');
+  if (userJson) {
+    const user = JSON.parse(userJson);
+    if (user.requiresPasswordChange) {
+      setTimeout(() => {
+        if (typeof window.openProfileModal === 'function') {
+          window.openProfileModal();
+        }
+      }, 300);
+    }
+  }
 });
 
 /**
@@ -613,11 +626,21 @@ function initProfileModal() {
 
   if (closeBtn) {
     closeBtn.addEventListener('click', () => {
+      const userJson = localStorage.getItem('user');
+      const user = userJson ? JSON.parse(userJson) : null;
+      if (user && user.requiresPasswordChange) {
+        alert('Por razones de seguridad, debes actualizar tu contraseña temporal antes de continuar.');
+        return;
+      }
       modal.classList.remove('active');
     });
   }
 
   modal.addEventListener('click', (e) => {
+    const userJson = localStorage.getItem('user');
+    const user = userJson ? JSON.parse(userJson) : null;
+    if (user && user.requiresPasswordChange) return;
+
     if (e.target === modal) {
       modal.classList.remove('active');
     }
@@ -713,9 +736,14 @@ function initProfileModal() {
         return;
       }
 
-      if (passNueva.length < 6) {
+      const tieneMinuscula = /[a-z]/.test(passNueva);
+      const tieneMayuscula = /[A-Z]/.test(passNueva);
+      const tieneNumero = /\d/.test(passNueva);
+      const tieneEspecial = /[@$!%*?&._\-\/\+#]/.test(passNueva);
+
+      if (passNueva.length < 8 || !tieneMinuscula || !tieneMayuscula || !tieneNumero || !tieneEspecial) {
         passwordAlert.className = 'alert alert-danger';
-        passwordAlert.textContent = 'La nueva contraseña debe tener al menos 6 caracteres.';
+        passwordAlert.textContent = 'La nueva contraseña debe tener al menos 8 caracteres e incluir mayúsculas, minúsculas, números y un carácter especial (@$!%*?&._-/#+).';
         passwordAlert.style.display = 'block';
         return;
       }
@@ -739,9 +767,21 @@ function initProfileModal() {
 
         if (response.ok) {
           passwordAlert.className = 'alert alert-success';
-          passwordAlert.textContent = 'Contraseña actualizada con éxito.';
+          passwordAlert.textContent = 'Contraseña actualizada con éxito. Redirigiendo...';
           passwordAlert.style.display = 'block';
           passwordForm.reset();
+
+          const userJson = localStorage.getItem('user');
+          if (userJson) {
+            const localUser = JSON.parse(userJson);
+            if (localUser.requiresPasswordChange) {
+              localUser.requiresPasswordChange = false;
+              localStorage.setItem('user', JSON.stringify(localUser));
+              setTimeout(() => {
+                window.location.reload();
+              }, 1500);
+            }
+          }
         } else {
           passwordAlert.className = 'alert alert-danger';
           passwordAlert.textContent = data.error || 'Error al cambiar contraseña.';
@@ -797,14 +837,44 @@ window.openProfileModal = function() {
   document.getElementById('profile-password-alert').style.display = 'none';
   document.getElementById('profile-password-form').reset();
 
-  document.querySelectorAll('.profile-tab-btn').forEach((b, i) => {
-    if (i === 0) b.classList.add('active');
-    else b.classList.remove('active');
-  });
-  document.querySelectorAll('.profile-tab-pane').forEach((p, i) => {
-    if (i === 0) p.classList.add('active');
-    else p.classList.remove('active');
-  });
+  const closeBtn = document.getElementById('profile-close-btn');
+
+  if (user.requiresPasswordChange) {
+    if (closeBtn) closeBtn.style.display = 'none';
+    
+    document.querySelectorAll('.profile-tab-btn').forEach((b) => {
+      if (b.getAttribute('data-tab') === 'tab-seguridad') {
+        b.classList.add('active');
+        b.style.display = 'block';
+      } else {
+        b.classList.remove('active');
+        b.style.display = 'none';
+      }
+    });
+
+    document.querySelectorAll('.profile-tab-pane').forEach((p) => {
+      if (p.id === 'tab-seguridad') p.classList.add('active');
+      else p.classList.remove('active');
+    });
+
+    const passwordAlert = document.getElementById('profile-password-alert');
+    passwordAlert.className = 'alert alert-warning';
+    passwordAlert.textContent = '🔒 Tu contraseña ha sido reiniciada por la administración. Por seguridad, debes establecer una nueva contraseña robusta para continuar.';
+    passwordAlert.style.display = 'block';
+  } else {
+    if (closeBtn) closeBtn.style.display = 'block';
+
+    document.querySelectorAll('.profile-tab-btn').forEach((b, i) => {
+      b.style.display = 'block';
+      if (i === 0) b.classList.add('active');
+      else b.classList.remove('active');
+    });
+
+    document.querySelectorAll('.profile-tab-pane').forEach((p, i) => {
+      if (i === 0) p.classList.add('active');
+      else p.classList.remove('active');
+    });
+  }
 
   modal.classList.add('active');
 };

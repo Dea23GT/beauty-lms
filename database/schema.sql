@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `token_verificacion` VARCHAR(6) NULL,
   `token_verificacion_expira` DATETIME NULL,
   `metodo_verificacion` VARCHAR(20) DEFAULT 'correo',
-
+  `requiere_cambio_password` BOOLEAN NOT NULL DEFAULT FALSE,
   `fecha_creacion` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_correo_unico` (`correo`)

@@ -998,8 +998,11 @@ async function fetchUsuarios() {
         <td class="col-date">${new Date(u.fecha_creacion).toLocaleDateString()}</td>
         <td class="col-actions-users">
           <div class="actions-cell">
-            <button class="btn-action edit" onclick="openUserCoursesModal(${u.id}, '${escapeHtml(u.nombre.replace(/'/g, "\\'"))}')">
+            <button class="btn-action edit" onclick="openUserCoursesModal(${u.id}, '${escapeHtml(u.nombre.replace(/'/g, "\\'"))}')" style="margin-right: 0.25rem;">
               <i class="bi bi-journal-check"></i> Cursos
+            </button>
+            <button class="btn-action delete" onclick="openResetPasswordModal(${u.id}, '${escapeHtml(u.nombre.replace(/'/g, "\\'"))}')">
+              <i class="bi bi-shield-slash"></i> Contraseña
             </button>
           </div>
         </td>
@@ -1126,6 +1129,84 @@ document.getElementById('assign-course-form').addEventListener('submit', async (
     btnSave.textContent = originalText;
   }
 });
+
+// eslint-disable-next-line no-unused-vars
+function openResetPasswordModal(usuarioId, usuarioNombre) {
+  document.getElementById('reset-password-usuario-id').value = usuarioId;
+  document.getElementById('reset-password-usuario-nombre').value = usuarioNombre;
+  document.getElementById('reset-password-alert').style.display = 'none';
+  document.getElementById('reset-password-result-container').style.display = 'none';
+  document.getElementById('reset-password-temporal-val').value = '';
+  
+  const btnSubmit = document.getElementById('btn-submit-reset-pass');
+  btnSubmit.disabled = false;
+  btnSubmit.textContent = 'Generar Contraseña Temporal';
+  document.getElementById('reset-password-modal').style.display = 'flex';
+}
+
+document.getElementById('reset-password-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const usuarioId = document.getElementById('reset-password-usuario-id').value;
+  const btnSubmit = document.getElementById('btn-submit-reset-pass');
+  const alertBox = document.getElementById('reset-password-alert');
+  const resultContainer = document.getElementById('reset-password-result-container');
+  const tempPassInput = document.getElementById('reset-password-temporal-val');
+
+  alertBox.style.display = 'none';
+  resultContainer.style.display = 'none';
+
+  try {
+    btnSubmit.disabled = true;
+    btnSubmit.innerHTML = '<i class="bi bi-arrow-repeat bi-spin" style="margin-right: 6px;"></i> Generando...';
+
+    const response = await fetch(`/api/admin/usuarios/${usuarioId}/password-reset`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'Error al reiniciar contraseña');
+
+    tempPassInput.value = data.passwordTemporal;
+    resultContainer.style.display = 'block';
+    
+    alertBox.textContent = '¡Contraseña temporal generada con éxito!';
+    alertBox.className = 'alert alert-success';
+    alertBox.style.display = 'block';
+
+    btnSubmit.textContent = 'Generar Nueva Contraseña Temporal';
+  } catch (error) {
+    alertBox.textContent = error.message;
+    alertBox.className = 'alert alert-danger';
+    alertBox.style.display = 'block';
+    btnSubmit.textContent = 'Generar Contraseña Temporal';
+  } finally {
+    btnSubmit.disabled = false;
+  }
+});
+
+window.copyTempPassword = function() {
+  const tempPassInput = document.getElementById('reset-password-temporal-val');
+  tempPassInput.select();
+  tempPassInput.setSelectionRange(0, 99999); // Para móviles
+
+  navigator.clipboard.writeText(tempPassInput.value)
+    .then(() => {
+      const btnCopy = document.getElementById('btn-copy-temp-pass');
+      const originalHtml = btnCopy.innerHTML;
+      btnCopy.innerHTML = '<i class="bi bi-check-lg"></i> Copiado';
+      setTimeout(() => {
+        btnCopy.innerHTML = originalHtml;
+      }, 2000);
+    })
+    .catch(err => {
+      console.error('Error al copiar al portapapeles: ', err);
+      alert('No se pudo copiar automáticamente. Por favor, selecciona el texto y cópialo manualmente.');
+    });
+};
 
 // --- TAB: VENTAS Y REPORTES ---
 async function renderVentasView(container) {

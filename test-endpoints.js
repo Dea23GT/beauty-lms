@@ -3,7 +3,7 @@ const http = require('http');
 
 const PORT = 3000;
 const testEmail = `alumna_${Date.now()}@beautyboutique.com`;
-const testPassword = 'alumnapassword123';
+const testPassword = 'AlumnaPassword123!';
 const testName = 'Camila Valenzuela';
 
 // Función helper para hacer peticiones HTTP

@@ -8,6 +8,28 @@ const { pool } = require('../config/db');
 const { enviarCorreo, getTemplateVerificacion, getTemplateRecuperacion } = require('../utils/email');
 
 
+// Validar fortaleza de contraseña basada en principios OWASP
+function validarPasswordOWASP(password) {
+  if (password.length < 8) {
+    return {
+      valido: false,
+      message: 'La contraseña debe tener al menos 8 caracteres.'
+    };
+  }
+  const tieneMinuscula = /[a-z]/.test(password);
+  const tieneMayuscula = /[A-Z]/.test(password);
+  const tieneNumero = /\d/.test(password);
+  const tieneEspecial = /[@$!%*?&._\-\/\+#]/.test(password);
+
+  if (!tieneMinuscula || !tieneMayuscula || !tieneNumero || !tieneEspecial) {
+    return {
+      valido: false,
+      message: 'La contraseña debe incluir al menos una letra mayúscula, una minúscula, un número y un carácter especial (@$!%*?&._-/#+).'
+    };
+  }
+  return { valido: true };
+}
+
 // Registro de usuaria (alumna)
 router.post('/register', async (req, res) => {
   const { nombre, correo, password } = req.body;
@@ -29,12 +51,14 @@ router.post('/register', async (req, res) => {
     });
   }
 
-  if (password.length < 6) {
+  const passCheck = validarPasswordOWASP(password);
+  if (!passCheck.valido) {
     return res.status(400).json({
       error: 'Contraseña débil',
-      message: 'La contraseña debe tener al menos 6 caracteres'
+      message: passCheck.message
     });
   }
+
 
   try {
     // 1. Verificar si el correo ya está registrado
@@ -188,8 +212,8 @@ router.post('/login', async (req, res) => {
       id: usuario.id,
       nombre: usuario.nombre,
       correo: usuario.correo,
-
-      rol: usuario.rol
+      rol: usuario.rol,
+      requiresPasswordChange: !!usuario.requiere_cambio_password
     };
 
     const token = jwt.sign(tokenPayload, secreto, {
@@ -212,7 +236,8 @@ router.post('/login', async (req, res) => {
         nombre: usuario.nombre,
         correo: usuario.correo,
         rol: usuario.rol,
-        verificado: !!usuario.verificado
+        verificado: !!usuario.verificado,
+        requiresPasswordChange: !!usuario.requiere_cambio_password
       }
     });
 
@@ -354,8 +379,9 @@ router.post('/reset-password', async (req, res) => {
     return res.status(400).json({ error: 'Todos los campos son requeridos' });
   }
 
-  if (newPassword.length < 6) {
-    return res.status(400).json({ error: 'La nueva contraseña debe tener al menos 6 caracteres.' });
+  const passCheck = validarPasswordOWASP(newPassword);
+  if (!passCheck.valido) {
+    return res.status(400).json({ error: passCheck.message });
   }
 
   try {
@@ -470,8 +496,9 @@ router.put('/password', verificarToken, async (req, res) => {
     return res.status(400).json({ error: 'La contraseña actual y la nueva son requeridas.' });
   }
 
-  if (passwordNueva.length < 6) {
-    return res.status(400).json({ error: 'La nueva contraseña debe tener al menos 6 caracteres.' });
+  const passCheck = validarPasswordOWASP(passwordNueva);
+  if (!passCheck.valido) {
+    return res.status(400).json({ error: passCheck.message });
   }
 
   try {
@@ -495,11 +522,41 @@ router.put('/password', verificarToken, async (req, res) => {
     const nuevoHash = await bcrypt.hash(passwordNueva, saltRounds);
 
     await pool.query(
-      'UPDATE usuarios SET password_hash = ? WHERE id = ?',
+      'UPDATE usuarios SET password_hash = ?, requiere_cambio_password = 0 WHERE id = ?',
       [nuevoHash, req.usuario.id]
     );
 
-    res.json({ success: true, message: 'Contraseña actualizada con éxito.' });
+    // Regenerar el token de sesión sin requiresPasswordChange
+    const secreto = process.env.JWT_SECRET;
+    const tokenPayload = {
+      id: req.usuario.id,
+      nombre: req.usuario.nombre,
+      correo: req.usuario.correo,
+      rol: req.usuario.rol,
+      requiresPasswordChange: false
+    };
+
+    const token = jwt.sign(tokenPayload, secreto, { expiresIn: '24h' });
+
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 24 * 60 * 60 * 1000
+    });
+
+    res.json({
+      success: true,
+      message: 'Contraseña actualizada con éxito.',
+      token,
+      user: {
+        id: req.usuario.id,
+        nombre: req.usuario.nombre,
+        correo: req.usuario.correo,
+        rol: req.usuario.rol,
+        requiresPasswordChange: false
+      }
+    });
   } catch (error) {
     console.error('Error al cambiar contraseña:', error);
     res.status(500).json({ error: 'Error al cambiar contraseña.' });
