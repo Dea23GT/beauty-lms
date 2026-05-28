@@ -60,8 +60,26 @@ app.use('/api/auth/register', authLimiter);
 app.use('/api/auth/forgot-password', authLimiter);
 app.use('/api/auth/reset-password', authLimiter);
 
-// Servir archivos estáticos
-app.use(express.static(path.join(__dirname, 'public')));
+// Middleware para redirigir URLs con .html a sus versiones limpias (Clean URLs)
+app.use((req, res, next) => {
+  if (req.method === 'GET') {
+    if (req.path.endsWith('/index.html')) {
+      const query = req.url.slice(req.path.length);
+      return res.redirect(301, '/' + query);
+    }
+    if (req.path.endsWith('.html')) {
+      const newPath = req.path.slice(0, -5);
+      const query = req.url.slice(req.path.length);
+      return res.redirect(301, newPath + query);
+    }
+  }
+  next();
+});
+
+// Servir archivos estáticos permitiendo cargar archivos .html sin la extensión en la URL
+app.use(express.static(path.join(__dirname, 'public'), {
+  extensions: ['html', 'htm']
+}));
 
 // Rutas de la API
 const authRouter = require('./routes/auth');

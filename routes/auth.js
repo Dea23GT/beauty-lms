@@ -278,7 +278,7 @@ router.get('/verificar', async (req, res) => {
     );
 
     // Redireccionar al login con flag de éxito
-    res.redirect(`/login.html?verified=true&email=${encodeURIComponent(correo)}`);
+    res.redirect(`/login?verified=true&email=${encodeURIComponent(correo)}`);
 
   } catch (error) {
     console.error('Error al verificar por link:', error);

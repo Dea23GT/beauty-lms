@@ -30,7 +30,7 @@ router.post('/checkout', verificarToken, async (req, res) => {
       .digest('hex');
 
     // Generar la URL de redirección al simulador
-    const checkoutUrl = `/checkout-simulador.html?user_id=${usuarioId}&curso_id=${cursoId}&sig=${signature}`;
+    const checkoutUrl = `/checkout-simulador?user_id=${usuarioId}&curso_id=${cursoId}&sig=${signature}`;
 
     res.json({
       checkoutUrl,
