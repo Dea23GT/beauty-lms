@@ -418,7 +418,7 @@ function initWhatsAppWidget() {
     const encodedText = encodeURIComponent(waText);
     
     // Usamos el número de WhatsApp oficial configurado
-    const phoneNumber = '50254321098'; // +502 5432-1098
+    const phoneNumber = '50238040420'; // +502 3804-0420
     const waUrl = `https://wa.me/${phoneNumber}?text=${encodedText}`;
 
     // Abrir WhatsApp en pestaña nueva

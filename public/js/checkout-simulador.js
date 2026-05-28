@@ -220,7 +220,7 @@ btnRequestVisaLink.addEventListener('click', () => {
                   `Hola, solicito el enlace de pago VisaLink para inscribirme a este curso.`;
 
   const encoded = encodeURIComponent(message);
-  window.open(`https://wa.me/50254321098?text=${encoded}`, '_blank');
+  window.open(`https://wa.me/50238040420?text=${encoded}`, '_blank');
 });
 
 btnSubmitTransfer.addEventListener('click', () => {
@@ -236,7 +236,7 @@ btnSubmitTransfer.addEventListener('click', () => {
                   `Hola, adjunto la fotografía de mi comprobante de depósito/transferencia a Banrural para activar mi curso.`;
 
   const encoded = encodeURIComponent(message);
-  window.open(`https://wa.me/50254321098?text=${encoded}`, '_blank');
+  window.open(`https://wa.me/50238040420?text=${encoded}`, '_blank');
 });
 
 function showAlert(type, message) {
