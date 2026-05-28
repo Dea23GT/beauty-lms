@@ -669,13 +669,4 @@ renderNavbar();
 loadCursoDetalles();
 loadBanner();
 
-// Alerta interactiva para la opción Tienda en la barra
-document.addEventListener('DOMContentLoaded', () => {
-  const navShop = document.getElementById('nav-shop');
-  if (navShop) {
-    navShop.addEventListener('click', function(e) {
-      e.preventDefault();
-      alert('🛍️ Redirección externa:\n\nPróximamente serás redirigida a la Tienda de Cosméticos Oficial de Blush Pro Academy para adquirir tus herramientas y productos sugeridos.');
-    });
-  }
-});
+

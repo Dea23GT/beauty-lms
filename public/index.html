@@ -41,7 +41,7 @@
     <!-- Menú de Opciones para Alumnos (Escritorio) -->
     <div class="navbar-menu">
       <a href="index.html" class="nav-menu-link active">Inicio</a>
-      <a href="#" class="nav-menu-link" id="nav-shop">Tienda</a>
+      <a href="https://tiendas.bluspro.net/" target="_blank" rel="noopener noreferrer" class="nav-menu-link">Tienda</a>
       <a href="#nosotros" class="nav-menu-link">Nosotros</a>
       <a href="#blog" class="nav-menu-link">Blog</a>
       <a href="#contacto" class="nav-menu-link">Contacto</a>
@@ -403,14 +403,7 @@
       });
     }
 
-    // 4. Alerta interactiva para la opción Tienda
-    const navShop = document.getElementById('nav-shop');
-    if (navShop) {
-      navShop.addEventListener('click', function(e) {
-        e.preventDefault();
-        alert('🛍️ Redirección externa:\n\nPróximamente serás redirigida a la Tienda de Cosméticos Oficial de Blush Pro Academy para adquirir tus herramientas y productos sugeridos.');
-      });
-    }
+
 
     // 5. Destacar la opción activa del menú según el scroll
     const sections = document.querySelectorAll('section[id], header.hero, main.container');
