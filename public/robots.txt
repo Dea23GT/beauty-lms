@@ -1,0 +1,20 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+
+# Bloquear indexación de la consola de administración
+Disallow: /admin
+Disallow: /admin.html
+
+# Bloquear indexación de la pasarela y simulador de pagos
+Disallow: /checkout-simulador
+Disallow: /checkout-simulador.html
+
+# Bloquear indexación de las clases y espacio de trabajo de estudiantes
+Disallow: /curso
+Disallow: /curso.html
+
+# Permitir el resto del sitio
+Allow: /
+
+# Enlace al Sitemap
+Sitemap: https://academy.bluspro.net/sitemap.xml
