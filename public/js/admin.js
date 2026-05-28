@@ -59,6 +59,8 @@ function switchTab(tab) {
     renderCuponesView(container);
   } else if (tab === 'ventas') {
     renderVentasView(container);
+  } else if (tab === 'blogs') {
+    renderBlogsView(container);
   }
 }
 
@@ -152,6 +154,7 @@ function openCursoModal(cursoId = null) {
   }
   if (placeholder) placeholder.style.display = 'block';
   document.getElementById('curso-miniatura').value = '';
+  document.getElementById('curso-trailer').value = 'dQw4w9WgXcQ';
 
   if (cursoId) {
     title.textContent = 'Editar Curso';
@@ -162,6 +165,7 @@ function openCursoModal(cursoId = null) {
       document.getElementById('curso-desc').value = curso.descripcion;
       document.getElementById('curso-precio').value = curso.precio;
       document.getElementById('curso-miniatura').value = curso.miniatura_url;
+      document.getElementById('curso-trailer').value = curso.trailer_youtube_id || 'dQw4w9WgXcQ';
       
       if (preview && curso.miniatura_url) {
         preview.src = curso.miniatura_url;
@@ -183,7 +187,8 @@ document.getElementById('curso-form').addEventListener('submit', async (e) => {
     titulo: document.getElementById('curso-titulo').value.trim(),
     descripcion: document.getElementById('curso-desc').value.trim(),
     precio: parseFloat(document.getElementById('curso-precio').value),
-    miniatura_url: document.getElementById('curso-miniatura').value.trim()
+    miniatura_url: document.getElementById('curso-miniatura').value.trim(),
+    trailer_youtube_id: document.getElementById('curso-trailer').value.trim()
   };
 
   const method = cursoId ? 'PUT' : 'POST';
@@ -1709,6 +1714,11 @@ function setupImageUploads() {
   if (moduloFileInput) {
     moduloFileInput.addEventListener('change', (e) => handleImageUpload(e, 'modulos', 'modulo-miniatura-url', 'modulo-image-preview', 'modulo-file-info'));
   }
+
+  const blogFileInput = document.getElementById('blog-image-file');
+  if (blogFileInput) {
+    blogFileInput.addEventListener('change', (e) => handleImageUpload(e, 'blogs', 'blog-imagen-url', 'blog-image-preview', 'blog-file-info'));
+  }
 }
 
 async function handleImageUpload(event, type, hiddenUrlInputId, previewImgId, infoMsgId) {
@@ -1777,6 +1787,181 @@ async function handleImageUpload(event, type, hiddenUrlInputId, previewImgId, in
     hiddenInput.value = '';
   }
 }
+
+// --- TAB: BLOGS ---
+let loadedBlogs = [];
+
+async function renderBlogsView(container) {
+  container.innerHTML = `
+    <div class="content-header">
+      <h2 class="content-title">Gestión de Blogs</h2>
+      <button class="btn-auth" onclick="openBlogModal()" style="margin-top:0; padding:0.6rem 1.2rem;">+ Nuevo Artículo</button>
+    </div>
+    <div id="blogs-alert" class="alert" style="display: none; margin-bottom: 1rem;"></div>
+    <div class="table-container">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th class="col-id">ID</th>
+            <th class="col-mini">Imagen</th>
+            <th class="col-title">Título</th>
+            <th class="col-rol">Categoría</th>
+            <th class="col-actions-cursos">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="blogs-table-body">
+          <tr><td colspan="5" style="text-align:center;">Cargando artículos...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  `;
+  await fetchBlogs();
+}
+
+async function fetchBlogs() {
+  try {
+    const response = await fetch('/api/admin/blogs', {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const data = await response.json();
+    
+    if (!response.ok) throw new Error(data.error || 'Error al cargar blogs');
+    loadedBlogs = data;
+    
+    const tbody = document.getElementById('blogs-table-body');
+    if (data.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No hay artículos de blog registrados.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = data.map(blog => `
+      <tr>
+        <td class="col-id">${blog.id}</td>
+        <td class="col-mini">
+          <img src="${escapeHtml(blog.imagen_url)}" alt="Imagen" style="width: 70px; height: 40px; object-fit: cover; border-radius: 4px;" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'70\' height=\'40\' viewBox=\'0 0 70 40\'><rect width=\'100%\' height=\'100%\' fill=\'%231a1a1a\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23d6af37\' font-family=\'sans-serif\' font-size=\'10\' font-weight=\'bold\'>BLUSH</text></svg>';">
+        </td>
+        <td class="col-title" style="font-weight: 500;">${escapeHtml(blog.titulo)}</td>
+        <td class="col-rol" style="text-align: center;"><span class="badge badge-primary">${escapeHtml(blog.categoria)}</span></td>
+        <td class="col-actions-cursos">
+          <div class="actions-cell">
+            <button class="btn-action edit" onclick="openBlogModal(${blog.id})"><i class="bi bi-pencil-square"></i> Editar</button>
+            <button class="btn-action delete" onclick="deleteBlog(${blog.id})"><i class="bi bi-trash"></i> Eliminar</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+
+  } catch (error) {
+    showTabAlert('blogs-alert', 'danger', error.message);
+  }
+}
+
+// Modal de Blogs
+window.openBlogModal = function(blogId = null) {
+  const modal = document.getElementById('blog-modal');
+  const title = document.getElementById('blog-modal-title');
+  const form = document.getElementById('blog-form');
+  
+  form.reset();
+  document.getElementById('blog-id-input').value = '';
+
+  const preview = document.getElementById('blog-image-preview');
+  const placeholder = document.getElementById('blog-image-preview-placeholder');
+  const fileInfo = document.getElementById('blog-file-info');
+  const fileInput = document.getElementById('blog-image-file');
+  
+  if (fileInput) fileInput.value = '';
+  if (fileInfo) fileInfo.textContent = '';
+  if (preview) {
+    preview.src = '';
+    preview.style.display = 'none';
+  }
+  if (placeholder) placeholder.style.display = 'block';
+  document.getElementById('blog-imagen-url').value = '';
+
+  if (blogId) {
+    title.textContent = 'Editar Artículo';
+    const blog = loadedBlogs.find(b => b.id === blogId);
+    if (blog) {
+      document.getElementById('blog-id-input').value = blog.id;
+      document.getElementById('blog-titulo').value = blog.titulo;
+      document.getElementById('blog-categoria').value = blog.categoria;
+      document.getElementById('blog-extracto').value = blog.extracto;
+      document.getElementById('blog-contenido').value = blog.contenido;
+      document.getElementById('blog-imagen-url').value = blog.imagen_url;
+      
+      if (preview && blog.imagen_url) {
+        preview.src = blog.imagen_url;
+        preview.style.display = 'block';
+        if (placeholder) placeholder.style.display = 'none';
+      }
+    }
+  } else {
+    title.textContent = 'Nuevo Artículo';
+  }
+
+  modal.style.display = 'flex';
+};
+
+// Formulario de Blogs submit
+document.getElementById('blog-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const blogId = document.getElementById('blog-id-input').value;
+  const payload = {
+    titulo: document.getElementById('blog-titulo').value.trim(),
+    categoria: document.getElementById('blog-categoria').value.trim(),
+    extracto: document.getElementById('blog-extracto').value.trim(),
+    contenido: document.getElementById('blog-contenido').value.trim(),
+    imagen_url: document.getElementById('blog-imagen-url').value.trim()
+  };
+
+  const method = blogId ? 'PUT' : 'POST';
+  const url = blogId ? `/api/admin/blogs/${blogId}` : '/api/admin/blogs';
+
+  const btnSave = e.target.querySelector('button[type="submit"]');
+  const originalText = btnSave.textContent;
+  try {
+    btnSave.disabled = true;
+    btnSave.innerHTML = '<i class="bi bi-arrow-repeat bi-spin" style="margin-right: 6px;"></i> Guardando...';
+    const response = await fetch(url, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'Error al procesar artículo de blog');
+
+    closeModal('blog');
+    fetchBlogs();
+  } catch (error) {
+    alert(error.message);
+  } finally {
+    btnSave.disabled = false;
+    btnSave.textContent = originalText;
+  }
+});
+
+// Eliminar Blog
+window.deleteBlog = async function(id) {
+  if (!confirm('¿Estás segura de eliminar este artículo de blog?')) return;
+  try {
+    const response = await fetch(`/api/admin/blogs/${id}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (!response.ok) {
+      const data = await response.json();
+      throw new Error(data.error || 'Error al eliminar blog');
+    }
+    fetchBlogs();
+  } catch (error) {
+    alert(error.message);
+  }
+};
 
 // Inicializar verificación y cargas
 verificarAccesoAdmin();

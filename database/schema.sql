@@ -157,3 +157,15 @@ CREATE TABLE IF NOT EXISTS `ventas` (
     ON DELETE CASCADE 
     ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Tabla de Blogs
+CREATE TABLE IF NOT EXISTS `blogs` (
+  `id` INT AUTO_INCREMENT,
+  `titulo` VARCHAR(255) NOT NULL,
+  `categoria` VARCHAR(50) NOT NULL,
+  `extracto` TEXT NOT NULL,
+  `contenido` TEXT NOT NULL,
+  `imagen_url` VARCHAR(2083) NOT NULL,
+  `fecha_creacion` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

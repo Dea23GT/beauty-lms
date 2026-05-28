@@ -10,5 +10,6 @@ router.use('/', require('./admin/config'));
 router.use('/', require('./admin/ventas'));
 router.use('/', require('./admin/pasos'));
 router.use('/', require('./admin/upload'));
+router.use('/', require('./admin/blogs'));
 
 module.exports = router;

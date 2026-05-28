@@ -676,6 +676,7 @@
         <button class="sidebar-btn" onclick="switchTab('usuarios')"><i class="bi bi-people"></i> Usuarias</button>
         <button class="sidebar-btn" onclick="switchTab('cupones')"><i class="bi bi-ticket-perforated"></i> Cupones y Banner</button>
         <button class="sidebar-btn" onclick="switchTab('ventas')"><i class="bi bi-graph-up-arrow"></i> Ventas y Reportes</button>
+        <button class="sidebar-btn" onclick="switchTab('blogs')"><i class="bi bi-journal-text"></i> Blogs</button>
       </aside>
 
       <!-- Contenido Principal Dinámico -->
@@ -714,6 +715,10 @@
         <div class="form-group">
           <label for="curso-precio" class="form-label">Precio (Q GTQ)</label>
           <input type="number" id="curso-precio" class="form-control" min="0" step="0.01" placeholder="Ej. 49.99" required>
+        </div>
+        <div class="form-group">
+          <label for="curso-trailer" class="form-label">ID de Video de Tráiler (YouTube)</label>
+          <input type="text" id="curso-trailer" class="form-control" placeholder="Ej. dQw4w9WgXcQ" required>
         </div>
         <div class="form-group">
           <label class="form-label">Miniatura del Curso</label>
@@ -911,12 +916,52 @@
     </div>
   </div>
 
+  <!-- MODAL DE BLOG (Nuevo/Editar) -->
+  <div class="modal" id="blog-modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('blog')">&times;</span>
+      <h2 class="modal-title" id="blog-modal-title">Nuevo Artículo de Blog</h2>
+      <form id="blog-form">
+        <input type="hidden" id="blog-id-input">
+        <div class="form-group">
+          <label for="blog-titulo" class="form-label">Título del Artículo</label>
+          <input type="text" id="blog-titulo" class="form-control" placeholder="Ej. Los secretos de la colorimetría" required>
+        </div>
+        <div class="form-group">
+          <label for="blog-categoria" class="form-label">Categoría</label>
+          <input type="text" id="blog-categoria" class="form-control" placeholder="Ej. Colorimetría, Skincare, Maquillaje" required>
+        </div>
+        <div class="form-group">
+          <label for="blog-extracto" class="form-label">Extracto / Resumen</label>
+          <textarea id="blog-extracto" class="form-control" rows="3" placeholder="Escribe un breve resumen que enganche a la lectura..." required style="resize: vertical; font-family: inherit; padding: 0.75rem; border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); width: 100%;"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="blog-contenido" class="form-label">Contenido Completo</label>
+          <textarea id="blog-contenido" class="form-control" rows="8" placeholder="Escribe el artículo completo aquí..." required style="resize: vertical; font-family: inherit; padding: 0.75rem; border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); width: 100%;"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Imagen del Artículo</label>
+          <div style="display: flex; gap: 1rem; align-items: center;">
+            <input type="file" id="blog-image-file" class="form-control" accept="image/png, image/jpeg, image/jpg, image/webp" style="padding: 0.5rem; flex: 1;">
+            <div id="blog-image-preview-container" style="width: 80px; height: 50px; border: 1px solid var(--color-gray-light); border-radius: 4px; overflow: hidden; background-color: var(--color-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <span id="blog-image-preview-placeholder" style="font-size: 0.7rem; color: var(--color-gray);">Sin img</span>
+              <img id="blog-image-preview" src="" alt="Vista previa" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          </div>
+          <input type="hidden" id="blog-imagen-url" required>
+          <small id="blog-file-info" style="display: block; font-size: 0.75rem; color: var(--color-gray); margin-top: 0.35rem;"></small>
+        </div>
+        <button type="submit" class="btn-auth" style="margin-top: 1rem; width: 100%;">Guardar Artículo</button>
+      </form>
+    </div>
+  </div>
+
   <footer>
     <div class="footer-social-links">
-      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+      <a href="https://www.instagram.com/blushupstudio_gt/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
       <a href="https://wa.me/50238040420" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-      <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+      <a href="https://www.tiktok.com/@blushupstudiogt" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+      <a href="https://www.facebook.com/Blushupstudiogt" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
     </div>
     <p>&copy; 2026 BLUSH PRO ACADEMY. Todos los derechos reservados. | Panel Administrativo Privado.</p>
   </footer>

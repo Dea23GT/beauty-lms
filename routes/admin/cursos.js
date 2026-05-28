@@ -8,7 +8,7 @@ const { pool } = require('../../config/db');
 router.get('/cursos', async (req, res) => {
   try {
     const [cursos] = await pool.query(
-      'SELECT id, titulo, descripcion, precio, miniatura_url, fecha_creacion FROM cursos ORDER BY id DESC'
+      'SELECT id, titulo, descripcion, precio, miniatura_url, trailer_youtube_id, fecha_creacion FROM cursos ORDER BY id DESC'
     );
     res.json(cursos);
   } catch (error) {
@@ -19,7 +19,7 @@ router.get('/cursos', async (req, res) => {
 
 // 2. Crear un nuevo curso
 router.post('/cursos', async (req, res) => {
-  const { titulo, descripcion, precio, miniatura_url } = req.body;
+  const { titulo, descripcion, precio, miniatura_url, trailer_youtube_id } = req.body;
 
   if (!titulo || !descripcion || precio === undefined || !miniatura_url) {
     return res.status(400).json({ error: 'Todos los campos son obligatorios' });
@@ -27,13 +27,13 @@ router.post('/cursos', async (req, res) => {
 
   try {
     const [result] = await pool.query(
-      'INSERT INTO cursos (titulo, descripcion, precio, miniatura_url) VALUES (?, ?, ?, ?)',
-      [titulo, descripcion, parseFloat(precio), miniatura_url]
+      'INSERT INTO cursos (titulo, descripcion, precio, miniatura_url, trailer_youtube_id) VALUES (?, ?, ?, ?, ?)',
+      [titulo, descripcion, parseFloat(precio), miniatura_url, trailer_youtube_id || 'dQw4w9WgXcQ']
     );
 
     res.status(201).json({
       message: 'Curso creado con éxito',
-      curso: { id: result.insertId, titulo, descripcion, precio, miniatura_url }
+      curso: { id: result.insertId, titulo, descripcion, precio, miniatura_url, trailer_youtube_id: trailer_youtube_id || 'dQw4w9WgXcQ' }
     });
   } catch (error) {
     console.error('Error al crear curso:', error.message);
@@ -44,7 +44,7 @@ router.post('/cursos', async (req, res) => {
 // 3. Actualizar un curso
 router.put('/cursos/:id', async (req, res) => {
   const cursoId = req.params.id;
-  const { titulo, descripcion, precio, miniatura_url } = req.body;
+  const { titulo, descripcion, precio, miniatura_url, trailer_youtube_id } = req.body;
 
   if (!titulo || !descripcion || precio === undefined || !miniatura_url) {
     return res.status(400).json({ error: 'Todos los campos son obligatorios' });
@@ -52,8 +52,8 @@ router.put('/cursos/:id', async (req, res) => {
 
   try {
     const [result] = await pool.query(
-      'UPDATE cursos SET titulo = ?, descripcion = ?, precio = ?, miniatura_url = ? WHERE id = ?',
-      [titulo, descripcion, parseFloat(precio), miniatura_url, cursoId]
+      'UPDATE cursos SET titulo = ?, descripcion = ?, precio = ?, miniatura_url = ?, trailer_youtube_id = ? WHERE id = ?',
+      [titulo, descripcion, parseFloat(precio), miniatura_url, trailer_youtube_id || 'dQw4w9WgXcQ', cursoId]
     );
 
     if (result.affectedRows === 0) {
@@ -62,7 +62,7 @@ router.put('/cursos/:id', async (req, res) => {
 
     res.json({
       message: 'Curso actualizado con éxito',
-      curso: { id: parseInt(cursoId, 10), titulo, descripcion, precio, miniatura_url }
+      curso: { id: parseInt(cursoId, 10), titulo, descripcion, precio, miniatura_url, trailer_youtube_id: trailer_youtube_id || 'dQw4w9WgXcQ' }
     });
   } catch (error) {
     console.error('Error al actualizar curso:', error.message);

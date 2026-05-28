@@ -9,6 +9,7 @@ const crypto = require('crypto');
 const uploadDirs = [
   'public/uploads/cursos',
   'public/uploads/modulos',
+  'public/uploads/blogs',
   'public/uploads/otros'
 ];
 
@@ -29,6 +30,8 @@ const storage = multer.diskStorage({
       dest = 'public/uploads/cursos';
     } else if (type === 'modulos') {
       dest = 'public/uploads/modulos';
+    } else if (type === 'blogs') {
+      dest = 'public/uploads/blogs';
     }
     
     cb(null, dest);

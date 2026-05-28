@@ -261,7 +261,7 @@ async function selectLeccion(id) {
 
   // Verificar si la usuaria está autenticada
   if (!user) {
-    showNoAccessBanner('Inicia sesión para poder acceder a las clases de este curso.', true);
+    showNoAccessBanner('Para acceder a esta clase magistral y recibir el soporte de nuestros estilistas certificados, debes inscribirte en el curso.', false);
     return;
   }
 
@@ -342,6 +342,11 @@ function showNoAccessBanner(message, isLoginRequired = false) {
     btnBuyCourse.href = '#';
     btnBuyCourse.onclick = async (e) => {
       e.preventDefault();
+
+      if (!user) {
+        window.location.href = 'login';
+        return;
+      }
 
       // VALIDACIÓN DE VERIFICACIÓN DE CUENTA
       if (user && !user.verificado) {

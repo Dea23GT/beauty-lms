@@ -88,12 +88,14 @@ const leccionesRouter = require('./routes/lecciones');
 const pagosRouter = require('./routes/pagos');
 const adminRouter = require('./routes/admin');
 const progresoRouter = require('./routes/progreso');
+const blogsRouter = require('./routes/blogs');
 const { verificarToken, verificarRol } = require('./middleware/auth');
 
 app.use('/api/auth', authRouter);
 app.use('/api/cursos', cursosRouter);
 app.use('/api/lecciones', leccionesRouter);
 app.use('/api/pagos', pagosRouter);
+app.use('/api/blogs', blogsRouter);
 app.use('/api/progreso', verificarToken, progresoRouter);
 app.use('/api/admin', verificarToken, verificarRol(['admin']), adminRouter);
 
@@ -192,7 +194,46 @@ async function startServer() {
       }
     }
 
-    
+    try {
+      console.log('🔄 Verificando esquema de la base de datos (blogs)...');
+      await pool.query(`
+        CREATE TABLE IF NOT EXISTS \`blogs\` (
+          \`id\` INT AUTO_INCREMENT,
+          \`titulo\` VARCHAR(255) NOT NULL,
+          \`categoria\` VARCHAR(50) NOT NULL,
+          \`extracto\` TEXT NOT NULL,
+          \`contenido\` TEXT NOT NULL,
+          \`imagen_url\` VARCHAR(2083) NOT NULL,
+          \`fecha_creacion\` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          PRIMARY KEY (\`id\`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+      `);
+      console.log('✅ Base de datos actualizada: tabla blogs verificada/creada.');
+      
+      const [blogsCount] = await pool.query('SELECT COUNT(*) AS count FROM `blogs`');
+      if (blogsCount[0].count === 0) {
+        console.log('🔄 Sembrando blogs iniciales...');
+        await pool.query(`
+          INSERT INTO \`blogs\` (\`id\`, \`titulo\`, \`categoria\`, \`extracto\`, \`contenido\`, \`imagen_url\`, \`fecha_creacion\`) VALUES
+          (1, 'Diseño de Rutina Facial Pro: Identificación de Activos', 'Skincare', 
+           'Aprende a combinar principios activos como el ácido hialurónico, retinol y vitamina C sin causar irritaciones, personalizando la rutina según el tipo de piel de tu cliente.', 
+           'Para diseñar una rutina facial profesional, es vital identificar el fototipo y estado cutáneo del cliente. Activos clave como la Vitamina C aportan luminosidad por la mañana, mientras que el Retinol estimula la renovación celular por la noche. El ácido hialurónico sirve como puente hidratante de alta absorción y es compatible con la mayoría de ingredientes. Es indispensable educar al cliente en el uso diario de protector solar FPS 50+ de amplio espectro, ya que muchos activos sensibilizan la piel al sol.', 
+           'https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=600', '2026-05-24 12:00:00'),
+          (2, 'La Regla de Oro en Colorimetría: Neutralización de Subtonos', 'Colorimetría', 
+           'Domina el círculo cromático capilar para formular tonos perfectos. Descubre cómo corregir reflejos no deseados amarillos, naranjas o verdosos en decoloraciones.', 
+           'La colorimetría capilar se basa en la neutralización de los reflejos residuales. La regla de oro dicta que los colores opuestos en el círculo cromático se neutralizan entre sí. El tono violeta contrarresta el fondo de aclaración amarillo (nivel 9-10), el azul neutraliza los tonos naranja cobrizos (nivel 7-8), y el rojo contrarresta los tonos verdosos. Al formular, la precisión milimétrica del peróxido y la elección del matizante determinan el éxito del rubio platinado o cenizo perfecto sin maltratar la fibra capilar.', 
+           'https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=600', '2026-05-18 12:00:00'),
+          (3, 'Looks Nupciales 2026: Maquillaje de Novia de Alta Duración', 'Maquillaje', 
+           'Secretos profesionales de fijación, preparación de la piel en climas cálidos y técnicas de ojos difuminados elegantes que lucen espectaculares tanto en persona como ante la cámara.', 
+           'El maquillaje nupcial moderno exige una preparación de piel impecable. El uso de brumas fijadoras hidratantes, primers siliconados o matificantes según la zona, y la aplicación de bases de cobertura construible a toques garantizan resistencia al sudor y las lágrimas. Para la fotografía digital, es fundamental evitar polvos traslúcidos con flashback y optar por técnicas de ojos difuminados en tonos tierra o rosáceos con pestañas individuales que den una mirada fresca, natural y sofisticada.', 
+           'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=600', '2026-05-10 12:00:00');
+        `);
+        console.log('✅ Blogs iniciales sembrados con éxito.');
+      }
+    } catch (err) {
+      console.warn('⚠️ Advertencia en migración/siembra de base de datos (blogs):', err.message);
+    }
+
     app.listen(PORT, () => {
       console.log(`🚀 Servidor Express iniciado y corriendo en http://localhost:${PORT}`);
       console.log(`📍 Entorno: ${process.env.NODE_ENV || 'development'}`);

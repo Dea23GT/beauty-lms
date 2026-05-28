@@ -130,60 +130,10 @@
   <section id="blog" class="container blog-section animate-fade-in">
     <span class="about-badge">Publicaciones de Estética</span>
     <h2 class="section-title">Consejos y Tendencias de Belleza</h2>
-    <div class="blog-grid">
-      <!-- Tarjeta de Blog 1 -->
-      <article class="blog-card">
-        <div class="blog-img-wrapper">
-          <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=600" alt="Skincare Rutina" class="blog-img" loading="lazy">
-        </div>
-        <div class="blog-info">
-          <div class="blog-meta">
-            <span class="blog-tag">Skincare</span>
-            <span class="blog-date">24 Mayo, 2026</span>
-          </div>
-          <h3 class="blog-post-title">Diseño de Rutina Facial Pro: Identificación de Activos</h3>
-          <p class="blog-excerpt">
-            Aprende a combinar principios activos como el ácido hialurónico, retinol y vitamina C sin causar irritaciones, personalizando la rutina según el tipo de piel de tu cliente.
-          </p>
-          <a href="#" class="blog-read-more" onclick="alert('Muy pronto podrás leer el artículo completo en nuestra revista digital Blush Magazine.'); event.preventDefault();">Leer Artículo <i class="bi bi-arrow-right"></i></a>
-        </div>
-      </article>
-
-      <!-- Tarjeta de Blog 2 -->
-      <article class="blog-card">
-        <div class="blog-img-wrapper">
-          <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=600" alt="Colorimetría capilar" class="blog-img" loading="lazy">
-        </div>
-        <div class="blog-info">
-          <div class="blog-meta">
-            <span class="blog-tag">Colorimetría</span>
-            <span class="blog-date">18 Mayo, 2026</span>
-          </div>
-          <h3 class="blog-post-title">La Regla de Oro en Colorimetría: Neutralización de Subtonos</h3>
-          <p class="blog-excerpt">
-            Domina el círculo cromático capilar para formular tonos perfectos. Descubre cómo corregir reflejos no deseados amarillos, naranjas o verdosos en decoloraciones.
-          </p>
-          <a href="#" class="blog-read-more" onclick="alert('Muy pronto podrás leer el artículo completo en nuestra revista digital Blush Magazine.'); event.preventDefault();">Leer Artículo <i class="bi bi-arrow-right"></i></a>
-        </div>
-      </article>
-
-      <!-- Tarjeta de Blog 3 -->
-      <article class="blog-card">
-        <div class="blog-img-wrapper">
-          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=600" alt="Maquillaje de Novias" class="blog-img" loading="lazy">
-        </div>
-        <div class="blog-info">
-          <div class="blog-meta">
-            <span class="blog-tag">Maquillaje</span>
-            <span class="blog-date">10 Mayo, 2026</span>
-          </div>
-          <h3 class="blog-post-title">Looks Nupciales 2026: Maquillaje de Novia de Alta Duración</h3>
-          <p class="blog-excerpt">
-            Secretos profesionales de fijación, preparación de la piel en climas cálidos y técnicas de ojos difuminados elegantes que lucen espectaculares tanto en persona como ante la cámara.
-          </p>
-          <a href="#" class="blog-read-more" onclick="alert('Muy pronto podrás leer el artículo completo en nuestra revista digital Blush Magazine.'); event.preventDefault();">Leer Artículo <i class="bi bi-arrow-right"></i></a>
-        </div>
-      </article>
+    <div class="blog-grid" id="blogs-container">
+      <div style="grid-column: 1 / -1; text-align: center; color: var(--color-gray); padding: 3rem 0;">
+        Cargando publicaciones del blog...
+      </div>
     </div>
   </section>
 
@@ -259,10 +209,10 @@
 
   <footer>
     <div class="footer-social-links">
-      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+      <a href="https://www.instagram.com/blushupstudio_gt/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
       <a href="https://wa.me/50238040420" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-      <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+      <a href="https://www.tiktok.com/@blushupstudiogt" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+      <a href="https://www.facebook.com/Blushupstudiogt" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
     </div>
     <p>&copy; 2026 BLUSH PRO ACADEMY. Todos los derechos reservados. | Diseñado con elegancia.</p>
   </footer>
@@ -461,10 +411,82 @@
       });
     });
 
+    async function loadBlogs() {
+      const blogsContainer = document.getElementById('blogs-container');
+      try {
+        const response = await fetch('/api/blogs');
+        if (!response.ok) throw new Error('Error al cargar blogs');
+        const blogs = await response.json();
+        
+        if (blogs.length === 0) {
+          blogsContainer.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; color: var(--color-gray); padding: 3rem 0;">
+              Próximamente publicaremos artículos de blog.
+            </div>
+          `;
+          return;
+        }
+        
+        blogsContainer.innerHTML = blogs.map(blog => {
+          const dateFormatted = new Date(blog.fecha_creacion).toLocaleDateString('es-ES', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+          });
+          return `
+            <article class="blog-card" style="display: flex; flex-direction: column;">
+              <div class="blog-img-wrapper">
+                <img src="${escapeHtml(blog.imagen_url)}" alt="${escapeHtml(blog.titulo)}" class="blog-img" loading="lazy"
+                     onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'600\\' height=\\'400\\' viewBox=\\'0 0 600 400\\'><rect width=\\'100%\\' height=\\'100%\\' fill=\\'%231a1a1a\\'/><text x=\\'50%\\' y=\\'50%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' fill=\\'%23d6af37\\' font-family=\\'sans-serif\\' font-size=\\'36\\' font-weight=\\'bold\\' letter-spacing=\\'4\\'>BLUSH</text></svg>';">
+              </div>
+              <div class="blog-info" style="display: flex; flex-direction: column; flex: 1;">
+                <div class="blog-meta">
+                  <span class="blog-tag">${escapeHtml(blog.categoria)}</span>
+                  <span class="blog-date">${dateFormatted}</span>
+                </div>
+                <h3 class="blog-post-title">${escapeHtml(blog.titulo)}</h3>
+                <p class="blog-excerpt">${escapeHtml(blog.extracto)}</p>
+                <div class="blog-full-content" id="blog-full-${blog.id}" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; font-size: 0.95rem; line-height: 1.6; color: var(--color-gray-dark); margin-top: 0;">
+                  <p style="margin-top: 1rem; border-top: 1px dashed var(--color-gray-light); padding-top: 0.75rem; white-space: pre-line;">${escapeHtml(blog.contenido)}</p>
+                </div>
+                <div style="margin-top: auto; padding-top: 1rem;">
+                  <a href="#" class="blog-read-more" onclick="toggleBlog(${blog.id}, this); event.preventDefault();" style="display: inline-flex; align-items: center; gap: 0.25rem;">Leer más <i class="bi bi-chevron-down"></i></a>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join('');
+        
+      } catch (error) {
+        console.error('Error loading blogs:', error);
+        blogsContainer.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; color: var(--color-danger); padding: 3rem 0;">
+            No pudimos cargar las publicaciones del blog. Por favor, intenta de nuevo más tarde.
+          </div>
+        `;
+      }
+    }
+
+    window.toggleBlog = function(blogId, linkElement) {
+      const fullContent = document.getElementById(`blog-full-${blogId}`);
+      if (!fullContent) return;
+      
+      if (fullContent.style.maxHeight === '0px' || !fullContent.style.maxHeight || fullContent.style.maxHeight === '0') {
+        // Expandir
+        fullContent.style.maxHeight = fullContent.scrollHeight + 'px';
+        linkElement.innerHTML = 'Leer menos <i class="bi bi-chevron-up"></i>';
+      } else {
+        // Colapsar
+        fullContent.style.maxHeight = '0px';
+        linkElement.innerHTML = 'Leer más <i class="bi bi-chevron-down"></i>';
+      }
+    };
+
     // Inicializar
     renderNavbar();
     loadCursos();
     loadBanner();
+    loadBlogs();
   </script>
 
   <!-- Widgets Globales: WhatsApp y Hamburguesa -->

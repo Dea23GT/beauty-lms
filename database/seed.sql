@@ -85,3 +85,18 @@ INSERT INTO `ventas` (`id`, `usuario_id`, `curso_id`, `precio_pagado`, `metodo_p
 (2, 2, 3, 29.99, 'transferencia', 'BOLETA-882910', '2026-05-20 14:22:45'),
 (3, 2, 4, 59.99, 'visalink', 'VL-33921820', '2026-05-21 09:05:12'),
 (4, 2, 2, 39.99, 'gratis', 'CUPON-BELLEZA50', '2026-05-22 11:30:00');
+
+-- Blogs Semilla
+INSERT INTO `blogs` (`id`, `titulo`, `categoria`, `extracto`, `contenido`, `imagen_url`, `fecha_creacion`) VALUES
+(1, 'Diseño de Rutina Facial Pro: Identificación de Activos', 'Skincare', 
+ 'Aprende a combinar principios activos como el ácido hialurónico, retinol y vitamina C sin causar irritaciones, personalizando la rutina según el tipo de piel de tu cliente.', 
+ 'Para diseñar una rutina facial profesional, es vital identificar el fototipo y estado cutáneo del cliente. Activos clave como la Vitamina C aportan luminosidad por la mañana, mientras que el Retinol estimula la renovación celular por la noche. El ácido hialurónico sirve como puente hidratante de alta absorción y es compatible con la mayoría de ingredientes. Es indispensable educar al cliente en el uso diario de protector solar FPS 50+ de amplio espectro, ya que muchos activos sensibilizan la piel al sol.', 
+ 'https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=600', '2026-05-24 12:00:00'),
+(2, 'La Regla de Oro en Colorimetría: Neutralización de Subtonos', 'Colorimetría', 
+ 'Domina el círculo cromático capilar para formular tonos perfectos. Descubre cómo corregir reflejos no deseados amarillos, naranjas o verdosos en decoloraciones.', 
+ 'La colorimetría capilar se basa en la neutralización de los reflejos residuales. La regla de oro dicta que los colores opuestos en el círculo cromático se neutralizan entre sí. El tono violeta contrarresta el fondo de aclaración amarillo (nivel 9-10), el azul neutraliza los tonos naranja cobrizos (nivel 7-8), y el rojo contrarresta los tonos verdosos. Al formular, la precisión milimétrica del peróxido y la elección del matizante determinan el éxito del rubio platinado o cenizo perfecto sin maltratar la fibra capilar.', 
+ 'https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=600', '2026-05-18 12:00:00'),
+(3, 'Looks Nupciales 2026: Maquillaje de Novia de Alta Duración', 'Maquillaje', 
+ 'Secretos profesionales de fijación, preparación de la piel en climas cálidos y técnicas de ojos difuminados elegantes que lucen espectaculares tanto en persona como ante la cámara.', 
+ 'El maquillaje nupcial moderno exige una preparación de piel impecable. El uso de brumas fijadoras hidratantes, primers siliconados o matificantes según la zona, y la aplicación de bases de cobertura construible a toques garantizan resistencia al sudor y las lágrimas. Para la fotografía digital, es fundamental evitar polvos traslúcidos con flashback y optar por técnicas de ojos difuminados en tonos tierra o rosáceos con pestañas individuales que den una mirada fresca, natural y sofisticada.', 
+ 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=600', '2026-05-10 12:00:00');
