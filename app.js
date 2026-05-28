@@ -89,6 +89,7 @@ const pagosRouter = require('./routes/pagos');
 const adminRouter = require('./routes/admin');
 const progresoRouter = require('./routes/progreso');
 const blogsRouter = require('./routes/blogs');
+const contactoRouter = require('./routes/contacto');
 const { verificarToken, verificarRol } = require('./middleware/auth');
 
 app.use('/api/auth', authRouter);
@@ -96,6 +97,7 @@ app.use('/api/cursos', cursosRouter);
 app.use('/api/lecciones', leccionesRouter);
 app.use('/api/pagos', pagosRouter);
 app.use('/api/blogs', blogsRouter);
+app.use('/api/contacto', contactoRouter);
 app.use('/api/progreso', verificarToken, progresoRouter);
 app.use('/api/admin', verificarToken, verificarRol(['admin']), adminRouter);
 
