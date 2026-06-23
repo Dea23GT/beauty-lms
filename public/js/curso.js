@@ -251,7 +251,12 @@ async function selectLeccion(id) {
       
       const moduloImg = document.getElementById('modulo-info-image');
       if (moduloImg) {
-        moduloImg.src = currentPaso.miniatura_url || 'data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'140\' height=\'90\'><rect width=\'100%\' height=\'100%\' fill=\'%231a1a1a\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23d6af37\' font-family=\'sans-serif\' font-size=\'12\' font-weight=\'bold\'>BLUSH PRO</text></svg>';
+        const fallbackSrc = 'data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'140\' height=\'90\'><rect width=\'100%\' height=\'100%\' fill=\'%231a1a1a\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23d6af37\' font-family=\'sans-serif\' font-size=\'12\' font-weight=\'bold\'>BLUSH PRO</text></svg>';
+        moduloImg.onerror = () => {
+          moduloImg.onerror = null;
+          moduloImg.src = fallbackSrc;
+        };
+        moduloImg.src = currentPaso.miniatura_url || fallbackSrc;
       }
       moduloCard.style.display = 'flex';
     } else {
