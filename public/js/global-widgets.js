@@ -2,6 +2,7 @@
  * global-widgets.js
  * Inyecta dinámicamente y maneja la interactividad del Menú de Hamburguesa
  * y el Widget Flotante de WhatsApp para soporte técnico y consultas.
+ * [Test Deploy: 2026-06-23]
  */
 
 window.escapeHtml = function(text) {
