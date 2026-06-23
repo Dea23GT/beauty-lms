@@ -75,7 +75,7 @@ function initNavbarHamburger() {
               </a>
             </li>
             <li>
-              <a href="#" class="drawer-link" id="link-tienda">
+              <a href="https://tiendas.bluspro.net/" target="_blank" rel="noopener noreferrer" class="drawer-link" id="link-tienda">
                 <span><i class="bi bi-bag-fill"></i> Tienda</span>
               </a>
             </li>
@@ -247,10 +247,8 @@ function initNavbarHamburger() {
   // Enlace Tienda
   const linkTienda = document.getElementById('link-tienda');
   if (linkTienda) {
-    linkTienda.addEventListener('click', (e) => {
-      e.preventDefault();
+    linkTienda.addEventListener('click', () => {
       closeDrawer();
-      alert('🛍️ Redirección externa:\n\nPróximamente serás redirigida a la Tienda de Cosméticos Oficial de Blush Pro Academy para adquirir tus herramientas y productos sugeridos.');
     });
   }
 
