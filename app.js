@@ -76,10 +76,19 @@ app.use((req, res, next) => {
   next();
 });
 
+// Servir imágenes/cargas desde un directorio persistente configurable (para evitar borrado en despliegues)
+const fs = require('fs');
+const uploadDir = process.env.UPLOADS_DIR || path.join(__dirname, 'public/uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+app.use('/uploads', express.static(uploadDir));
+
 // Servir archivos estáticos permitiendo cargar archivos .html sin la extensión en la URL
 app.use(express.static(path.join(__dirname, 'public'), {
   extensions: ['html', 'htm']
 }));
+
 
 // Rutas de la API
 const authRouter = require('./routes/auth');

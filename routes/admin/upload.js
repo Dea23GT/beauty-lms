@@ -5,15 +5,16 @@ const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 
-// Ruta raíz del proyecto para asegurar consistencia en entornos de producción (ej. Hostinger)
+// Directorio base de cargas (configurable desde .env para producción persistente)
 const projectRoot = path.resolve(__dirname, '../..');
+const baseUploadPath = process.env.UPLOADS_DIR || path.join(projectRoot, 'public/uploads');
 
 // Asegurar que existan los directorios utilizando rutas absolutas
 const uploadDirs = [
-  path.join(projectRoot, 'public/uploads/cursos'),
-  path.join(projectRoot, 'public/uploads/modulos'),
-  path.join(projectRoot, 'public/uploads/blogs'),
-  path.join(projectRoot, 'public/uploads/otros')
+  path.join(baseUploadPath, 'cursos'),
+  path.join(baseUploadPath, 'modulos'),
+  path.join(baseUploadPath, 'blogs'),
+  path.join(baseUploadPath, 'otros')
 ];
 
 uploadDirs.forEach(dir => {
@@ -27,16 +28,7 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     // Determinar destino absoluto según el parámetro 'type'
     const type = req.query.type || 'otros';
-    let dest = path.join(projectRoot, 'public/uploads/otros');
-    
-    if (type === 'cursos') {
-      dest = path.join(projectRoot, 'public/uploads/cursos');
-    } else if (type === 'modulos') {
-      dest = path.join(projectRoot, 'public/uploads/modulos');
-    } else if (type === 'blogs') {
-      dest = path.join(projectRoot, 'public/uploads/blogs');
-    }
-    
+    const dest = path.join(baseUploadPath, type);
     cb(null, dest);
   },
   filename: (req, file, cb) => {
