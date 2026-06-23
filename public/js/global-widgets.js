@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initWhatsAppWidget();
   initSearchWidget();
   initProfileModal();
+  initCookieConsent();
 
   // Guard de contraseña temporal obligatorio
   const userJson = localStorage.getItem('user');
@@ -896,4 +897,62 @@ document.addEventListener('click', (e) => {
     }
   }
 });
+
+/**
+ * Gestiona el banner de consentimiento de cookies y lo inyecta si no se ha aceptado/rechazado aún.
+ */
+function initCookieConsent() {
+  const consent = localStorage.getItem('cookie_consent');
+  if (consent) return;
+
+  if (document.getElementById('cookie-consent-banner')) return;
+
+  const bannerHtml = `
+    <div class="cookie-banner" id="cookie-consent-banner">
+      <div class="cookie-content">
+        <p>
+          Utilizamos cookies propias y de terceros para asegurar el correcto funcionamiento del sitio, personalizar tu experiencia y analizar el tráfico. Al hacer clic en "Aceptar todo", consientes el uso de todas las cookies. Puedes conocer más detalles o cambiar tu configuración en nuestra <a href="politica-privacidad.html">Política de Privacidad y Cookies</a>.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button class="btn-cookie-decline" id="btn-cookie-decline-all">Solo necesarias</button>
+        <button class="btn-cookie-accept" id="btn-cookie-accept-all">Aceptar todo</button>
+      </div>
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', bannerHtml);
+
+  const banner = document.getElementById('cookie-consent-banner');
+  const btnAccept = document.getElementById('btn-cookie-accept-all');
+  const btnDecline = document.getElementById('btn-cookie-decline-all');
+
+  setTimeout(() => {
+    if (banner) banner.classList.add('active');
+  }, 500);
+
+  const hideBanner = () => {
+    if (banner) {
+      banner.classList.remove('active');
+      setTimeout(() => {
+        banner.remove();
+      }, 500);
+    }
+  };
+
+  if (btnAccept) {
+    btnAccept.addEventListener('click', () => {
+      localStorage.setItem('cookie_consent', 'accepted');
+      hideBanner();
+    });
+  }
+
+  if (btnDecline) {
+    btnDecline.addEventListener('click', () => {
+      localStorage.setItem('cookie_consent', 'essential');
+      hideBanner();
+    });
+  }
+}
+
 
