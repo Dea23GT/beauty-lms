@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pasarela Segura de Pagos | Blush Pro Academy</title>
-  <meta name="description" content="Inscríbete y paga tus cursos de belleza y estética de forma segura en Blush Pro Academy. Proceso fácil, rápido y 100% confiable.">
+  <meta name="description"
+    content="Inscríbete y paga tus cursos de belleza y estética de forma segura en Blush Pro Academy. Proceso fácil, rápido y 100% confiable.">
   <meta name="robots" content="noindex, nofollow">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Pasarela Segura de Pagos | Blush Pro Academy">
-  <meta property="og:description" content="Inscríbete y paga tus cursos de belleza y estética de forma segura en Blush Pro Academy.">
-  <meta property="og:image" content="https://academy.bluspro.net/logo.png">
-  
+  <meta property="og:description"
+    content="Inscríbete y paga tus cursos de belleza y estética de forma segura en Blush Pro Academy.">
+  <meta property="og:image" content="https://academy.blushpro.net/logo.png">
+
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Pasarela Segura de Pagos | Blush Pro Academy">
   <meta name="twitter:description" content="Inscríbete y paga tus cursos de belleza de forma segura.">
-  <meta name="twitter:image" content="https://academy.bluspro.net/logo.png">
+  <meta name="twitter:image" content="https://academy.blushpro.net/logo.png">
 
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" href="logo.svg" type="image/svg+xml">
@@ -34,11 +37,13 @@
       box-shadow: var(--shadow-lg);
       text-align: center;
     }
+
     .checkout-header {
       border-bottom: 1px solid var(--color-gray-light);
       padding-bottom: 1.5rem;
       margin-bottom: 1.5rem;
     }
+
     .checkout-title {
       font-family: var(--font-title);
       font-size: 1.8rem;
@@ -46,6 +51,7 @@
       margin-bottom: 0.5rem;
       letter-spacing: 1px;
     }
+
     .checkout-subtitle {
       font-size: 0.9rem;
       color: var(--color-gray);
@@ -53,6 +59,7 @@
       letter-spacing: 2px;
       font-weight: 500;
     }
+
     .checkout-details {
       background-color: var(--color-gray-light);
       border-radius: 8px;
@@ -60,12 +67,14 @@
       margin-bottom: 2rem;
       text-align: left;
     }
+
     .detail-row {
       display: flex;
       justify-content: space-between;
       margin-bottom: 0.75rem;
       font-size: 0.95rem;
     }
+
     .detail-row:last-child {
       margin-bottom: 0;
       padding-top: 0.75rem;
@@ -73,18 +82,22 @@
       font-weight: bold;
       font-size: 1.1rem;
     }
+
     .detail-label {
       color: var(--color-gray);
     }
+
     .detail-value {
       color: var(--color-dark);
     }
+
     .checkout-actions {
       display: flex;
       flex-direction: column;
       gap: 1rem;
       margin-top: 1.5rem;
     }
+
     .btn-pay {
       background-color: var(--color-dark);
       color: var(--color-white);
@@ -99,11 +112,13 @@
       transition: var(--transition);
       width: 100%;
     }
+
     .btn-pay:hover {
       background-color: var(--color-primary);
       border-color: var(--color-primary);
       color: var(--color-dark);
     }
+
     .btn-cancel {
       background-color: transparent;
       color: var(--color-gray);
@@ -116,10 +131,12 @@
       transition: var(--transition);
       width: 100%;
     }
+
     .btn-cancel:hover {
       background-color: var(--color-gray-light);
       color: var(--color-dark);
     }
+
     .secure-badge {
       display: inline-flex;
       align-items: center;
@@ -138,6 +155,7 @@
       margin-bottom: 1.5rem;
       gap: 5px;
     }
+
     .tab-btn {
       flex: 1;
       background: none;
@@ -156,10 +174,12 @@
       justify-content: center;
       gap: 6px;
     }
+
     .tab-btn.active {
       color: var(--color-primary);
       border-bottom: 2px solid var(--color-primary);
     }
+
     .tab-desc {
       font-size: 0.85rem;
       color: var(--color-gray-dark);
@@ -167,6 +187,7 @@
       line-height: 1.4;
       text-align: left;
     }
+
     .bank-accounts {
       text-align: left;
       margin-bottom: 1.25rem;
@@ -174,12 +195,14 @@
       flex-direction: column;
       gap: 10px;
     }
+
     .bank-account-card {
       background: #fdfcf8;
       border: 1px solid #f2e5bc;
       border-radius: var(--border-radius-sm);
       padding: 12px;
     }
+
     .bank-name {
       font-weight: 700;
       color: var(--color-dark);
@@ -189,17 +212,20 @@
       align-items: center;
       gap: 5px;
     }
+
     .account-details {
       font-size: 0.8rem;
       color: var(--color-gray-dark);
       line-height: 1.5;
     }
+
     .account-num {
       font-family: monospace;
       font-size: 0.95rem;
       color: var(--color-dark);
       font-weight: 700;
     }
+
     .btn-whatsapp:hover {
       background-color: #20ba5a !important;
       border-color: #20ba5a !important;
@@ -208,6 +234,7 @@
     }
   </style>
 </head>
+
 <body>
   <!-- Fondo Dinámico Animado -->
   <div class="animated-bg">
@@ -253,7 +280,9 @@
 
       <!-- Sección de Cupones -->
       <div class="coupon-section" style="margin-bottom: 1.5rem;">
-        <label for="coupon-code" class="detail-label" style="text-align: left; display: block; font-weight: 500; margin-bottom: 4px;">¿Tienes un código promocional?</label>
+        <label for="coupon-code" class="detail-label"
+          style="text-align: left; display: block; font-weight: 500; margin-bottom: 4px;">¿Tienes un código
+          promocional?</label>
         <div class="coupon-input-group">
           <input type="text" id="coupon-code" class="coupon-input" placeholder="Ingresa tu cupón">
           <button class="btn-coupon" id="btn-apply-coupon">Aplicar</button>
@@ -273,31 +302,36 @@
 
       <!-- Contenido: VisaLink / Tarjeta -->
       <div class="tab-content" id="tab-content-visalink">
-        <p class="tab-desc">Solicita tu enlace de pago VisaLink por WhatsApp para pagar con tarjeta de crédito o débito de manera segura. Al completar el pago, la administración activará tu curso.</p>
-        <button class="btn-pay btn-whatsapp" id="btn-request-visalink" style="background-color: #25d366; border-color: #25d366; color: white;">
+        <p class="tab-desc">Solicita tu enlace de pago VisaLink por WhatsApp para pagar con tarjeta de crédito o débito
+          de manera segura. Al completar el pago, la administración activará tu curso.</p>
+        <button class="btn-pay btn-whatsapp" id="btn-request-visalink"
+          style="background-color: #25d366; border-color: #25d366; color: white;">
           <i class="bi bi-whatsapp"></i> Solicitar VisaLink por WhatsApp
         </button>
-        
-      <!-- Sección de Automatización de Pruebas (Oculta de momento, lista para pruebas E2E) -->
-      <div id="test-automation-container" style="display: none;">
-        <div style="margin: 1.5rem 0; border-top: 1px solid var(--color-gray-light); position: relative;">
-          <span style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: white; padding: 0 10px; font-size: 0.75rem; color: var(--color-gray); font-weight: 500;">O AUTOMATIZAR PRUEBA</span>
-        </div>
-        
-        <div class="checkout-actions" id="actions-container" style="margin-bottom: 1rem;">
-          <button class="btn-pay" id="btn-approve">Simular Pago Exitoso</button>
-        </div>
-      </div>
 
-      <div class="checkout-actions">
-        <button class="btn-cancel" id="btn-cancel">Cancelar Transacción</button>
-      </div>
+        <!-- Sección de Automatización de Pruebas (Oculta de momento, lista para pruebas E2E) -->
+        <div id="test-automation-container" style="display: none;">
+          <div style="margin: 1.5rem 0; border-top: 1px solid var(--color-gray-light); position: relative;">
+            <span
+              style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: white; padding: 0 10px; font-size: 0.75rem; color: var(--color-gray); font-weight: 500;">O
+              AUTOMATIZAR PRUEBA</span>
+          </div>
+
+          <div class="checkout-actions" id="actions-container" style="margin-bottom: 1rem;">
+            <button class="btn-pay" id="btn-approve">Simular Pago Exitoso</button>
+          </div>
+        </div>
+
+        <div class="checkout-actions">
+          <button class="btn-cancel" id="btn-cancel">Cancelar Transacción</button>
+        </div>
       </div>
 
       <!-- Contenido: Transferencia Banrural -->
       <div class="tab-content" id="tab-content-banrural" style="display: none;">
-        <p class="tab-desc">Realiza tu depósito o transferencia bancaria a cualquiera de nuestras cuentas monetarias de Banrural y envíanos la fotografía de tu comprobante por WhatsApp.</p>
-        
+        <p class="tab-desc">Realiza tu depósito o transferencia bancaria a cualquiera de nuestras cuentas monetarias de
+          Banrural y envíanos la fotografía de tu comprobante por WhatsApp.</p>
+
         <div class="bank-accounts">
           <div class="bank-account-card">
             <div class="bank-name">
@@ -318,13 +352,15 @@
             </div>
           </div>
         </div>
-        
-        <button class="btn-pay btn-whatsapp" id="btn-submit-transfer" style="background-color: #25d366; border-color: #25d366; color: white;">
+
+        <button class="btn-pay btn-whatsapp" id="btn-submit-transfer"
+          style="background-color: #25d366; border-color: #25d366; color: white;">
           <i class="bi bi-whatsapp"></i> Enviar Comprobante por WhatsApp
         </button>
-        
+
         <div class="checkout-actions" style="margin-top: 1.25rem;">
-          <button class="btn-cancel" onclick="window.location.href = `curso.html?id=${cursoId}`">Cancelar Transacción</button>
+          <button class="btn-cancel" onclick="window.location.href = `curso.html?id=${cursoId}`">Cancelar
+            Transacción</button>
         </div>
       </div>
 
@@ -336,12 +372,17 @@
 
   <footer>
     <div class="footer-social-links">
-      <a href="https://www.instagram.com/blushupstudio_gt/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-      <a href="https://wa.me/50238040420" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-      <a href="https://www.tiktok.com/@blushupstudiogt" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-      <a href="https://www.facebook.com/Blushupstudiogt" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+      <a href="https://www.instagram.com/blushupstudio_gt/" target="_blank" rel="noopener noreferrer"
+        class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+      <a href="https://wa.me/50238040420" target="_blank" rel="noopener noreferrer" class="social-icon"
+        aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      <a href="https://www.tiktok.com/@blushupstudiogt" target="_blank" rel="noopener noreferrer" class="social-icon"
+        aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+      <a href="https://www.facebook.com/Blushupstudiogt" target="_blank" rel="noopener noreferrer" class="social-icon"
+        aria-label="Facebook"><i class="bi bi-facebook"></i></a>
     </div>
-    <p>&copy; 2026 BLUSH PRO ACADEMY. Todos los derechos reservados. | <a href="politica-privacidad.html">Política de Privacidad y Cookies</a> | Simulación de Procesador de Pagos.</p>
+    <p>&copy; 2026 BLUSH PRO ACADEMY. Todos los derechos reservados. | <a href="politica-privacidad.html">Política de
+        Privacidad y Cookies</a> | Simulación de Procesador de Pagos.</p>
   </footer>
 
 
@@ -349,4 +390,5 @@
   <script src="js/global-widgets.js" defer></script>
   <script src="js/checkout-simulador.js" defer></script>
 </body>
+
 </html>

@@ -5,7 +5,7 @@
  * [Test Deploy: 2026-06-23]
  */
 
-window.escapeHtml = function(text) {
+window.escapeHtml = function (text) {
   if (text === null || text === undefined) return '';
   return String(text)
     .replace(/&/g, '&amp;')
@@ -54,7 +54,7 @@ function initNavbarHamburger() {
   hamburgerToggle.className = 'hamburger-toggle';
   hamburgerToggle.setAttribute('aria-label', 'Abrir menú');
   hamburgerToggle.innerHTML = '<i class="bi bi-list"></i>';
-  
+
   // Lo insertamos al final del navbar
   navbar.appendChild(hamburgerToggle);
 
@@ -77,7 +77,7 @@ function initNavbarHamburger() {
               </a>
             </li>
             <li>
-              <a href="https://tiendas.bluspro.net/" target="_blank" rel="noopener noreferrer" class="drawer-link" id="link-tienda">
+              <a href="https://shop.blushpro.net/" target="_blank" rel="noopener noreferrer" class="drawer-link" id="link-tienda">
                 <span><i class="bi bi-bag-fill"></i> Tienda</span>
               </a>
             </li>
@@ -112,7 +112,7 @@ function initNavbarHamburger() {
     if (menuEl) {
       const userJson = localStorage.getItem('user');
       const user = userJson ? JSON.parse(userJson) : null;
-      
+
       let sessionHtml = '';
       if (user) {
         sessionHtml = `
@@ -161,7 +161,7 @@ function initNavbarHamburger() {
         `;
       }
       menuEl.insertAdjacentHTML('beforeend', sessionHtml);
-      
+
       // Manejador del botón de perfil del drawer
       const drawerPerfilBtn = document.getElementById('drawer-btn-perfil');
       if (drawerPerfilBtn) {
@@ -194,7 +194,7 @@ function initNavbarHamburger() {
   const closeBtn = document.getElementById('drawer-close');
   const drawer = document.getElementById('hamburger-drawer');
   const overlay = document.getElementById('hamburger-drawer-overlay');
-  
+
   // Abrir menú
   toggleBtn.addEventListener('click', () => {
     drawer.classList.add('active');
@@ -212,16 +212,16 @@ function initNavbarHamburger() {
 
   // 4. Comportamiento de los enlaces del Drawer
   const isHomePage = () => {
-    return window.location.pathname.endsWith('index.html') || 
-           window.location.pathname === '/' || 
-           window.location.pathname === '/beauty-lms/' ||
-           (!window.location.pathname.includes('.html') && !window.location.pathname.includes('admin') && !window.location.pathname.includes('curso') && !window.location.pathname.includes('login'));
+    return window.location.pathname.endsWith('index.html') ||
+      window.location.pathname === '/' ||
+      window.location.pathname === '/beauty-lms/' ||
+      (!window.location.pathname.includes('.html') && !window.location.pathname.includes('admin') && !window.location.pathname.includes('curso') && !window.location.pathname.includes('login'));
   };
 
   const handleDrawerNavigation = (e, targetId) => {
     e.preventDefault();
     closeDrawer();
-    
+
     if (isHomePage()) {
       const section = document.getElementById(targetId);
       if (section) {
@@ -371,7 +371,7 @@ function initWhatsAppWidget() {
   waBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     waPopup.classList.toggle('active');
-    
+
     // Ocultar burbuja flotante cuando el popup esté abierto
     if (waPopup.classList.contains('active')) {
       waBubble.style.opacity = '0';
@@ -410,13 +410,13 @@ function initWhatsAppWidget() {
 
     // Formatear el texto de soporte
     const waText = `✨ *BLUSH PRO ACADEMY - SOPORTE* ✨\n\n` +
-                   `👤 *Nombre:* ${name}\n` +
-                   `🏷️ *Tipo de Consulta:* ${type}\n` +
-                   `✉️ *Mensaje:* ${message}\n\n` +
-                   `_Enviado desde el sistema de soporte automatizado._`;
+      `👤 *Nombre:* ${name}\n` +
+      `🏷️ *Tipo de Consulta:* ${type}\n` +
+      `✉️ *Mensaje:* ${message}\n\n` +
+      `_Enviado desde el sistema de soporte automatizado._`;
 
     const encodedText = encodeURIComponent(waText);
-    
+
     // Usamos el número de WhatsApp oficial configurado
     const phoneNumber = '50238040420'; // +502 3804-0420
     const waUrl = `https://wa.me/${phoneNumber}?text=${encodedText}`;
@@ -472,10 +472,10 @@ function initSearchWidget() {
     searchInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         const query = e.target.value.trim();
-        const isHomePage = window.location.pathname.endsWith('index.html') || 
-                           window.location.pathname === '/' || 
-                           window.location.pathname === '/beauty-lms/' ||
-                           (!window.location.pathname.includes('.html') && !window.location.pathname.includes('admin') && !window.location.pathname.includes('curso') && !window.location.pathname.includes('login'));
+        const isHomePage = window.location.pathname.endsWith('index.html') ||
+          window.location.pathname === '/' ||
+          window.location.pathname === '/beauty-lms/' ||
+          (!window.location.pathname.includes('.html') && !window.location.pathname.includes('admin') && !window.location.pathname.includes('curso') && !window.location.pathname.includes('login'));
         if (!isHomePage) {
           window.location.href = `index.html?search=${encodeURIComponent(query)}`;
         }
@@ -485,7 +485,7 @@ function initSearchWidget() {
 }
 
 // Alternar barra de búsqueda
-window.toggleSearchBar = function() {
+window.toggleSearchBar = function () {
   const container = document.getElementById('search-bar-container');
   const input = document.getElementById('search-input');
   if (!container || !input) return;
@@ -502,10 +502,10 @@ window.toggleSearchBar = function() {
 
 // Filtrar catálogo de cursos
 function triggerCatalogFilter(query) {
-  const isHomePage = window.location.pathname.endsWith('index.html') || 
-                     window.location.pathname === '/' || 
-                     window.location.pathname === '/beauty-lms/' ||
-                     (!window.location.pathname.includes('.html') && !window.location.pathname.includes('admin') && !window.location.pathname.includes('curso') && !window.location.pathname.includes('login'));
+  const isHomePage = window.location.pathname.endsWith('index.html') ||
+    window.location.pathname === '/' ||
+    window.location.pathname === '/beauty-lms/' ||
+    (!window.location.pathname.includes('.html') && !window.location.pathname.includes('admin') && !window.location.pathname.includes('curso') && !window.location.pathname.includes('login'));
   if (!isHomePage) return;
 
   const normalizedQuery = query.toLowerCase().trim();
@@ -515,7 +515,7 @@ function triggerCatalogFilter(query) {
   cards.forEach(card => {
     const title = card.querySelector('.curso-titulo')?.textContent.toLowerCase() || '';
     const desc = card.querySelector('.curso-descripcion')?.textContent.toLowerCase() || '';
-    
+
     if (title.includes(normalizedQuery) || desc.includes(normalizedQuery)) {
       card.style.display = 'block';
       matchCount++;
@@ -813,7 +813,7 @@ function initProfileModal() {
   }
 }
 
-window.openProfileModal = function() {
+window.openProfileModal = function () {
   const userJson = localStorage.getItem('user');
   if (!userJson) {
     window.location.href = 'login.html';
@@ -827,7 +827,7 @@ window.openProfileModal = function() {
   document.getElementById('profile-name').value = user.nombre;
   document.getElementById('profile-email').value = user.correo;
   document.getElementById('profile-avatar-circle').textContent = user.nombre.charAt(0).toUpperCase();
-  
+
   const roleLabel = document.getElementById('profile-role-badge');
   if (roleLabel) {
     roleLabel.textContent = user.rol === 'admin' ? 'Administradora' : 'Alumna';
@@ -841,7 +841,7 @@ window.openProfileModal = function() {
 
   if (user.requiresPasswordChange) {
     if (closeBtn) closeBtn.style.display = 'none';
-    
+
     document.querySelectorAll('.profile-tab-btn').forEach((b) => {
       if (b.getAttribute('data-tab') === 'tab-seguridad') {
         b.classList.add('active');

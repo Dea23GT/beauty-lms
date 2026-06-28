@@ -17,4 +17,4 @@ Disallow: /curso.html
 Allow: /
 
 # Enlace al Sitemap
-Sitemap: https://academy.bluspro.net/sitemap.xml
+Sitemap: https://academy.blushpro.net/sitemap.xml

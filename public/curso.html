@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clase | Blush Pro Academy LMS</title>
-  <meta name="description" content="Visualiza tus clases profesionales en línea en Blush Pro Academy LMS. Progresa lección a lección con soporte de instructores expertos.">
-  
+  <meta name="description"
+    content="Visualiza tus clases profesionales en línea en Blush Pro Academy LMS. Progresa lección a lección con soporte de instructores expertos.">
+
   <meta name="robots" content="noindex, nofollow">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Clase | Blush Pro Academy LMS">
   <meta property="og:description" content="Visualiza tus clases profesionales en línea en Blush Pro Academy LMS.">
-  <meta property="og:image" content="https://academy.bluspro.net/logo.png">
-  
+  <meta property="og:image" content="https://academy.blushpro.net/logo.png">
+
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Clase | Blush Pro Academy LMS">
   <meta name="twitter:description" content="Visualiza tus clases profesionales en línea en Blush Pro Academy LMS.">
-  <meta name="twitter:image" content="https://academy.bluspro.net/logo.png">
+  <meta name="twitter:image" content="https://academy.blushpro.net/logo.png">
 
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" href="logo.svg" type="image/svg+xml">
@@ -27,6 +29,7 @@
   <!-- YouTube IFrame Player API -->
   <script src="https://www.youtube.com/iframe_api" defer></script>
 </head>
+
 <body>
   <!-- Fondo Dinámico Animado -->
   <div class="animated-bg">
@@ -41,11 +44,11 @@
   <!-- Navbar Responsivo -->
   <nav class="navbar">
     <a href="index.html" class="navbar-brand"><img src="logo.svg" class="logo-img" alt="Blush Pro Academy"></a>
-    
+
     <!-- Menú de Opciones para Alumnos (Escritorio) -->
     <div class="navbar-menu">
       <a href="index.html" class="nav-menu-link">Inicio</a>
-      <a href="https://tiendas.bluspro.net/" target="_blank" rel="noopener noreferrer" class="nav-menu-link">Tienda</a>
+      <a href="https://shop.blushpro.net/" target="_blank" rel="noopener noreferrer" class="nav-menu-link">Tienda</a>
       <a href="index.html#nosotros" class="nav-menu-link">Nosotros</a>
       <a href="index.html#blog" class="nav-menu-link">Blog</a>
       <a href="index.html#contacto" class="nav-menu-link">Contacto</a>
@@ -60,11 +63,11 @@
   <!-- Área de Trabajo Principal del LMS (Grid Split) -->
   <main class="container animate-fade-in">
     <div class="curso-workspace">
-      
+
       <!-- Menú Lateral: Índice de Lecciones -->
       <aside class="lecciones-sidebar">
         <h2 class="sidebar-title" id="curso-titulo-sidebar">Cargando Curso...</h2>
-        
+
         <!-- Barra de Progreso de la Alumna -->
         <div class="progreso-container" id="progreso-box" style="display: none;">
           <div class="progreso-header">
@@ -83,7 +86,7 @@
 
       <!-- Panel de Contenido: Reproductor de Video y Detalles de Clase -->
       <section class="video-workspace">
-        
+
         <!-- Alertas de Error/Mensajes -->
         <div id="status-alert" class="alert alert-danger"></div>
 
@@ -99,7 +102,8 @@
           <!-- Controles de Video Personalizados del LMS -->
           <div class="custom-controls">
             <button id="btn-play-pause" class="btn-control">
-              <i class="bi bi-play-fill" id="play-icon" style="margin-right: 6px;"></i> <span id="btn-text">Reproducir</span>
+              <i class="bi bi-play-fill" id="play-icon" style="margin-right: 6px;"></i> <span
+                id="btn-text">Reproducir</span>
             </button>
             <input type="range" id="video-progress-bar" class="video-seek-bar" min="0" value="0" step="0.1">
             <span class="video-status" id="video-time-status">Tiempo: 0:00 / 0:00</span>
@@ -110,37 +114,56 @@
         <div class="no-access-banner" id="no-access-banner" style="display: none;">
           <i class="bi bi-lock-fill banner-icon"></i>
           <h2 class="banner-title" id="banner-course-title">Contenido Protegido</h2>
-          <p class="banner-desc" id="banner-message">Para acceder a esta clase magistral y recibir el soporte de nuestros estilistas certificados, debes inscribirte en el curso.</p>
+          <p class="banner-desc" id="banner-message">Para acceder a esta clase magistral y recibir el soporte de
+            nuestros estilistas certificados, debes inscribirte en el curso.</p>
           <a href="#" class="btn-buy" id="btn-buy-course">Comprar Curso</a>
         </div>
 
         <!-- Información de la Lección Actual -->
-        <div style="background-color: var(--color-white); border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); padding: 1.5rem; box-shadow: var(--shadow); margin-bottom: 1.5rem;">
-          <h1 id="leccion-titulo-main" style="font-family: var(--font-title); font-size: 2rem; margin-bottom: 0.5rem;">Cargando clase...</h1>
+        <div
+          style="background-color: var(--color-white); border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); padding: 1.5rem; box-shadow: var(--shadow); margin-bottom: 1.5rem;">
+          <h1 id="leccion-titulo-main" style="font-family: var(--font-title); font-size: 2rem; margin-bottom: 0.5rem;">
+            Cargando clase...</h1>
           <p id="curso-descripcion-main" style="color: var(--color-gray); font-weight: 300;">...</p>
         </div>
 
         <!-- Información del Módulo Actual (Secciones/Pasos) -->
-        <div id="modulo-info-card" style="display: none; background-color: var(--color-white); border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); padding: 1.5rem; box-shadow: var(--shadow); margin-bottom: 1.5rem; align-items: center; gap: 1.5rem;">
-          <div id="modulo-info-image-container" style="width: 140px; height: 90px; border-radius: 6px; overflow: hidden; border: 1px solid var(--color-gray-light); background: #eee; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
-            <img id="modulo-info-image" src="" alt="Imagen del Módulo" style="width: 100%; height: 100%; object-fit: cover;">
+        <div id="modulo-info-card"
+          style="display: none; background-color: var(--color-white); border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); padding: 1.5rem; box-shadow: var(--shadow); margin-bottom: 1.5rem; align-items: center; gap: 1.5rem;">
+          <div id="modulo-info-image-container"
+            style="width: 140px; height: 90px; border-radius: 6px; overflow: hidden; border: 1px solid var(--color-gray-light); background: #eee; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+            <img id="modulo-info-image" src="" alt="Imagen del Módulo"
+              style="width: 100%; height: 100%; object-fit: cover;">
           </div>
           <div style="flex: 1; min-width: 0;">
-            <span style="font-size: 0.75rem; font-weight: 600; color: var(--color-primary-dark); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 0.25rem;">Módulo de Aprendizaje</span>
-            <h3 id="modulo-info-titulo" style="font-family: var(--font-title); font-size: 1.4rem; margin: 0 0 0.5rem 0; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">...</h3>
-            <p id="modulo-info-descripcion" style="color: var(--color-gray); font-size: 0.9rem; font-weight: 300; margin: 0; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;"></p>
+            <span
+              style="font-size: 0.75rem; font-weight: 600; color: var(--color-primary-dark); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 0.25rem;">Módulo
+              de Aprendizaje</span>
+            <h3 id="modulo-info-titulo"
+              style="font-family: var(--font-title); font-size: 1.4rem; margin: 0 0 0.5rem 0; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+              ...</h3>
+            <p id="modulo-info-descripcion"
+              style="color: var(--color-gray); font-size: 0.9rem; font-weight: 300; margin: 0; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+            </p>
           </div>
         </div>
 
         <!-- Panel de Notas Personales con Autoguardado -->
-        <div id="notes-container" style="background-color: var(--color-white); border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); padding: 1.5rem; box-shadow: var(--shadow); display: none; margin-top: 1.5rem;">
-          <h3 style="font-family: var(--font-title); font-size: 1.25rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px;">
+        <div id="notes-container"
+          style="background-color: var(--color-white); border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); padding: 1.5rem; box-shadow: var(--shadow); display: none; margin-top: 1.5rem;">
+          <h3
+            style="font-family: var(--font-title); font-size: 1.25rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px;">
             <i class="bi bi-pencil-square" style="color: var(--color-primary);"></i> Mis Notas de Clase
           </h3>
-          <textarea id="personal-notes-input" placeholder="Escribe aquí tus apuntes personales sobre esta clase. Se guardan automáticamente mientras escribes..." style="width: 100%; height: 120px; border: 1px solid var(--color-gray-light); border-radius: 4px; padding: 10px; font-family: inherit; font-size: 0.95rem; resize: vertical; margin-bottom: 8px;"></textarea>
-          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--color-gray);">
+          <textarea id="personal-notes-input"
+            placeholder="Escribe aquí tus apuntes personales sobre esta clase. Se guardan automáticamente mientras escribes..."
+            style="width: 100%; height: 120px; border: 1px solid var(--color-gray-light); border-radius: 4px; padding: 10px; font-family: inherit; font-size: 0.95rem; resize: vertical; margin-bottom: 8px;"></textarea>
+          <div
+            style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--color-gray);">
             <span id="notes-saved-status">Sin apuntes para esta clase</span>
-            <button id="btn-clear-notes" style="background: none; border: none; color: var(--color-danger); cursor: pointer; display: flex; align-items: center; gap: 4px; font-size: 0.8rem;"><i class="bi bi-trash"></i> Borrar notas</button>
+            <button id="btn-clear-notes"
+              style="background: none; border: none; color: var(--color-danger); cursor: pointer; display: flex; align-items: center; gap: 4px; font-size: 0.8rem;"><i
+                class="bi bi-trash"></i> Borrar notas</button>
           </div>
         </div>
 
@@ -151,12 +174,17 @@
 
   <footer>
     <div class="footer-social-links">
-      <a href="https://www.instagram.com/blushupstudio_gt/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-      <a href="https://wa.me/50238040420" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-      <a href="https://www.tiktok.com/@blushupstudiogt" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-      <a href="https://www.facebook.com/Blushupstudiogt" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+      <a href="https://www.instagram.com/blushupstudio_gt/" target="_blank" rel="noopener noreferrer"
+        class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+      <a href="https://wa.me/50238040420" target="_blank" rel="noopener noreferrer" class="social-icon"
+        aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      <a href="https://www.tiktok.com/@blushupstudiogt" target="_blank" rel="noopener noreferrer" class="social-icon"
+        aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+      <a href="https://www.facebook.com/Blushupstudiogt" target="_blank" rel="noopener noreferrer" class="social-icon"
+        aria-label="Facebook"><i class="bi bi-facebook"></i></a>
     </div>
-    <p>&copy; 2026 BLUSH PRO ACADEMY. Todos los derechos reservados. | <a href="politica-privacidad.html">Política de Privacidad y Cookies</a> | Diseñado con elegancia.</p>
+    <p>&copy; 2026 BLUSH PRO ACADEMY. Todos los derechos reservados. | <a href="politica-privacidad.html">Política de
+        Privacidad y Cookies</a> | Diseñado con elegancia.</p>
   </footer>
 
 
@@ -164,4 +192,5 @@
   <script src="js/global-widgets.js" defer></script>
   <script src="js/curso.js" defer></script>
 </body>
+
 </html>

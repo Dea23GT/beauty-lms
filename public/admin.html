@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel Administrativo | Blush Pro Academy</title>
-  <meta name="description" content="Panel de administración exclusivo de Blush Pro Academy. Administra cursos, inscripciones, reportes de ventas, cupones de descuento y configuraciones del sitio.">
+  <meta name="description"
+    content="Panel de administración exclusivo de Blush Pro Academy. Administra cursos, inscripciones, reportes de ventas, cupones de descuento y configuraciones del sitio.">
   <meta name="robots" content="noindex, nofollow">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Panel Administrativo | Blush Pro Academy">
-  <meta property="og:description" content="Panel de administración exclusivo de Blush Pro Academy. Administra cursos, inscripciones, reportes de ventas, cupones y configuraciones.">
-  <meta property="og:image" content="https://academy.bluspro.net/logo.png">
-  
+  <meta property="og:description"
+    content="Panel de administración exclusivo de Blush Pro Academy. Administra cursos, inscripciones, reportes de ventas, cupones y configuraciones.">
+  <meta property="og:image" content="https://academy.blushpro.net/logo.png">
+
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Panel Administrativo | Blush Pro Academy">
   <meta name="twitter:description" content="Panel de administración exclusivo de Blush Pro Academy.">
-  <meta name="twitter:image" content="https://academy.bluspro.net/logo.png">
+  <meta name="twitter:image" content="https://academy.blushpro.net/logo.png">
 
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" href="logo.svg" type="image/svg+xml">
@@ -31,7 +34,7 @@
       gap: 2rem;
       margin-top: 1.5rem;
     }
-    
+
     .admin-sidebar {
       background-color: var(--color-white);
       border: 1px solid var(--color-gray-light);
@@ -61,7 +64,8 @@
       gap: 0.75rem;
     }
 
-    .sidebar-btn:hover, .sidebar-btn.active {
+    .sidebar-btn:hover,
+    .sidebar-btn.active {
       background-color: var(--color-gray-light);
       color: var(--color-primary);
     }
@@ -102,17 +106,21 @@
       overflow-x: auto;
       margin-top: 1rem;
     }
+
     .table-container::-webkit-scrollbar {
       height: 6px;
     }
+
     .table-container::-webkit-scrollbar-track {
       background: rgba(0, 0, 0, 0.02);
       border-radius: 3px;
     }
+
     .table-container::-webkit-scrollbar-thumb {
       background: rgba(214, 175, 55, 0.3);
       border-radius: 3px;
     }
+
     .table-container::-webkit-scrollbar-thumb:hover {
       background: var(--color-primary);
     }
@@ -146,26 +154,92 @@
     }
 
     /* Clases de Columnas Administrativas con Anchos Fijos y Mínimos */
-    .col-id { width: 60px; min-width: 60px; text-align: center; }
-    .col-mini { width: 90px; min-width: 90px; }
-    .col-title { min-width: 250px; }
-    .col-price { width: 90px; min-width: 90px; }
-    .col-actions-cursos { width: 320px; min-width: 320px; text-align: center; }
-    
-    .col-alumna { min-width: 150px; }
-    .col-correo { min-width: 180px; }
-    .col-curso { min-width: 200px; }
-    .col-status { width: 100px; min-width: 100px; text-align: center; }
-    .col-actions-subs { width: 250px; min-width: 250px; text-align: center; }
-    
-    .col-rol { width: 120px; min-width: 120px; text-align: center; }
-    .col-date { width: 130px; min-width: 130px; }
-    .col-actions-users { width: 260px; min-width: 260px; text-align: center; }
-    
-    .col-monto { width: 100px; min-width: 100px; }
-    .col-metodo { width: 120px; min-width: 120px; }
-    .col-ref { width: 140px; min-width: 140px; }
-    .col-fecha { width: 160px; min-width: 160px; }
+    .col-id {
+      width: 60px;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .col-mini {
+      width: 90px;
+      min-width: 90px;
+    }
+
+    .col-title {
+      min-width: 250px;
+    }
+
+    .col-price {
+      width: 90px;
+      min-width: 90px;
+    }
+
+    .col-actions-cursos {
+      width: 320px;
+      min-width: 320px;
+      text-align: center;
+    }
+
+    .col-alumna {
+      min-width: 150px;
+    }
+
+    .col-correo {
+      min-width: 180px;
+    }
+
+    .col-curso {
+      min-width: 200px;
+    }
+
+    .col-status {
+      width: 100px;
+      min-width: 100px;
+      text-align: center;
+    }
+
+    .col-actions-subs {
+      width: 250px;
+      min-width: 250px;
+      text-align: center;
+    }
+
+    .col-rol {
+      width: 120px;
+      min-width: 120px;
+      text-align: center;
+    }
+
+    .col-date {
+      width: 130px;
+      min-width: 130px;
+    }
+
+    .col-actions-users {
+      width: 260px;
+      min-width: 260px;
+      text-align: center;
+    }
+
+    .col-monto {
+      width: 100px;
+      min-width: 100px;
+    }
+
+    .col-metodo {
+      width: 120px;
+      min-width: 120px;
+    }
+
+    .col-ref {
+      width: 140px;
+      min-width: 140px;
+    }
+
+    .col-fecha {
+      width: 160px;
+      min-width: 160px;
+    }
 
     .badge {
       display: inline-block;
@@ -200,7 +274,7 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.5);
+      background-color: rgba(0, 0, 0, 0.5);
       align-items: center;
       justify-content: center;
       backdrop-filter: blur(4px);
@@ -262,7 +336,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.35rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
       white-space: nowrap;
       flex-shrink: 0;
@@ -403,20 +477,20 @@
       transition: all 0.2s ease;
       user-select: none;
     }
-    
+
     #temario-modulos-container.drag-active .drop-zone {
       display: block;
       margin: 0.25rem 0;
       animation: fadeIn 0.2s ease;
     }
-    
+
     .drop-zone-hover {
       border-color: var(--color-primary) !important;
       background-color: rgba(214, 175, 55, 0.1) !important;
       transform: scale(1.005);
       box-shadow: 0 4px 12px rgba(212, 175, 55, 0.1);
     }
-    
+
     .module-card.dragging {
       opacity: 0.4;
       border: 2px dashed var(--color-primary) !important;
@@ -437,31 +511,32 @@
       transition: all 0.2s ease;
       user-select: none;
     }
-    
+
     .lessons-list-admin.drag-active-lesson .lesson-drop-zone {
       display: block;
       margin: 0.2rem 0;
       animation: fadeIn 0.2s ease;
     }
-    
+
     .lesson-drop-zone-hover {
       border-color: var(--color-primary) !important;
       background-color: rgba(214, 175, 55, 0.1) !important;
       transform: scale(1.002);
     }
-    
+
     .lesson-row-admin.dragging {
       opacity: 0.4;
       border: 1px dashed var(--color-primary) !important;
       background: #fffcf5 !important;
     }
-    
+
     .lesson-row-admin {
       user-select: none;
       -webkit-user-select: none;
     }
 
-    .drag-handle, .drag-handle-lesson {
+    .drag-handle,
+    .drag-handle-lesson {
       touch-action: none;
     }
 
@@ -474,7 +549,7 @@
       border-bottom: 1px solid var(--color-gray-light);
       gap: 1rem;
     }
-    
+
     .module-img-frame {
       width: 70px;
       height: 40px;
@@ -487,18 +562,18 @@
       align-items: center;
       justify-content: center;
     }
-    
+
     .module-img-frame img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    
+
     .module-info-admin {
       flex: 1;
       min-width: 0;
     }
-    
+
     .module-info-admin h4 {
       font-family: var(--font-title);
       font-size: 1.15rem;
@@ -509,7 +584,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    
+
     .module-info-admin p {
       margin: 0;
       font-size: 0.8rem;
@@ -518,20 +593,20 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    
+
     .module-actions-admin {
       display: flex;
       gap: 0.4rem;
       align-items: center;
       flex-shrink: 0;
     }
-    
+
     .module-actions-admin .btn-action {
       padding: 0.4rem 0.7rem;
       font-size: 0.75rem;
       margin-top: 0;
     }
-    
+
     .lesson-row-admin {
       display: flex;
       align-items: center;
@@ -543,7 +618,7 @@
       font-size: 0.85rem;
       gap: 0.5rem;
     }
-    
+
     .lesson-info-admin {
       display: flex;
       align-items: center;
@@ -551,7 +626,7 @@
       min-width: 0;
       flex: 1;
     }
-    
+
     .lesson-title-admin {
       font-weight: 500;
       color: var(--color-dark);
@@ -559,20 +634,20 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    
+
     .lesson-youtube-id {
       font-size: 0.75rem;
       color: var(--color-gray);
       font-family: monospace;
       white-space: nowrap;
     }
-    
+
     .lesson-actions-admin {
       display: flex;
       gap: 0.25rem;
       flex-shrink: 0;
     }
-    
+
     .lesson-actions-admin .btn-action {
       padding: 0.2rem 0.4rem;
       font-size: 0.7rem;
@@ -586,18 +661,18 @@
         gap: 0.75rem;
         padding: 0.75rem;
       }
-      
+
       .module-info-admin h4 {
         white-space: normal;
         line-height: 1.3;
         font-size: 1.05rem;
       }
-      
+
       .module-info-admin p {
         white-space: normal;
         margin-top: 0.2rem;
       }
-      
+
       .module-actions-admin {
         width: 100%;
         justify-content: flex-end;
@@ -605,35 +680,36 @@
         padding-top: 0.6rem;
         margin-top: 0.2rem;
       }
-      
+
       .module-actions-admin .btn-action {
         padding: 0.4rem 0.6rem;
         font-size: 0.75rem;
       }
-      
+
       .lesson-row-admin {
         flex-wrap: wrap;
         padding: 0.6rem;
         gap: 0.6rem;
       }
-      
+
       .lesson-info-admin {
         width: 100%;
         flex: none;
         gap: 0.5rem;
       }
-      
+
       .lesson-title-admin {
         white-space: normal;
         word-break: break-word;
         flex: 1;
         line-height: 1.3;
       }
-      
+
       .lesson-youtube-id {
-        display: none; /* Ocultar en móvil para ahorrar espacio */
+        display: none;
+        /* Ocultar en móvil para ahorrar espacio */
       }
-      
+
       .lesson-actions-admin {
         width: 100%;
         justify-content: flex-end;
@@ -641,7 +717,7 @@
         padding-top: 0.5rem;
         margin-top: 0.1rem;
       }
-      
+
       .lesson-actions-admin .btn-action {
         padding: 0.3rem 0.5rem;
         font-size: 0.75rem;
@@ -649,6 +725,7 @@
     }
   </style>
 </head>
+
 <body>
   <!-- Fondo Dinámico Animado -->
   <div class="animated-bg">
@@ -669,14 +746,18 @@
   <!-- Vista Principal -->
   <div class="container" id="main-view" style="display: none;">
     <div class="admin-layout animate-fade-in">
-      
+
       <!-- Menú Lateral -->
       <aside class="admin-sidebar">
-        <button class="sidebar-btn active" onclick="switchTab('cursos')"><i class="bi bi-journal-album"></i> Cursos</button>
-        <button class="sidebar-btn" onclick="switchTab('suscripciones')"><i class="bi bi-key"></i> Suscripciones</button>
+        <button class="sidebar-btn active" onclick="switchTab('cursos')"><i class="bi bi-journal-album"></i>
+          Cursos</button>
+        <button class="sidebar-btn" onclick="switchTab('suscripciones')"><i class="bi bi-key"></i>
+          Suscripciones</button>
         <button class="sidebar-btn" onclick="switchTab('usuarios')"><i class="bi bi-people"></i> Usuarias</button>
-        <button class="sidebar-btn" onclick="switchTab('cupones')"><i class="bi bi-ticket-perforated"></i> Cupones y Banner</button>
-        <button class="sidebar-btn" onclick="switchTab('ventas')"><i class="bi bi-graph-up-arrow"></i> Ventas y Reportes</button>
+        <button class="sidebar-btn" onclick="switchTab('cupones')"><i class="bi bi-ticket-perforated"></i> Cupones y
+          Banner</button>
+        <button class="sidebar-btn" onclick="switchTab('ventas')"><i class="bi bi-graph-up-arrow"></i> Ventas y
+          Reportes</button>
         <button class="sidebar-btn" onclick="switchTab('blogs')"><i class="bi bi-journal-text"></i> Blogs</button>
       </aside>
 
@@ -692,8 +773,10 @@
   <div class="container" id="access-denied-view" style="display: none;">
     <div class="access-denied-container">
       <span style="font-size: 3rem;">🔒</span>
-      <h1 style="font-family: var(--font-title); font-size: 2.2rem; margin-top: 1rem; margin-bottom: 1rem;">Acceso Restringido</h1>
-      <p style="color: var(--color-gray); margin-bottom: 2rem;">No tienes los permisos de administración necesarios para acceder a esta consola.</p>
+      <h1 style="font-family: var(--font-title); font-size: 2.2rem; margin-top: 1rem; margin-bottom: 1rem;">Acceso
+        Restringido</h1>
+      <p style="color: var(--color-gray); margin-bottom: 2rem;">No tienes los permisos de administración necesarios para
+        acceder a esta consola.</p>
       <div class="alert alert-danger" style="display: inline-block;">Redireccionando al catálogo...</div>
     </div>
   </div>
@@ -711,11 +794,13 @@
         </div>
         <div class="form-group">
           <label for="curso-desc" class="form-label">Descripción</label>
-          <textarea id="curso-desc" class="form-control" rows="4" placeholder="Describe los temas del curso..." required style="resize: vertical; font-family: inherit; padding: 0.75rem; border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); width: 100%;"></textarea>
+          <textarea id="curso-desc" class="form-control" rows="4" placeholder="Describe los temas del curso..." required
+            style="resize: vertical; font-family: inherit; padding: 0.75rem; border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); width: 100%;"></textarea>
         </div>
         <div class="form-group">
           <label for="curso-precio" class="form-label">Precio (Q GTQ)</label>
-          <input type="number" id="curso-precio" class="form-control" min="0" step="0.01" placeholder="Ej. 49.99" required>
+          <input type="number" id="curso-precio" class="form-control" min="0" step="0.01" placeholder="Ej. 49.99"
+            required>
         </div>
         <div class="form-group">
           <label for="curso-trailer" class="form-label">ID de Video de Tráiler (YouTube)</label>
@@ -724,14 +809,19 @@
         <div class="form-group">
           <label class="form-label">Miniatura del Curso</label>
           <div style="display: flex; gap: 1rem; align-items: center;">
-            <input type="file" id="curso-image-file" class="form-control" accept="image/png, image/jpeg, image/jpg, image/webp" style="padding: 0.5rem; flex: 1;">
-            <div id="curso-image-preview-container" style="width: 80px; height: 50px; border: 1px solid var(--color-gray-light); border-radius: 4px; overflow: hidden; background-color: var(--color-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-              <span id="curso-image-preview-placeholder" style="font-size: 0.7rem; color: var(--color-gray);">Sin img</span>
-              <img id="curso-image-preview" src="" alt="Vista previa" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+            <input type="file" id="curso-image-file" class="form-control"
+              accept="image/png, image/jpeg, image/jpg, image/webp" style="padding: 0.5rem; flex: 1;">
+            <div id="curso-image-preview-container"
+              style="width: 80px; height: 50px; border: 1px solid var(--color-gray-light); border-radius: 4px; overflow: hidden; background-color: var(--color-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <span id="curso-image-preview-placeholder" style="font-size: 0.7rem; color: var(--color-gray);">Sin
+                img</span>
+              <img id="curso-image-preview" src="" alt="Vista previa"
+                style="display: none; width: 100%; height: 100%; object-fit: cover;">
             </div>
           </div>
           <input type="hidden" id="curso-miniatura" required>
-          <small id="curso-file-info" style="display: block; font-size: 0.75rem; color: var(--color-gray); margin-top: 0.35rem;"></small>
+          <small id="curso-file-info"
+            style="display: block; font-size: 0.75rem; color: var(--color-gray); margin-top: 0.35rem;"></small>
         </div>
         <button type="submit" class="btn-auth" style="margin-top: 1rem; width: 100%;">Guardar Curso</button>
       </form>
@@ -749,7 +839,8 @@
         <p style="color: var(--color-gray); font-size: 0.9rem; margin: 0;">
           Arrastra los módulos por su controlador para cambiar su orden de visualización.
         </p>
-        <button class="btn-action edit" onclick="openModuloModal()" style="padding: 0.6rem 1.2rem; font-size: 0.85rem; margin-top: 0;">
+        <button class="btn-action edit" onclick="openModuloModal()"
+          style="padding: 0.6rem 1.2rem; font-size: 0.85rem; margin-top: 0;">
           <i class="bi bi-folder-plus"></i> + Nuevo Módulo
         </button>
       </div>
@@ -775,19 +866,26 @@
         </div>
         <div class="form-group">
           <label for="modulo-desc" class="form-label">Explicación / Descripción</label>
-          <textarea id="modulo-desc" class="form-control" rows="3" placeholder="Describe qué aprenderán en este módulo..." style="resize: vertical; font-family: inherit; padding: 0.75rem; border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); width: 100%;"></textarea>
+          <textarea id="modulo-desc" class="form-control" rows="3"
+            placeholder="Describe qué aprenderán en este módulo..."
+            style="resize: vertical; font-family: inherit; padding: 0.75rem; border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); width: 100%;"></textarea>
         </div>
         <div class="form-group">
           <label class="form-label">Imagen del Módulo</label>
           <div style="display: flex; gap: 1rem; align-items: center;">
-            <input type="file" id="modulo-image-file" class="form-control" accept="image/png, image/jpeg, image/jpg, image/webp" style="padding: 0.5rem; flex: 1;">
-            <div id="modulo-image-preview-container" style="width: 80px; height: 50px; border: 1px solid var(--color-gray-light); border-radius: 4px; overflow: hidden; background-color: var(--color-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-              <span id="modulo-image-preview-placeholder" style="font-size: 0.7rem; color: var(--color-gray);">Sin img</span>
-              <img id="modulo-image-preview" src="" alt="Vista previa" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+            <input type="file" id="modulo-image-file" class="form-control"
+              accept="image/png, image/jpeg, image/jpg, image/webp" style="padding: 0.5rem; flex: 1;">
+            <div id="modulo-image-preview-container"
+              style="width: 80px; height: 50px; border: 1px solid var(--color-gray-light); border-radius: 4px; overflow: hidden; background-color: var(--color-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <span id="modulo-image-preview-placeholder" style="font-size: 0.7rem; color: var(--color-gray);">Sin
+                img</span>
+              <img id="modulo-image-preview" src="" alt="Vista previa"
+                style="display: none; width: 100%; height: 100%; object-fit: cover;">
             </div>
           </div>
           <input type="hidden" id="modulo-miniatura-url">
-          <small id="modulo-file-info" style="display: block; font-size: 0.75rem; color: var(--color-gray); margin-top: 0.35rem;"></small>
+          <small id="modulo-file-info"
+            style="display: block; font-size: 0.75rem; color: var(--color-gray); margin-top: 0.35rem;"></small>
         </div>
         <button type="submit" class="btn-auth" style="margin-top: 1rem; width: 100%;">Guardar Módulo</button>
       </form>
@@ -805,7 +903,8 @@
         <input type="hidden" id="leccion-paso-id-input">
         <div class="form-group">
           <label for="leccion-titulo" class="form-label">Título de la Clase</label>
-          <input type="text" id="leccion-titulo" class="form-control" placeholder="Ej. Clase 1: Bases del Maquillaje" required>
+          <input type="text" id="leccion-titulo" class="form-control" placeholder="Ej. Clase 1: Bases del Maquillaje"
+            required>
         </div>
         <div class="form-group">
           <label for="leccion-orden" class="form-label">Número de Orden</label>
@@ -847,15 +946,18 @@
   <div class="modal" id="assign-course-modal">
     <div class="modal-content" style="max-width: 450px;">
       <span class="close-modal" onclick="closeModal('assign-course')">&times;</span>
-      <h2 class="modal-title" style="font-family: var(--font-title); font-size: 1.6rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-gray-light); padding-bottom: 0.5rem;">Registrar Venta y Asignación</h2>
+      <h2 class="modal-title"
+        style="font-family: var(--font-title); font-size: 1.6rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-gray-light); padding-bottom: 0.5rem;">
+        Registrar Venta y Asignación</h2>
       <div id="assign-course-alert" class="alert" style="display: none; margin-bottom: 1rem;"></div>
       <form id="assign-course-form">
         <input type="hidden" id="assign-usuario-id">
         <input type="hidden" id="assign-curso-id">
-        
+
         <div class="form-group">
           <label class="form-label">Curso Seleccionado</label>
-          <input type="text" id="assign-curso-titulo" class="form-control" disabled style="background-color: var(--color-gray-light); font-weight: 600;">
+          <input type="text" id="assign-curso-titulo" class="form-control" disabled
+            style="background-color: var(--color-gray-light); font-weight: 600;">
         </div>
 
         <div class="form-group">
@@ -865,7 +967,8 @@
 
         <div class="form-group">
           <label for="assign-metodo" class="form-label">Método de Pago</label>
-          <select id="assign-metodo" class="form-control" required style="background: white; border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); padding: 0.8rem 1rem;">
+          <select id="assign-metodo" class="form-control" required
+            style="background: white; border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); padding: 0.8rem 1rem;">
             <option value="VisaLink">VisaLink</option>
             <option value="Transferencia Banrural">Transferencia Banrural</option>
             <option value="Tarjeta">Tarjeta de Crédito/Débito</option>
@@ -887,32 +990,46 @@
   <div class="modal" id="reset-password-modal">
     <div class="modal-content" style="max-width: 450px;">
       <span class="close-modal" onclick="closeModal('reset-password')">&times;</span>
-      <h2 class="modal-title" style="font-family: var(--font-title); font-size: 1.6rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-gray-light); padding-bottom: 0.5rem;">Reiniciar Contraseña</h2>
+      <h2 class="modal-title"
+        style="font-family: var(--font-title); font-size: 1.6rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-gray-light); padding-bottom: 0.5rem;">
+        Reiniciar Contraseña</h2>
       <div id="reset-password-alert" class="alert" style="display: none; margin-bottom: 1rem;"></div>
-      
+
       <form id="reset-password-form">
         <input type="hidden" id="reset-password-usuario-id">
-        
+
         <div class="form-group">
           <label class="form-label">Usuaria Seleccionada</label>
-          <input type="text" id="reset-password-usuario-nombre" class="form-control" disabled style="background-color: var(--color-gray-light); font-weight: 600;">
+          <input type="text" id="reset-password-usuario-nombre" class="form-control" disabled
+            style="background-color: var(--color-gray-light); font-weight: 600;">
         </div>
 
         <div style="font-size: 0.85rem; color: var(--color-gray); margin-bottom: 1.5rem; line-height: 1.4;">
-          <i class="bi bi-info-circle" style="color: var(--color-primary);"></i> Se generará automáticamente una contraseña temporal robusta que cumple con las directrices de seguridad OWASP. A la alumna se le exigirá actualizarla de inmediato la próxima vez que acceda a la plataforma.
+          <i class="bi bi-info-circle" style="color: var(--color-primary);"></i> Se generará automáticamente una
+          contraseña temporal robusta que cumple con las directrices de seguridad OWASP. A la alumna se le exigirá
+          actualizarla de inmediato la próxima vez que acceda a la plataforma.
         </div>
 
         <!-- Resultados del reinicio (inicialmente oculto) -->
-        <div id="reset-password-result-container" style="display: none; background: #fdfaf2; border: 1px dashed var(--color-primary); padding: 1rem; border-radius: var(--border-radius); margin-bottom: 1.5rem;">
-          <label class="form-label" style="font-weight: 600; color: var(--color-primary-dark); font-size: 0.8rem; margin-bottom: 0.5rem; display: block;">Contraseña Temporal Generada</label>
+        <div id="reset-password-result-container"
+          style="display: none; background: #fdfaf2; border: 1px dashed var(--color-primary); padding: 1rem; border-radius: var(--border-radius); margin-bottom: 1.5rem;">
+          <label class="form-label"
+            style="font-weight: 600; color: var(--color-primary-dark); font-size: 0.8rem; margin-bottom: 0.5rem; display: block;">Contraseña
+            Temporal Generada</label>
           <div style="display: flex; gap: 0.5rem; align-items: center;">
-            <input type="text" id="reset-password-temporal-val" class="form-control" readonly style="font-family: monospace; font-size: 1.1rem; letter-spacing: 1px; font-weight: bold; background: white; text-align: center; color: var(--color-dark); padding: 0.5rem;" onclick="this.select()">
-            <button type="button" class="btn-action edit" id="btn-copy-temp-pass" style="margin: 0; padding: 0.6rem 0.8rem;" onclick="window.copyTempPassword()"><i class="bi bi-copy"></i> Copiar</button>
+            <input type="text" id="reset-password-temporal-val" class="form-control" readonly
+              style="font-family: monospace; font-size: 1.1rem; letter-spacing: 1px; font-weight: bold; background: white; text-align: center; color: var(--color-dark); padding: 0.5rem;"
+              onclick="this.select()">
+            <button type="button" class="btn-action edit" id="btn-copy-temp-pass"
+              style="margin: 0; padding: 0.6rem 0.8rem;" onclick="window.copyTempPassword()"><i class="bi bi-copy"></i>
+              Copiar</button>
           </div>
-          <small style="display: block; font-size: 0.75rem; color: var(--color-gray); margin-top: 0.5rem;">Copia esta contraseña y compártela de forma segura con la usuaria.</small>
+          <small style="display: block; font-size: 0.75rem; color: var(--color-gray); margin-top: 0.5rem;">Copia esta
+            contraseña y compártela de forma segura con la usuaria.</small>
         </div>
 
-        <button type="submit" class="btn-auth" id="btn-submit-reset-pass" style="margin-top: 1rem; width: 100%;">Generar Contraseña Temporal</button>
+        <button type="submit" class="btn-auth" id="btn-submit-reset-pass" style="margin-top: 1rem; width: 100%;">Generar
+          Contraseña Temporal</button>
       </form>
     </div>
   </div>
@@ -926,31 +1043,42 @@
         <input type="hidden" id="blog-id-input">
         <div class="form-group">
           <label for="blog-titulo" class="form-label">Título del Artículo</label>
-          <input type="text" id="blog-titulo" class="form-control" placeholder="Ej. Los secretos de la colorimetría" required>
+          <input type="text" id="blog-titulo" class="form-control" placeholder="Ej. Los secretos de la colorimetría"
+            required>
         </div>
         <div class="form-group">
           <label for="blog-categoria" class="form-label">Categoría</label>
-          <input type="text" id="blog-categoria" class="form-control" placeholder="Ej. Colorimetría, Skincare, Maquillaje" required>
+          <input type="text" id="blog-categoria" class="form-control"
+            placeholder="Ej. Colorimetría, Skincare, Maquillaje" required>
         </div>
         <div class="form-group">
           <label for="blog-extracto" class="form-label">Extracto / Resumen</label>
-          <textarea id="blog-extracto" class="form-control" rows="3" placeholder="Escribe un breve resumen que enganche a la lectura..." required style="resize: vertical; font-family: inherit; padding: 0.75rem; border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); width: 100%;"></textarea>
+          <textarea id="blog-extracto" class="form-control" rows="3"
+            placeholder="Escribe un breve resumen que enganche a la lectura..." required
+            style="resize: vertical; font-family: inherit; padding: 0.75rem; border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); width: 100%;"></textarea>
         </div>
         <div class="form-group">
           <label for="blog-contenido" class="form-label">Contenido Completo</label>
-          <textarea id="blog-contenido" class="form-control" rows="8" placeholder="Escribe el artículo completo aquí..." required style="resize: vertical; font-family: inherit; padding: 0.75rem; border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); width: 100%;"></textarea>
+          <textarea id="blog-contenido" class="form-control" rows="8" placeholder="Escribe el artículo completo aquí..."
+            required
+            style="resize: vertical; font-family: inherit; padding: 0.75rem; border: 1px solid var(--color-gray-light); border-radius: var(--border-radius); width: 100%;"></textarea>
         </div>
         <div class="form-group">
           <label class="form-label">Imagen del Artículo</label>
           <div style="display: flex; gap: 1rem; align-items: center;">
-            <input type="file" id="blog-image-file" class="form-control" accept="image/png, image/jpeg, image/jpg, image/webp" style="padding: 0.5rem; flex: 1;">
-            <div id="blog-image-preview-container" style="width: 80px; height: 50px; border: 1px solid var(--color-gray-light); border-radius: 4px; overflow: hidden; background-color: var(--color-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-              <span id="blog-image-preview-placeholder" style="font-size: 0.7rem; color: var(--color-gray);">Sin img</span>
-              <img id="blog-image-preview" src="" alt="Vista previa" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+            <input type="file" id="blog-image-file" class="form-control"
+              accept="image/png, image/jpeg, image/jpg, image/webp" style="padding: 0.5rem; flex: 1;">
+            <div id="blog-image-preview-container"
+              style="width: 80px; height: 50px; border: 1px solid var(--color-gray-light); border-radius: 4px; overflow: hidden; background-color: var(--color-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <span id="blog-image-preview-placeholder" style="font-size: 0.7rem; color: var(--color-gray);">Sin
+                img</span>
+              <img id="blog-image-preview" src="" alt="Vista previa"
+                style="display: none; width: 100%; height: 100%; object-fit: cover;">
             </div>
           </div>
           <input type="hidden" id="blog-imagen-url" required>
-          <small id="blog-file-info" style="display: block; font-size: 0.75rem; color: var(--color-gray); margin-top: 0.35rem;"></small>
+          <small id="blog-file-info"
+            style="display: block; font-size: 0.75rem; color: var(--color-gray); margin-top: 0.35rem;"></small>
         </div>
         <button type="submit" class="btn-auth" style="margin-top: 1rem; width: 100%;">Guardar Artículo</button>
       </form>
@@ -959,12 +1087,17 @@
 
   <footer>
     <div class="footer-social-links">
-      <a href="https://www.instagram.com/blushupstudio_gt/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-      <a href="https://wa.me/50238040420" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
-      <a href="https://www.tiktok.com/@blushupstudiogt" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-      <a href="https://www.facebook.com/Blushupstudiogt" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+      <a href="https://www.instagram.com/blushupstudio_gt/" target="_blank" rel="noopener noreferrer"
+        class="social-icon" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+      <a href="https://wa.me/50238040420" target="_blank" rel="noopener noreferrer" class="social-icon"
+        aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      <a href="https://www.tiktok.com/@blushupstudiogt" target="_blank" rel="noopener noreferrer" class="social-icon"
+        aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+      <a href="https://www.facebook.com/Blushupstudiogt" target="_blank" rel="noopener noreferrer" class="social-icon"
+        aria-label="Facebook"><i class="bi bi-facebook"></i></a>
     </div>
-    <p>&copy; 2026 BLUSH PRO ACADEMY. Todos los derechos reservados. | <a href="politica-privacidad.html">Política de Privacidad y Cookies</a> | Panel Administrativo Privado.</p>
+    <p>&copy; 2026 BLUSH PRO ACADEMY. Todos los derechos reservados. | <a href="politica-privacidad.html">Política de
+        Privacidad y Cookies</a> | Panel Administrativo Privado.</p>
   </footer>
 
 
@@ -974,4 +1107,5 @@
   <script src="https://cdn.jsdelivr.net/npm/drag-drop-touch@1.3.0/DragDropTouch.js"></script>
   <script src="js/admin.js" defer></script>
 </body>
+
 </html>

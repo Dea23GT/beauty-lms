@@ -32,7 +32,7 @@ if (host && user && pass) {
  * @param {string} options.html - Versión HTML
  */
 async function enviarCorreo({ to, subject, text, html }) {
-  const from = process.env.SMTP_FROM || `"Blush Pro Academy" <${user || 'academy@bluspro.net'}>`;
+  const from = process.env.SMTP_FROM || `"Blush Pro Academy" <${user || 'academy@blushpro.net'}>`;
 
   if (!transporter) {
     console.log('\n=================== 📨 CORREO ELECTRÓNICO SIMULADO ===================');

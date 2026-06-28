@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    const adminEmail = process.env.SMTP_USER || 'academy@bluspro.net';
+    const adminEmail = process.env.SMTP_USER || 'academy@blushpro.net';
     const emailSubject = `[Consulta Web LMS] - ${asunto.trim()}`;
 
     // Construcción del contenido en texto plano
